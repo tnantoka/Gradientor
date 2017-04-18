@@ -24,7 +24,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        title = NSLocalizedString("Gradientor", comment: "")
         view.backgroundColor = .white
         navigationController?.isToolbarHidden = false
 
@@ -70,6 +69,7 @@ class HomeViewController: UIViewController {
 
     private func updateUI(colors: [UIColor]) {
         clearItem.isEnabled = colors.count > 0
+        title = colors.isEmpty ? NSLocalizedString("Gradientor", comment: "") : NSLocalizedString("\(colors.count) colors", comment: "")
     }
 
     private func randomColor() -> UIColor {
@@ -85,15 +85,23 @@ class HomeViewController: UIViewController {
 
     private func clear() {
         colors.value = [
-            randomColor(),
-            randomColor(),
+//            randomColor(),
+//            randomColor(),
         ]
     }
 
     // MARK - Actions
 
     @objc private func addDidTap(sender: Any) {
-        colors.value.append(randomColor())
+        // colors.value.append(randomColor())
+        let colorsViewController = ColorsViewController()
+        colorsViewController.selectedColors
+            .subscribe(onNext: { [weak self] newColor in
+                self?.colors.value.append(newColor)
+            })
+            .addDisposableTo(colorsViewController.bag)
+
+        navigationController?.pushViewController(colorsViewController, animated: true)
     }
 
     @objc private func clearDidTap(sender: Any) {

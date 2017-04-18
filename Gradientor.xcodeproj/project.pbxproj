@@ -14,6 +14,7 @@
 		9BECCBA31EA4FD24003E4EC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BECCBA11EA4FD24003E4EC5 /* LaunchScreen.storyboard */; };
 		9BECCBAE1EA4FD24003E4EC5 /* GradientorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBAD1EA4FD24003E4EC5 /* GradientorTests.swift */; };
 		9BECCBBA1EA4FFF7003E4EC5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */; };
+		9BECCBBC1EA64011003E4EC5 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBBB1EA64011003E4EC5 /* ColorsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		9BECCBAD1EA4FD24003E4EC5 /* GradientorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientorTests.swift; sourceTree = "<group>"; };
 		9BECCBAF1EA4FD24003E4EC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9BECCBBB1EA64011003E4EC5 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
 		BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gradientor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD864E0FC53E7718F3AE726 /* Pods-Gradientor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gradientor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */,
+				9BECCBBB1EA64011003E4EC5 /* ColorsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BECCB991EA4FD24003E4EC5 /* AppDelegate.swift in Sources */,
+				9BECCBBC1EA64011003E4EC5 /* ColorsViewController.swift in Sources */,
 				9BECCBBA1EA4FFF7003E4EC5 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,12 +1,21 @@
 PODS:
+  - IGColorPicker (0.2.1):
+    - M13Checkbox (~> 2.2.0)
+  - M13Checkbox (2.2.6)
   - RxSwift (3.1.0)
+  - SnapKit (3.2.0)
 
 DEPENDENCIES:
+  - IGColorPicker
   - RxSwift
+  - SnapKit
 
 SPEC CHECKSUMS:
+  IGColorPicker: a6ed1bf42cccf9e260e24d33faec5263310b4cef
+  M13Checkbox: 9989b7e275f18493bd33b960dc68374c47d0027b
   RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
 
-PODFILE CHECKSUM: 8c8ed82d412096909dc2bfa097094be9c26306fc
+PODFILE CHECKSUM: 0a8ff3ace8192843f4b30273efb30e9486f8dc48
 
 COCOAPODS: 1.1.1
