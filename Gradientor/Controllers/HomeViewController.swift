@@ -25,7 +25,6 @@ class HomeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-        navigationController?.isToolbarHidden = false
 
         view.layer.addSublayer(gradientLayer)
 
@@ -36,10 +35,9 @@ class HomeViewController: UIViewController {
         toolbarItems = [clearItem]
 
         colors.asObservable()
+            .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] colors in
-                guard let view = self?.view else { fatalError() }
-                self?.gradientLayer.colors = colors.map { $0.cgColor }
-                self?.gradientLayer.frame = view.bounds
+                self?.updateGradient(colors: colors)
             }).addDisposableTo(bag)
         colors.asObservable()
             .subscribe(onNext: { [weak self] colors in
@@ -67,9 +65,25 @@ class HomeViewController: UIViewController {
 
     // MARK - Utilities
 
+    private func updateGradient(colors: [UIColor]) {
+        gradientLayer.colors = colors.map { $0.cgColor }
+        gradientLayer.frame = view.bounds
+    }
+
     private func updateUI(colors: [UIColor]) {
         clearItem.isEnabled = colors.count > 0
         title = colors.isEmpty ? NSLocalizedString("Gradientor", comment: "") : NSLocalizedString("\(colors.count) colors", comment: "")
+    }
+
+    private func fadeIn() {
+        let animation = CABasicAnimation.init(keyPath: "opacity")
+        animation.duration = 0.5
+        animation.isRemovedOnCompletion = true
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+
+        gradientLayer.add(animation, forKey: nil)
     }
 
     private func randomColor() -> UIColor {
@@ -95,9 +109,23 @@ class HomeViewController: UIViewController {
     @objc private func addDidTap(sender: Any) {
         // colors.value.append(randomColor())
         let colorsViewController = ColorsViewController()
-        colorsViewController.selectedColors
+
+        let newColors = colorsViewController.selectedColors
+            .share()
+
+        newColors
+            .distinctUntilChanged()
+            .takeWhile { [weak self] color in
+                return (self?.colors.value.count ?? 0) < 99
+            }
             .subscribe(onNext: { [weak self] newColor in
                 self?.colors.value.append(newColor)
+            })
+            .addDisposableTo(colorsViewController.bag)
+        newColors
+            .ignoreElements()
+            .subscribe(onCompleted: { [weak self] in
+                self?.fadeIn()
             })
             .addDisposableTo(colorsViewController.bag)
 
