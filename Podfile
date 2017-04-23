@@ -1,8 +1,10 @@
 target 'Gradientor' do
   use_frameworks!
 
-  pod 'RxSwift'
   pod 'IGColorPicker'
+  pod 'ReSwift'
+  pod 'RxSwift'
+  pod 'RxCocoa'
   pod 'SnapKit'
 
   target 'GradientorTests' do

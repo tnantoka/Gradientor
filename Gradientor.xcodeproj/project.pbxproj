@@ -15,6 +15,11 @@
 		9BECCBAE1EA4FD24003E4EC5 /* GradientorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBAD1EA4FD24003E4EC5 /* GradientorTests.swift */; };
 		9BECCBBA1EA4FFF7003E4EC5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */; };
 		9BECCBBC1EA64011003E4EC5 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBBB1EA64011003E4EC5 /* ColorsViewController.swift */; };
+		9BECCBBE1EAB8639003E4EC5 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBBD1EAB8639003E4EC5 /* EditViewController.swift */; };
+		9BECCBC21EAB9E49003E4EC5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC11EAB9E49003E4EC5 /* AppState.swift */; };
+		9BECCBC41EAB9F82003E4EC5 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC31EAB9F82003E4EC5 /* AppAction.swift */; };
+		9BECCBC61EABA092003E4EC5 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC51EABA092003E4EC5 /* AppReducer.swift */; };
+		9BECCBC81EABA11A003E4EC5 /* RxStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC71EABA11A003E4EC5 /* RxStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +47,11 @@
 		9BECCBAF1EA4FD24003E4EC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9BECCBBB1EA64011003E4EC5 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
+		9BECCBBD1EAB8639003E4EC5 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		9BECCBC11EAB9E49003E4EC5 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		9BECCBC31EAB9F82003E4EC5 /* AppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		9BECCBC51EABA092003E4EC5 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		9BECCBC71EABA11A003E4EC5 /* RxStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxStore.swift; sourceTree = "<group>"; };
 		BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gradientor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD864E0FC53E7718F3AE726 /* Pods-Gradientor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gradientor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +119,8 @@
 		9BECCB971EA4FD24003E4EC5 /* Gradientor */ = {
 			isa = PBXGroup;
 			children = (
+				9BECCBC01EAB9E24003E4EC5 /* State */,
+				9BECCBC91EABA622003E4EC5 /* Models */,
 				9BECCBB81EA4FFAC003E4EC5 /* Controllers */,
 				9BECCB981EA4FD24003E4EC5 /* AppDelegate.swift */,
 				9BECCB9F1EA4FD24003E4EC5 /* Assets.xcassets */,
@@ -131,9 +143,28 @@
 			isa = PBXGroup;
 			children = (
 				9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */,
+				9BECCBBD1EAB8639003E4EC5 /* EditViewController.swift */,
 				9BECCBBB1EA64011003E4EC5 /* ColorsViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9BECCBC01EAB9E24003E4EC5 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				9BECCBC11EAB9E49003E4EC5 /* AppState.swift */,
+				9BECCBC31EAB9F82003E4EC5 /* AppAction.swift */,
+				9BECCBC51EABA092003E4EC5 /* AppReducer.swift */,
+				9BECCBC71EABA11A003E4EC5 /* RxStore.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		9BECCBC91EABA622003E4EC5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,9 +368,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BECCBBE1EAB8639003E4EC5 /* EditViewController.swift in Sources */,
+				9BECCBC21EAB9E49003E4EC5 /* AppState.swift in Sources */,
+				9BECCBC61EABA092003E4EC5 /* AppReducer.swift in Sources */,
 				9BECCB991EA4FD24003E4EC5 /* AppDelegate.swift in Sources */,
+				9BECCBC41EAB9F82003E4EC5 /* AppAction.swift in Sources */,
 				9BECCBBC1EA64011003E4EC5 /* ColorsViewController.swift in Sources */,
 				9BECCBBA1EA4FFF7003E4EC5 /* HomeViewController.swift in Sources */,
+				9BECCBC81EABA11A003E4EC5 /* RxStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

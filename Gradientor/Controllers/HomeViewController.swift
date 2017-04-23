@@ -10,41 +10,58 @@ import UIKit
 import GameplayKit
 
 import RxSwift
+import RxCocoa
 
 class HomeViewController: UIViewController {
 
     private let bag = DisposeBag()
-    private let colors = Variable<[UIColor]>([])
+    private let store = RxStore<AppState>(store: mainStore)
     private let gradientLayer = CAGradientLayer()
 
-    private var addItem: UIBarButtonItem!
-    private var clearItem: UIBarButtonItem!
+    lazy private var editItem: UIBarButtonItem = {
+        let editItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        editItem.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.editDidTap()
+            })
+            .addDisposableTo(self.bag)
+        return editItem
+    }()
+    lazy private var clearItem: UIBarButtonItem = {
+        let clearItem = UIBarButtonItem(title: NSLocalizedString("Clear", comment: ""), style: .plain, target: self, action: #selector(clearDidTap))
+        clearItem.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.clearDidTap()
+            })
+            .addDisposableTo(self.bag)
+        return clearItem
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        title = NSLocalizedString("Gradientor", comment: "")
         view.backgroundColor = .white
 
         view.layer.addSublayer(gradientLayer)
 
-        addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDidTap))
-        clearItem = UIBarButtonItem(title: NSLocalizedString("Clear", comment: ""), style: .plain, target: self, action: #selector(clearDidTap))
-
-        navigationItem.rightBarButtonItem = addItem
+        navigationItem.rightBarButtonItem = editItem
         toolbarItems = [clearItem]
 
-        colors.asObservable()
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] colors in
-                self?.updateGradient(colors: colors)
-            }).addDisposableTo(bag)
-        colors.asObservable()
-            .subscribe(onNext: { [weak self] colors in
-                self?.updateUI(colors: colors)
-            }).addDisposableTo(bag)
+        let colors = store.state.asDriver()
+            .map { $0.colors }
 
-        clear()
+        colors.drive(onNext: { [weak self] colors in
+                self?.updateGradient(colors: colors)
+            })
+            .addDisposableTo(bag)
+        colors.drive(onNext: { [weak self] colors in
+                self?.updateUI(colors: colors)
+            })
+            .addDisposableTo(bag)
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,16 +92,16 @@ class HomeViewController: UIViewController {
         title = colors.isEmpty ? NSLocalizedString("Gradientor", comment: "") : NSLocalizedString("\(colors.count) colors", comment: "")
     }
 
-    private func fadeIn() {
-        let animation = CABasicAnimation.init(keyPath: "opacity")
-        animation.duration = 0.5
-        animation.isRemovedOnCompletion = true
-        animation.fromValue = 0.0
-        animation.toValue = 1.0
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-
-        gradientLayer.add(animation, forKey: nil)
-    }
+//    private func fadeIn() {
+//        let animation = CABasicAnimation.init(keyPath: "opacity")
+//        animation.duration = 0.5
+//        animation.isRemovedOnCompletion = true
+//        animation.fromValue = 0.0
+//        animation.toValue = 1.0
+//        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+//
+//        gradientLayer.add(animation, forKey: nil)
+//    }
 
     private func randomColor() -> UIColor {
         let random = GKRandomSource()
@@ -97,42 +114,14 @@ class HomeViewController: UIViewController {
         return color
     }
 
-    private func clear() {
-        colors.value = [
-//            randomColor(),
-//            randomColor(),
-        ]
-    }
-
     // MARK - Actions
 
-    @objc private func addDidTap(sender: Any) {
-        // colors.value.append(randomColor())
-        let colorsViewController = ColorsViewController()
-
-        let newColors = colorsViewController.selectedColors
-            .share()
-
-        newColors
-            .distinctUntilChanged()
-            .takeWhile { [weak self] color in
-                return (self?.colors.value.count ?? 0) < 99
-            }
-            .subscribe(onNext: { [weak self] newColor in
-                self?.colors.value.append(newColor)
-            })
-            .addDisposableTo(colorsViewController.bag)
-        newColors
-            .ignoreElements()
-            .subscribe(onCompleted: { [weak self] in
-                self?.fadeIn()
-            })
-            .addDisposableTo(colorsViewController.bag)
-
-        navigationController?.pushViewController(colorsViewController, animated: true)
+    private func editDidTap() {
+        let editViewController = EditViewController()
+        navigationController?.pushViewController(editViewController, animated: true)
     }
 
-    @objc private func clearDidTap(sender: Any) {
-        clear()
+    @objc private func clearDidTap() {
+        mainStore.dispatch(AppAction.clearColors)
     }
 }
