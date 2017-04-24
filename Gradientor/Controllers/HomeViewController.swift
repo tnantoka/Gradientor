@@ -16,7 +16,8 @@ class HomeViewController: UIViewController {
 
     private let bag = DisposeBag()
     private let store = RxStore<AppState>(store: mainStore)
-    private let gradientLayer = CAGradientLayer()
+
+    private var gradient = Gradient()
 
     lazy private var editItem: UIBarButtonItem = {
         let editItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
@@ -47,8 +48,6 @@ class HomeViewController: UIViewController {
         title = NSLocalizedString("Gradientor", comment: "")
         view.backgroundColor = .white
 
-        view.layer.addSublayer(gradientLayer)
-
         navigationItem.rightBarButtonItem = editItem
         toolbarItems = [clearItem]
 
@@ -73,8 +72,10 @@ class HomeViewController: UIViewController {
     // MARK - Utilities
 
     private func updateGradient(colors: [UIColor]) {
-        gradientLayer.colors = colors.map { $0.cgColor }
-        gradientLayer.frame = view.bounds
+        view.layer.sublayers?.first?.removeFromSuperlayer()
+        gradient.colors = colors
+        gradient.frame = view.bounds
+        view.layer.addSublayer(gradient.layer)
     }
 
     private func updateUI(colors: [UIColor]) {
