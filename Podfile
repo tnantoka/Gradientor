@@ -6,6 +6,7 @@ target 'Gradientor' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SnapKit'
+  pod 'SwiftLint'
 
   target 'GradientorTests' do
     inherit! :search_paths

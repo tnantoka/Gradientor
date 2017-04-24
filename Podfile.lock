@@ -7,6 +7,7 @@ PODS:
     - RxSwift (~> 3.4)
   - RxSwift (3.4.0)
   - SnapKit (3.2.0)
+  - SwiftLint (0.18.1)
 
 DEPENDENCIES:
   - IGColorPicker
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - SnapKit
+  - SwiftLint
 
 SPEC CHECKSUMS:
   IGColorPicker: a6ed1bf42cccf9e260e24d33faec5263310b4cef
@@ -22,7 +24,8 @@ SPEC CHECKSUMS:
   RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: b70a2b28a74fb36bc4fa2875cbce2d9f8fba5e04
+PODFILE CHECKSUM: e601dba54ff451c3745d0c8e401da56c81d92af1
 
 COCOAPODS: 1.1.1

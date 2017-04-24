@@ -29,7 +29,8 @@ class HomeViewController: UIViewController {
         return editItem
     }()
     lazy private var clearItem: UIBarButtonItem = {
-        let clearItem = UIBarButtonItem(title: NSLocalizedString("Clear", comment: ""), style: .plain, target: self, action: #selector(clearDidTap))
+        let clearItem = UIBarButtonItem(title: NSLocalizedString("Clear", comment: ""),
+                                        style: .plain, target: nil, action: nil)
         clearItem.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
@@ -69,17 +70,6 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK - Utilities
 
     private func updateGradient(colors: [UIColor]) {
@@ -89,19 +79,7 @@ class HomeViewController: UIViewController {
 
     private func updateUI(colors: [UIColor]) {
         clearItem.isEnabled = colors.count > 0
-        title = colors.isEmpty ? NSLocalizedString("Gradientor", comment: "") : NSLocalizedString("\(colors.count) colors", comment: "")
     }
-
-//    private func fadeIn() {
-//        let animation = CABasicAnimation.init(keyPath: "opacity")
-//        animation.duration = 0.5
-//        animation.isRemovedOnCompletion = true
-//        animation.fromValue = 0.0
-//        animation.toValue = 1.0
-//        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-//
-//        gradientLayer.add(animation, forKey: nil)
-//    }
 
     private func randomColor() -> UIColor {
         let random = GKRandomSource()
