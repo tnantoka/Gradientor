@@ -4,6 +4,7 @@ target 'Gradientor' do
   pod 'ChameleonFramework/Swift', git: 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'IGColorPicker'
   pod "IoniconsKit"
+  pod 'PKHUD'
   pod 'ReSwift'
   pod 'RxSwift'
   pod 'RxCocoa'

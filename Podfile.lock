@@ -6,6 +6,7 @@ PODS:
     - M13Checkbox (~> 2.2.0)
   - IoniconsKit (0.1.1)
   - M13Checkbox (2.2.6)
+  - PKHUD (4.2.1)
   - ReSwift (4.0.0)
   - RxCocoa (3.4.0):
     - RxSwift (~> 3.4)
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - IGColorPicker
   - IoniconsKit
+  - PKHUD
   - ReSwift
   - RxCocoa
   - RxSwift
@@ -37,12 +39,13 @@ SPEC CHECKSUMS:
   IGColorPicker: a6ed1bf42cccf9e260e24d33faec5263310b4cef
   IoniconsKit: da4e3826b706e59adfb7ef5633e44764dd0acd90
   M13Checkbox: 9989b7e275f18493bd33b960dc68374c47d0027b
+  PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
   RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: 02a468d2af8519249785e11ca902d9cdbc34a663
+PODFILE CHECKSUM: 1c761555de87c8fc7cc1777dd2b9f5d80c0a6ae2
 
 COCOAPODS: 1.1.1

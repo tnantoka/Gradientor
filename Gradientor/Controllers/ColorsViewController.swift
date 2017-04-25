@@ -13,6 +13,7 @@ import RxSwift
 import IGColorPicker
 import SnapKit
 import ChameleonFramework
+import PKHUD
 
 class ColorsViewController: UIViewController {
 
@@ -156,6 +157,7 @@ class ColorsViewController: UIViewController {
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 guard let color = UIColor(hexString: code) else { return }
                 mainStore.dispatch(AppAction.addColor(color))
+                HUD.flash(.success, delay: 0.5)
             }
         )
 
@@ -200,10 +202,13 @@ extension ColorsViewController: ColorPickerViewDelegateFlowLayout {
 extension ColorsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+        PKHUD.sharedHUD.dimsBackground = false
+        HUD.show(.progress)
         DispatchQueue.global().async {
             let colors = ColorsFromImage(image, withFlatScheme: false)
             DispatchQueue.main.async {
                 mainStore.dispatch(AppAction.addColors(colors))
+                HUD.flash(.success, delay: 0.5)
             }
         }
         dismiss(animated: true, completion: nil)
