@@ -11,6 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import IoniconsKit
+import RFAboutView_Swift
 
 class HomeViewController: UIViewController {
 
@@ -27,6 +28,12 @@ class HomeViewController: UIViewController {
         ], for: .normal)
         infoItem.title = String.ionicon(with: .information)
 
+        infoItem.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.infoDidTap()
+            })
+            .addDisposableTo(self.bag)
         return infoItem
     }()
 
@@ -96,10 +103,16 @@ class HomeViewController: UIViewController {
     // MARK - Utilities
 
     private func updateGradient(colors: [UIColor]) {
-        view.layer.sublayers?.first?.removeFromSuperlayer()
+        view.layer.sublayers?.forEach { sublayer in
+            if sublayer.isKind(of: LinerLayer.self) || sublayer.isKind(of: RadialLayer.self) {
+                sublayer.removeFromSuperlayer()
+            }
+        }
+
         gradient.direction = mainStore.state.direction
         gradient.colors = colors
         gradient.frame = view.bounds
+
         view.layer.addSublayer(gradient.layer)
     }
 
@@ -113,6 +126,19 @@ class HomeViewController: UIViewController {
     private func editDidTap() {
         let editViewController = EditViewController()
         navigationController?.pushViewController(editViewController, animated: true)
+    }
+
+    private func infoDidTap() {
+        let aboutViewController = RFAboutViewController()
+        aboutViewController.closeButtonAsImage = false
+        aboutViewController.copyrightHolderName = "tnantoka"
+//        aboutViewController.contactEmail = "tnantoka+gradientor@bornneet.com"
+//        aboutViewController.contactEmailTitle = NSLocalizedString("Contact", comment: "")
+        aboutViewController.websiteURL = URL(string: "http://gradientor.com/")!
+        aboutViewController.websiteURLTitle = aboutViewController.websiteURL!.absoluteString
+
+        let aboutNavigationController = UINavigationController(rootViewController: aboutViewController)
+        present(aboutNavigationController, animated: true, completion: nil)
     }
 
     private func clearDidTap() {

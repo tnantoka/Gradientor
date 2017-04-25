@@ -22,6 +22,7 @@
 		9BECCBC81EABA11A003E4EC5 /* RxStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC71EABA11A003E4EC5 /* RxStore.swift */; };
 		9BECCBCE1EADB07E003E4EC5 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBCD1EADB07E003E4EC5 /* Gradient.swift */; };
 		9BECCBD11EAF90A9003E4EC5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BECCBD31EAF90A9003E4EC5 /* InfoPlist.strings */; };
+		9BECCBD61EAFEB0E003E4EC5 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BECCBD51EAFEB0E003E4EC5 /* Acknowledgements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		9BECCBCD1EADB07E003E4EC5 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		9BECCBD21EAF90A9003E4EC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9BECCBD41EAF90B4003E4EC5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9BECCBD51EAFEB0E003E4EC5 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gradientor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD864E0FC53E7718F3AE726 /* Pods-Gradientor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gradientor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 				9BECCBA11EA4FD24003E4EC5 /* LaunchScreen.storyboard */,
 				9BECCBA41EA4FD24003E4EC5 /* Info.plist */,
 				9BECCBD31EAF90A9003E4EC5 /* InfoPlist.strings */,
+				9BECCBD51EAFEB0E003E4EC5 /* Acknowledgements.plist */,
 			);
 			path = Gradientor;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				9BECCBA31EA4FD24003E4EC5 /* LaunchScreen.storyboard in Resources */,
 				9BECCBD11EAF90A9003E4EC5 /* InfoPlist.strings in Resources */,
 				9BECCBA01EA4FD24003E4EC5 /* Assets.xcassets in Resources */,
+				9BECCBD61EAFEB0E003E4EC5 /* Acknowledgements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

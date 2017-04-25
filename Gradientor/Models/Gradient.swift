@@ -20,7 +20,7 @@ struct Gradient {
         case diagonalRL
     }
 
-    var layer = CAGradientLayer()
+    var layer = LinerLayer()
 
     var colors = [UIColor]() {
         didSet {
@@ -37,29 +37,29 @@ struct Gradient {
             switch direction {
             case .horizontal:
                 if layer.isKind(of: RadialLayer.self) {
-                    layer = CAGradientLayer()
+                    layer = LinerLayer()
                 }
                 layer.startPoint = CGPoint(x: 0.5, y: 0.0)
                 layer.endPoint = CGPoint(x: 0.5, y: 1.0)
             case .vertical:
-                //if layer.isKind(of: RadialLayer.self) {
-                    layer = CAGradientLayer()
-                //}
+                if layer.isKind(of: RadialLayer.self) {
+                    layer = LinerLayer()
+                }
                 layer.startPoint = CGPoint(x: 0.0, y: 0.5)
                 layer.endPoint = CGPoint(x: 1.0, y: 0.5)
             case .radial:
                 if !layer.isKind(of: RadialLayer.self) {
-                    layer = RadialLayer()
+                    layer = LinerLayer()
                 }
             case .diagonalLR:
                 if layer.isKind(of: RadialLayer.self) {
-                    layer = CAGradientLayer()
+                    layer = LinerLayer()
                 }
                 layer.startPoint = CGPoint(x: 0.0, y: 0.0)
                 layer.endPoint = CGPoint(x: 1.0, y: 1.0)
             case .diagonalRL:
                 if layer.isKind(of: RadialLayer.self) {
-                    layer = CAGradientLayer()
+                    layer = LinerLayer()
                 }
                 layer.startPoint = CGPoint(x: 1.0, y: 0.0)
                 layer.endPoint = CGPoint(x: 0.0, y: 1.0)
@@ -95,7 +95,10 @@ struct Gradient {
     ]
 }
 
-private class RadialLayer: CAGradientLayer {
+class LinerLayer: CAGradientLayer {
+}
+
+class RadialLayer: CAGradientLayer {
     override var colors: [Any]? {
         didSet {
             setNeedsDisplay()

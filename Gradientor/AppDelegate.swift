@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.isToolbarHidden = false
         navigationController.hidesNavigationBarHairline = true
         navigationController.toolbar.clipsToBounds = true
+        navigationController.toolbar.isTranslucent = false
+        navigationController.navigationBar.isTranslucent = false
         window?.rootViewController = navigationController
 
         window?.makeKeyAndVisible()
