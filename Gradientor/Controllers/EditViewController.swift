@@ -36,12 +36,13 @@ class EditViewController: UITableViewController {
         return addItem
     }()
     lazy private var directionControl: UISegmentedControl = {
+        let size = CGSize(width: 24.0, height: 24.0)
         let segmentedControl = UISegmentedControl(items: [
-            UIImage.ionicon(with: .androidRemove, textColor: .black, size: CGSize(width: 24.0, height: 24.0)),
-            UIImage.ionicon(with: .androidRemove, textColor: .black, size: CGSize(width: 24.0, height: 24.0)).rotated(degree: 90.0),
-            UIImage.ionicon(with: .androidRadioButtonOff, textColor: .black, size: CGSize(width: 24.0, height: 24.0)),
-            UIImage.ionicon(with: .androidRemove, textColor: .black, size: CGSize(width: 24.0, height: 24.0)).rotated(degree: 45.0),
-            UIImage.ionicon(with: .androidRemove, textColor: .black, size: CGSize(width: 24.0, height: 24.0)).rotated(degree: -45.0)
+            UIImage.ionicon(with: .minus, textColor: .black, size: size),
+            UIImage.ionicon(with: .minus, textColor: .black, size: size).rotated(degree: 90.0),
+            UIImage.ionicon(with: .androidRadioButtonOff, textColor: .black, size: size),
+            UIImage.ionicon(with: .minus, textColor: .black, size: size).rotated(degree: 45.0),
+            UIImage.ionicon(with: .minus, textColor: .black, size: size).rotated(degree: -45.0)
         ])
         segmentedControl.selectedSegmentIndex = mainStore.state.direction.rawValue
         segmentedControl.rx.selectedSegmentIndex

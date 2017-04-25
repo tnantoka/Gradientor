@@ -57,6 +57,12 @@ class HomeViewController: UIViewController {
             .addDisposableTo(self.bag)
         return clearItem
     }()
+    lazy private var exportItem: UIBarButtonItem = {
+        let exportItem = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
+
+        return exportItem
+    }()
+    private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +73,7 @@ class HomeViewController: UIViewController {
 
         navigationItem.leftBarButtonItem = infoItem
         navigationItem.rightBarButtonItem = editItem
-        toolbarItems = [clearItem]
+        toolbarItems = [flexibleItem, clearItem, flexibleItem, exportItem, flexibleItem]
 
         let colors = store.state.asDriver()
             .map { $0.colors }
@@ -98,7 +104,8 @@ class HomeViewController: UIViewController {
     }
 
     private func updateUI(colors: [UIColor]) {
-        clearItem.isEnabled = colors.count > 0
+        clearItem.isEnabled = colors.count > 1
+        exportItem.isEnabled = colors.count > 1
     }
 
     // MARK - Actions
@@ -109,6 +116,28 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func clearDidTap() {
-        mainStore.dispatch(AppAction.clearColors)
+        let alertViewController = UIAlertController(
+            title: NSLocalizedString("Delete All Colors", comment: ""),
+            message: NSLocalizedString("Are you sure?", comment: ""),
+            preferredStyle: .alert
+        )
+
+        alertViewController.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+        alertViewController.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Delete", comment: ""),
+                style: .destructive
+            ) { _ in
+                mainStore.dispatch(AppAction.clearColors)
+            }
+        )
+
+        present(alertViewController, animated: true, completion: nil)
     }
 }
