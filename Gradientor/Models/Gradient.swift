@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ChameleonFramework
+
 struct Gradient {
 
     enum Direction: Int {

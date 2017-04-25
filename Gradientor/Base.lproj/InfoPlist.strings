@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  Gradientor
+
+  Created by Tatsuya Tobioka on 2017/04/25.
+  Copyright © 2017 tnantoka. All rights reserved.
+*/
+"NSPhotoLibraryUsageDescription" = "Access the photo library to extract colors from image files.";

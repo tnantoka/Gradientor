@@ -12,6 +12,7 @@ import GameplayKit
 import RxSwift
 import IGColorPicker
 import SnapKit
+import ChameleonFramework
 
 class ColorsViewController: UIViewController {
 
@@ -58,6 +59,12 @@ class ColorsViewController: UIViewController {
             ], for: .normal)
         imageItem.title = String.ionicon(with: .image)
 
+        imageItem.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.imageDidTap()
+            })
+            .addDisposableTo(self.bag)
         return imageItem
     }()
     lazy private var rgbItem: UIBarButtonItem = {
@@ -97,17 +104,21 @@ class ColorsViewController: UIViewController {
 
         view.addSubview(colorPickerView)
         colorPickerView.snp.makeConstraints { make in
-            make.top.equalTo(topLayoutGuide.snp.bottom)
+//            make.top.equalTo(topLayoutGuide.snp.bottom)
+            make.top.equalTo(view)
             make.left.equalTo(view)
-            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+//            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            make.bottom.equalTo(view)
             make.right.equalTo(view)
         }
+
+        edgesForExtendedLayout = []
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        selectedColorsSubject.onCompleted()
+//        selectedColorsSubject.onCompleted()
     }
 
     override func didReceiveMemoryWarning() {
@@ -150,6 +161,13 @@ class ColorsViewController: UIViewController {
 
         present(alertViewController, animated: true, completion: nil)
     }
+
+    private func imageDidTap() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+    }
 }
 
 extension ColorsViewController: ColorPickerViewDelegate {
@@ -176,5 +194,18 @@ extension ColorsViewController: ColorPickerViewDelegateFlowLayout {
     func colorPickerView(_ colorPickerView: ColorPickerView,
                          minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8.0
+    }
+}
+
+extension ColorsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+        DispatchQueue.global().async {
+            let colors = ColorsFromImage(image, withFlatScheme: false)
+            DispatchQueue.main.async {
+                mainStore.dispatch(AppAction.addColors(colors))
+            }
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
