@@ -1,6 +1,10 @@
 PODS:
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - IGColorPicker (0.2.1):
     - M13Checkbox (~> 2.2.0)
+  - IoniconsKit (0.1.1)
   - M13Checkbox (2.2.6)
   - ReSwift (4.0.0)
   - RxCocoa (3.4.0):
@@ -10,15 +14,28 @@ PODS:
   - SwiftLint (0.18.1)
 
 DEPENDENCIES:
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - IGColorPicker
+  - IoniconsKit
   - ReSwift
   - RxCocoa
   - RxSwift
   - SnapKit
   - SwiftLint
 
+EXTERNAL SOURCES:
+  ChameleonFramework:
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
 SPEC CHECKSUMS:
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   IGColorPicker: a6ed1bf42cccf9e260e24d33faec5263310b4cef
+  IoniconsKit: da4e3826b706e59adfb7ef5633e44764dd0acd90
   M13Checkbox: 9989b7e275f18493bd33b960dc68374c47d0027b
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
   RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
@@ -26,6 +43,6 @@ SPEC CHECKSUMS:
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: e601dba54ff451c3745d0c8e401da56c81d92af1
+PODFILE CHECKSUM: 02a468d2af8519249785e11ca902d9cdbc34a663
 
 COCOAPODS: 1.1.1

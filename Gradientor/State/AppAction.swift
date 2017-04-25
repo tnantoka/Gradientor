@@ -15,4 +15,6 @@ enum AppAction: Action {
     case clearColors
     case moveColor(from: Int, to: Int)
     case deleteColor(Int)
+
+    case setDirection(Gradient.Direction)
 }

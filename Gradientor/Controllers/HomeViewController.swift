@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import GameplayKit
 
 import RxSwift
 import RxCocoa
+import IoniconsKit
 
 class HomeViewController: UIViewController {
 
@@ -19,8 +19,25 @@ class HomeViewController: UIViewController {
 
     private var gradient = Gradient()
 
+    lazy private var infoItem: UIBarButtonItem = {
+        let infoItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+
+        infoItem.setTitleTextAttributes([
+            NSFontAttributeName: UIFont.ionicon(of: 22.0)
+        ], for: .normal)
+        infoItem.title = String.ionicon(with: .information)
+
+        return infoItem
+    }()
+
     lazy private var editItem: UIBarButtonItem = {
-        let editItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        let editItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+
+        editItem.setTitleTextAttributes([
+            NSFontAttributeName: UIFont.ionicon(of: 22.0)
+        ], for: .normal)
+        editItem.title = String.ionicon(with: .edit)
+
         editItem.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
@@ -30,8 +47,8 @@ class HomeViewController: UIViewController {
         return editItem
     }()
     lazy private var clearItem: UIBarButtonItem = {
-        let clearItem = UIBarButtonItem(title: NSLocalizedString("Clear", comment: ""),
-                                        style: .plain, target: nil, action: nil)
+        let clearItem = UIBarButtonItem(barButtonSystemItem: .trash, target: nil, action: nil)
+
         clearItem.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
@@ -48,6 +65,7 @@ class HomeViewController: UIViewController {
         title = NSLocalizedString("Gradientor", comment: "")
         view.backgroundColor = .white
 
+        navigationItem.leftBarButtonItem = infoItem
         navigationItem.rightBarButtonItem = editItem
         toolbarItems = [clearItem]
 
@@ -73,6 +91,7 @@ class HomeViewController: UIViewController {
 
     private func updateGradient(colors: [UIColor]) {
         view.layer.sublayers?.first?.removeFromSuperlayer()
+        gradient.direction = mainStore.state.direction
         gradient.colors = colors
         gradient.frame = view.bounds
         view.layer.addSublayer(gradient.layer)
@@ -80,17 +99,6 @@ class HomeViewController: UIViewController {
 
     private func updateUI(colors: [UIColor]) {
         clearItem.isEnabled = colors.count > 0
-    }
-
-    private func randomColor() -> UIColor {
-        let random = GKRandomSource()
-        let color = UIColor(
-            red: CGFloat(random.nextUniform()),
-            green: CGFloat(random.nextUniform()),
-            blue: CGFloat(random.nextUniform()),
-            alpha: 1.0
-        )
-        return color
     }
 
     // MARK - Actions

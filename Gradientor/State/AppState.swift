@@ -12,4 +12,5 @@ import ReSwift
 
 struct AppState: StateType {
     var colors: [UIColor] = []
+    var direction = Gradient.Direction.horizontal
 }

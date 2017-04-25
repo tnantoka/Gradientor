@@ -24,6 +24,9 @@ func appReducer(action: Action, state: AppState?) -> AppState {
         state.colors.insert(color, at: to)
     case .deleteColor(let index):
         state.colors.remove(at: index)
+
+    case .setDirection(let direction):
+        state.direction = direction
     }
 
     return state

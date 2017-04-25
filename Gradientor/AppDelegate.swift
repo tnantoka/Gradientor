@@ -9,6 +9,7 @@
 import UIKit
 
 import ReSwift
+import ChameleonFramework
 
 let mainStore = Store<AppState>(
     reducer: appReducer,
@@ -28,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let homeViewController = HomeViewController()
         let navigationController = UINavigationController(rootViewController: homeViewController)
         navigationController.isToolbarHidden = false
+        navigationController.hidesNavigationBarHairline = true
+        navigationController.toolbar.clipsToBounds = true
         window?.rootViewController = navigationController
 
         window?.makeKeyAndVisible()

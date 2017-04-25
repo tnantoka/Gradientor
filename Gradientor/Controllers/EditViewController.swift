@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import GameplayKit
 
 import RxSwift
 import RxCocoa
+import ChameleonFramework
+import IoniconsKit
 
 class EditViewController: UITableViewController {
 
@@ -17,7 +20,13 @@ class EditViewController: UITableViewController {
     private let store = RxStore<AppState>(store: mainStore)
 
     lazy private var addItem: UIBarButtonItem = {
-        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+        let addItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+
+        addItem.setTitleTextAttributes([
+            NSFontAttributeName: UIFont.ionicon(of: 22.0)
+        ], for: .normal)
+        addItem.title = String.ionicon(with: .plus)
+
         addItem.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
@@ -26,6 +35,30 @@ class EditViewController: UITableViewController {
             .addDisposableTo(self.bag)
         return addItem
     }()
+    lazy private var directionControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: [
+            UIImage.ionicon(with: .androidRemove, textColor: .black, size: CGSize(width: 24.0, height: 24.0)),
+            UIImage.ionicon(with: .androidRemove, textColor: .black, size: CGSize(width: 24.0, height: 24.0)).rotated(degree: 90.0),
+            UIImage.ionicon(with: .androidRadioButtonOff, textColor: .black, size: CGSize(width: 24.0, height: 24.0)),
+            UIImage.ionicon(with: .androidRemove, textColor: .black, size: CGSize(width: 24.0, height: 24.0)).rotated(degree: 45.0),
+            UIImage.ionicon(with: .androidRemove, textColor: .black, size: CGSize(width: 24.0, height: 24.0)).rotated(degree: -45.0)
+        ])
+        segmentedControl.selectedSegmentIndex = mainStore.state.direction.rawValue
+        segmentedControl.rx.selectedSegmentIndex
+            .asObservable()
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .map { Gradient.Direction(rawValue: $0) ?? .vertical }
+            .subscribe(onNext: { [weak self] direction in
+                mainStore.dispatch(AppAction.setDirection(direction))
+            })
+            .addDisposableTo(self.bag)
+        return segmentedControl
+    }()
+    lazy private var directionItem: UIBarButtonItem = {
+        let directionItem = UIBarButtonItem(customView: self.directionControl)
+        return directionItem
+    }()
+    private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,19 +71,24 @@ class EditViewController: UITableViewController {
 
         isEditing = true
         navigationItem.rightBarButtonItem = addItem
+        toolbarItems = [flexibleItem, directionItem, flexibleItem]
 
         tableView.delegate = nil
         tableView.dataSource = nil
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.separatorColor = .clear
 
         let colors = store.state.asDriver()
             .map { $0.colors }
-
         colors.drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
                 cell.backgroundColor = model
+                cell.textLabel?.text = model.hexValue()
+                cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: true)
+                let bgView = UIView()
+                bgView.backgroundColor = model
+                cell.backgroundView = bgView
             }
             .addDisposableTo(bag)
-
         colors.drive(onNext: { [weak self] colors in
                 self?.updateUI(colors: colors)
             })
@@ -60,7 +98,6 @@ class EditViewController: UITableViewController {
                 mainStore.dispatch(AppAction.moveColor(from: fromIndex.row, to: toIndex.row))
             })
             .addDisposableTo(bag)
-
         tableView.rx.itemDeleted.subscribe(onNext: { indexPath in
                 mainStore.dispatch(AppAction.deleteColor(indexPath.row))
             })
@@ -91,5 +128,29 @@ class EditViewController: UITableViewController {
             .addDisposableTo(colorsViewController.bag)
 
         navigationController?.pushViewController(colorsViewController, animated: true)
+    }
+}
+
+extension UIImage {
+    func rotated(degree: Float) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        guard let context = UIGraphicsGetCurrentContext() else { return UIImage() }
+
+        let center = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
+
+        context.translateBy(x: center.x, y: center.y)
+        context.scaleBy(x: 1.0, y: -1.0)
+
+        let radian = CGFloat(GLKMathDegreesToRadians(degree))
+        context.rotate(by: radian)
+
+        guard let cgImage = cgImage else { return UIImage() }
+        context.draw(cgImage, in: CGRect(origin: CGPoint(x: -center.x, y: -center.y), size: size))
+
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
+        return image
     }
 }
