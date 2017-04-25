@@ -64,9 +64,36 @@ struct Gradient {
             }
         }
     }
+
+    static var flatColors: [UIColor] = [
+        .flatBlack, .flatBlackDark,
+        .flatBlue, .flatBlueDark,
+        .flatBrown, .flatBrownDark,
+        .flatCoffee, .flatCoffeeDark,
+        .flatForestGreen, .flatForestGreenDark,
+        .flatGray, .flatGrayDark,
+        .flatGreen, .flatGreenDark,
+        .flatLime, .flatLimeDark,
+        .flatMagenta, .flatMagentaDark,
+        .flatMaroon, .flatMaroonDark,
+        .flatMint, .flatMintDark,
+        .flatNavyBlue, .flatNavyBlueDark,
+        .flatOrange, .flatOrangeDark,
+        .flatPink, .flatPinkDark,
+        .flatPlum, .flatPlumDark,
+        .flatPowderBlue, .flatPowderBlueDark,
+        .flatPurple, .flatPurpleDark,
+        .flatRed, .flatRedDark,
+        .flatSand, .flatSandDark,
+        .flatSkyBlue, .flatSkyBlueDark,
+        .flatTeal, .flatTealDark,
+        .flatWatermelon, .flatWatermelonDark,
+        .flatWhite, .flatWhiteDark,
+        .flatYellow, .flatYellowDark
+    ]
 }
 
-class RadialLayer: CAGradientLayer {
+private class RadialLayer: CAGradientLayer {
     override var colors: [Any]? {
         didSet {
             setNeedsDisplay()

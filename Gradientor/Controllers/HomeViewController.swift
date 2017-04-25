@@ -115,7 +115,7 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(editViewController, animated: true)
     }
 
-    @objc private func clearDidTap() {
+    private func clearDidTap() {
         let alertViewController = UIAlertController(
             title: NSLocalizedString("Delete All Colors", comment: ""),
             message: NSLocalizedString("Are you sure?", comment: ""),

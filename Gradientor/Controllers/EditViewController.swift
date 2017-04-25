@@ -133,7 +133,7 @@ class EditViewController: UITableViewController {
 }
 
 extension UIImage {
-    func rotated(degree: Float) -> UIImage {
+    fileprivate func rotated(degree: Float) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         defer {
             UIGraphicsEndImageContext()

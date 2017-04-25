@@ -68,65 +68,22 @@ class ColorsViewController: UIViewController {
             ], for: .normal)
         rgbItem.title = String.ionicon(with: .pound)
 
+        rgbItem.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.rgbDidTap()
+            })
+            .addDisposableTo(self.bag)
         return rgbItem
     }()
     private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-    lazy var colorPickerView: ColorPickerView = {
+    lazy private var colorPickerView: ColorPickerView = {
         let colorPickerView = ColorPickerView()
         colorPickerView.delegate = self
         colorPickerView.layoutDelegate = self
         colorPickerView.isSelectedColorTappable = false
-        colorPickerView.colors = [
-            UIColor.flatBlack,
-            UIColor.flatBlackDark,
-            UIColor.flatBlue,
-            UIColor.flatBlueDark,
-            UIColor.flatBrown,
-            UIColor.flatBrownDark,
-            UIColor.flatCoffee,
-            UIColor.flatCoffeeDark,
-            UIColor.flatForestGreen,
-            UIColor.flatForestGreenDark,
-            UIColor.flatGray,
-            UIColor.flatGrayDark,
-            UIColor.flatGreen,
-            UIColor.flatGreenDark,
-            UIColor.flatLime,
-            UIColor.flatLimeDark,
-            UIColor.flatMagenta,
-            UIColor.flatMagentaDark,
-            UIColor.flatMaroon,
-            UIColor.flatMaroonDark,
-            UIColor.flatMint,
-            UIColor.flatMintDark,
-            UIColor.flatNavyBlue,
-            UIColor.flatNavyBlueDark,
-            UIColor.flatOrange,
-            UIColor.flatOrangeDark,
-            UIColor.flatPink,
-            UIColor.flatPinkDark,
-            UIColor.flatPlum,
-            UIColor.flatPlumDark,
-            UIColor.flatPowderBlue,
-            UIColor.flatPowderBlueDark,
-            UIColor.flatPurple,
-            UIColor.flatPurpleDark,
-            UIColor.flatRed,
-            UIColor.flatRedDark,
-            UIColor.flatSand,
-            UIColor.flatSandDark,
-            UIColor.flatSkyBlue,
-            UIColor.flatSkyBlueDark,
-            UIColor.flatTeal,
-            UIColor.flatTealDark,
-            UIColor.flatWatermelon,
-            UIColor.flatWatermelonDark,
-            UIColor.flatWhite,
-            UIColor.flatWhiteDark,
-            UIColor.flatYellow,
-            UIColor.flatYellowDark
-        ]
+        colorPickerView.colors = Gradient.flatColors
         return colorPickerView
     }()
 
@@ -156,6 +113,42 @@ class ColorsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    // MARK - Actions
+
+    private func rgbDidTap() {
+        let alertViewController = UIAlertController(
+            title: NSLocalizedString("Add Color", comment: ""),
+            message: NSLocalizedString("Enter a color code.", comment: ""),
+            preferredStyle: .alert
+        )
+
+        alertViewController.addTextField { textField in
+            textField.placeholder = "RRGGBB"
+        }
+
+        alertViewController.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+        alertViewController.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Add", comment: ""),
+                style: .default
+            ) { _ in
+                guard let rgb = alertViewController.textFields?.first?.text else { return }
+                let code = rgb.replacingOccurrences(of: "#", with: "")
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                guard let color = UIColor(hexString: code) else { return }
+                mainStore.dispatch(AppAction.addColor(color))
+            }
+        )
+
+        present(alertViewController, animated: true, completion: nil)
     }
 }
 
