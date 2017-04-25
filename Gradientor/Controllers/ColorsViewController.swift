@@ -24,17 +24,6 @@ class ColorsViewController: UIViewController {
         return selectedColorsSubject.asObservable()
     }
 
-    private var randomColor: UIColor {
-        let random = GKRandomSource()
-        let randomColor = UIColor(
-            red: CGFloat(random.nextUniform()),
-            green: CGFloat(random.nextUniform()),
-            blue: CGFloat(random.nextUniform()),
-            alpha: 1.0
-        )
-        return randomColor
-    }
-
     lazy private var randomItem: UIBarButtonItem = {
         let randomItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
 
@@ -45,9 +34,8 @@ class ColorsViewController: UIViewController {
 
         randomItem.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                guard let color = self?.randomColor else { return }
-                mainStore.dispatch(AppAction.addColor(color))
+            .subscribe(onNext: { _ in
+                mainStore.dispatch(AppAction.addRandomColor)
             })
             .addDisposableTo(self.bag)
         return randomItem

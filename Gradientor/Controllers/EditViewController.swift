@@ -49,7 +49,7 @@ class EditViewController: UITableViewController {
             .asObservable()
             .throttle(0.5, scheduler: MainScheduler.instance)
             .map { Gradient.Direction(rawValue: $0) ?? .vertical }
-            .subscribe(onNext: { [weak self] direction in
+            .subscribe(onNext: { direction in
                 mainStore.dispatch(AppAction.setDirection(direction))
             })
             .addDisposableTo(self.bag)

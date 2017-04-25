@@ -12,6 +12,7 @@ import ReSwift
 
 enum AppAction: Action {
     case addColor(UIColor)
+    case addRandomColor
     case addColors([UIColor])
     case clearColors
     case moveColor(from: Int, to: Int)

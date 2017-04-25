@@ -17,6 +17,8 @@ func appReducer(action: Action, state: AppState?) -> AppState {
     switch appAction {
     case .addColor(let color):
         state.colors.append(color)
+    case .addRandomColor:
+        state.colors.append(AppState.randomColor)
     case .addColors(let colors):
         colors.forEach { state.colors.append($0) }
     case .clearColors:

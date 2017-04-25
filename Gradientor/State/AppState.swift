@@ -7,10 +7,25 @@
 //
 
 import Foundation
+import GameplayKit
 
 import ReSwift
 
 struct AppState: StateType {
-    var colors: [UIColor] = []
+    var colors: [UIColor] = [
+        AppState.randomColor,
+        AppState.randomColor
+    ]
     var direction = Gradient.Direction.horizontal
+
+    static var randomColor: UIColor {
+        let random = GKRandomSource()
+        let randomColor = UIColor(
+            red: CGFloat(random.nextUniform()),
+            green: CGFloat(random.nextUniform()),
+            blue: CGFloat(random.nextUniform()),
+            alpha: 1.0
+        )
+        return randomColor
+    }
 }
