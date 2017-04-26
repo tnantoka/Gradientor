@@ -105,11 +105,6 @@ class EditViewController: UITableViewController {
             .addDisposableTo(bag)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK - Utilities
 
     private func updateUI(colors: [UIColor]) {
@@ -119,16 +114,20 @@ class EditViewController: UITableViewController {
     // MARK - Actions
 
     private func addDidTap() {
-        let colorsViewController = ColorsViewController()
+//        let colorsViewController = ColorsViewController()
+//
+//        colorsViewController.selectedColors
+//            .distinctUntilChanged()
+//            .subscribe(onNext: { newColor in
+//                mainStore.dispatch(AppAction.addColor(newColor))
+//            })
+//            .addDisposableTo(colorsViewController.bag)
+//
+//        navigationController?.pushViewController(colorsViewController, animated: true)
 
-        colorsViewController.selectedColors
-            .distinctUntilChanged()
-            .subscribe(onNext: { newColor in
-                mainStore.dispatch(AppAction.addColor(newColor))
-            })
-            .addDisposableTo(colorsViewController.bag)
+        let addViewController = AddViewController()
 
-        navigationController?.pushViewController(colorsViewController, animated: true)
+        navigationController?.pushViewController(addViewController, animated: true)
     }
 }
 

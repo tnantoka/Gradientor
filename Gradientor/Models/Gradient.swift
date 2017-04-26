@@ -20,7 +20,7 @@ struct Gradient {
         case diagonalRL
     }
 
-    var layer = LinerLayer()
+    var layer = CAGradientLayer()
 
     var colors = [UIColor]() {
         didSet {
@@ -49,7 +49,7 @@ struct Gradient {
                 layer.endPoint = CGPoint(x: 1.0, y: 0.5)
             case .radial:
                 if !layer.isKind(of: RadialLayer.self) {
-                    layer = LinerLayer()
+                    layer = RadialLayer()
                 }
             case .diagonalLR:
                 if layer.isKind(of: RadialLayer.self) {
