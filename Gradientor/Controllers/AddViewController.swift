@@ -12,30 +12,28 @@ import RxSwift
 import RxCocoa
 import ChameleonFramework
 import PKHUD
+import IoniconsKit
+import SnapKit
 
-private let reuseIdentifier = "Cell"
-
-class AddViewController: UICollectionViewController {
+class AddViewController: UIViewController {
 
     let bag = DisposeBag()
-
-    fileprivate let selectedColorsSubject = PublishSubject<UIColor>()
-    var selectedColors: Observable<UIColor> {
-        return selectedColorsSubject.asObservable()
-    }
+    let groupColors = Variable(MaterialDesign.colorGroups[0])
 
     lazy private var randomItem: UIBarButtonItem = {
         let randomItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
 
         randomItem.setTitleTextAttributes([
             NSFontAttributeName: UIFont.ionicon(of: 22.0)
-            ], for: .normal)
+        ], for: .normal)
         randomItem.title = String.ionicon(with: .shuffle)
 
         randomItem.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                mainStore.dispatch(AppAction.addRandomColor)
+            .subscribe(onNext: { [weak self] _ in
+                let color = AppState.randomColor
+                mainStore.dispatch(AppAction.addColor(color))
+                self?.showSuccess(subtitle: color.hexValue())
             })
             .addDisposableTo(self.bag)
         return randomItem
@@ -45,7 +43,7 @@ class AddViewController: UICollectionViewController {
 
         imageItem.setTitleTextAttributes([
             NSFontAttributeName: UIFont.ionicon(of: 22.0)
-            ], for: .normal)
+        ], for: .normal)
         imageItem.title = String.ionicon(with: .image)
 
         imageItem.rx.tap
@@ -61,7 +59,7 @@ class AddViewController: UICollectionViewController {
 
         rgbItem.setTitleTextAttributes([
             NSFontAttributeName: UIFont.ionicon(of: 22.0)
-            ], for: .normal)
+        ], for: .normal)
         rgbItem.title = String.ionicon(with: .pound)
 
         rgbItem.rx.tap
@@ -73,72 +71,87 @@ class AddViewController: UICollectionViewController {
         return rgbItem
     }()
     private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    
-    init() {
+
+    lazy private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
 
-        let length = UIScreen.main.bounds.width / 6.0
+        let length = UIScreen.main.bounds.width / 10.0
         layout.itemSize = CGSize(width: length, height: length)
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
 
-        super.init(collectionViewLayout: layout)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.backgroundColor = .clear
+
+        let items = Variable(MaterialDesign.mainColors)
+        items.asDriver()
+            .drive(collectionView.rx.items(cellIdentifier: "Cell")) { _, element, cell in
+                cell.backgroundColor = element
+            }
+            .addDisposableTo(self.bag)
+
+        collectionView.rx.itemSelected
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.groupColors.value = MaterialDesign.colorGroups[indexPath.row]
+            })
+            .addDisposableTo(self.bag)
+
+        return collectionView
+    }()
+
+    lazy private var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.separatorColor = .clear
+
+        self.groupColors.asDriver()
+            .drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
+                guard let model = model else { return }
+                cell.backgroundColor = model
+                cell.textLabel?.text = model.hexValue()
+                cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: false)
+                cell.selectionStyle = .none
+            }
+            .addDisposableTo(self.bag)
+
+        tableView.rx.modelSelected(UIColor.self)
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] color in
+                mainStore.dispatch(AppAction.addColor(color))
+                self?.showSuccess(subtitle: color.hexValue())
+            })
+            .addDisposableTo(self.bag)
+
+        return tableView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
         // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+
         toolbarItems = [flexibleItem, randomItem, flexibleItem, imageItem, flexibleItem, rgbItem, flexibleItem]
 
-        guard let collectionView = collectionView else { return }
-        collectionView.delegate = nil
-        collectionView.dataSource = nil
-        collectionView.backgroundColor = .white
-        collectionView.allowsSelection = true
+        PKHUD.sharedHUD.dimsBackground = false
 
-        let items = Variable(Gradient.flatColors)
-        items.asDriver()
-            .drive(collectionView.rx.items(cellIdentifier: reuseIdentifier)) { row, element, cell in
-                cell.backgroundColor = element
-            }
-            .addDisposableTo(bag)
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(view)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+            make.height.equalTo(UIScreen.main.bounds.width / 5.0)
+        }
 
-        collectionView.rx.modelSelected(UIColor.self)
-            .distinctUntilChanged()
-            .subscribe(onNext: { color in
-                mainStore.dispatch(AppAction.addColor(color))
-            })
-            .addDisposableTo(bag)
-
-        collectionView.rx.itemSelected
-            .distinctUntilChanged()
-            .subscribe(onNext: { indexPath in
-                guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-
-                let color = Gradient.flatColors[indexPath.row]
-                let bgView = UIView()
-                bgView.backgroundColor = ContrastColorOf(color, returnFlat: false)
-
-                cell.selectedBackgroundView = bgView
-                cell.selectedBackgroundView?.alpha = 0.3
-                UIView.animate(withDuration: 0.5, animations: {
-                    cell.selectedBackgroundView?.alpha = 0.0
-                }) { _ in
-                    cell.selectedBackgroundView = nil
-                }
-            })
-            .addDisposableTo(bag)
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+            make.bottom.equalTo(view)
+        }
     }
 
     // MARK - Actions
@@ -165,13 +178,13 @@ class AddViewController: UICollectionViewController {
             UIAlertAction(
                 title: NSLocalizedString("Add", comment: ""),
                 style: .default
-            ) { _ in
+            ) { [weak self]_ in
                 guard let rgb = alertViewController.textFields?.first?.text else { return }
                 let code = rgb.replacingOccurrences(of: "#", with: "")
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 guard let color = UIColor(hexString: code) else { return }
                 mainStore.dispatch(AppAction.addColor(color))
-                HUD.flash(.success, delay: 0.5)
+                self?.showSuccess(subtitle: color.hexValue())
             }
         )
 
@@ -184,18 +197,25 @@ class AddViewController: UICollectionViewController {
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true, completion: nil)
     }
+
+    // MARK - Utilities
+
+    fileprivate func showSuccess(subtitle: String?) {
+        let size = CGSize(width: 88.0, height: 88.0)
+        let image = UIImage.ionicon(with: .iosCheckmarkEmpty, textColor: UIColor(white: 0.0, alpha: 0.87), size: size)
+        HUD.flash(.labeledImage(image: image, title: nil, subtitle: subtitle), delay: 0.5)
+    }
 }
 
 extension AddViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-        PKHUD.sharedHUD.dimsBackground = false
-        HUD.show(.progress)
-        DispatchQueue.global().async {
+        HUD.show(.systemActivity)
+        DispatchQueue.global().async { [weak self] in
             let colors = ColorsFromImage(image, withFlatScheme: false)
             DispatchQueue.main.async {
                 mainStore.dispatch(AppAction.addColors(colors))
-                HUD.flash(.success, delay: 0.5)
+                self?.showSuccess(subtitle: nil)
             }
         }
         dismiss(animated: true, completion: nil)
