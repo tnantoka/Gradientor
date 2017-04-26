@@ -32,7 +32,7 @@ struct MaterialDesign {
         "#9E9E9E",
         "#607D8B",
         "#000000"
-    ].map { UIColor(hexString: $0) }
+    ].map { UIColor(hexString: $0)! }
 
     static var colorGroups = [
         [
@@ -331,5 +331,5 @@ struct MaterialDesign {
             "#000000",
             "#FFFFFF"
         ]
-    ].map { $0.map { UIColor(hexString: $0) } }
+    ].map { $0.map { UIColor(hexString: $0)! } }
 }

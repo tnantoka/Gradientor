@@ -24,16 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setAppearance()
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
 
         let homeViewController = HomeViewController()
         let navigationController = UINavigationController(rootViewController: homeViewController)
         navigationController.isToolbarHidden = false
-        navigationController.hidesNavigationBarHairline = true
         navigationController.toolbar.clipsToBounds = true
         navigationController.toolbar.isTranslucent = false
         navigationController.navigationBar.isTranslucent = false
+        navigationController.hidesNavigationBarHairline = true
         window?.rootViewController = navigationController
 
         window?.makeKeyAndVisible()
@@ -54,5 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+    }
+
+    // MARK: - Utilities
+
+    private func setAppearance() {
+        UINavigationBar.appearance().barTintColor = UIColor(hexString: "#F5F5F5")
+        UINavigationBar.appearance().tintColor = UIColor(white: 0.0, alpha: 0.87)
+
+        UIToolbar.appearance().barTintColor = UINavigationBar.appearance().barTintColor
+        UIToolbar.appearance().tintColor = UINavigationBar.appearance().tintColor
     }
 }

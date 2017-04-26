@@ -108,7 +108,6 @@ class AddViewController: UIViewController {
 
         self.groupColors.asDriver()
             .drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
-                guard let model = model else { return }
                 cell.backgroundColor = model
                 cell.textLabel?.text = model.hexValue()
                 cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: false)
@@ -180,8 +179,7 @@ class AddViewController: UIViewController {
                 style: .default
             ) { [weak self]_ in
                 guard let rgb = alertViewController.textFields?.first?.text else { return }
-                let code = rgb.replacingOccurrences(of: "#", with: "")
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                let code = rgb.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard let color = UIColor(hexString: code) else { return }
                 mainStore.dispatch(AppAction.addColor(color))
                 self?.showSuccess(subtitle: color.hexValue())

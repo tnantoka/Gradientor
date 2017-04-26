@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import IoniconsKit
 import RFAboutView_Swift
+import ChameleonFramework
 
 class HomeViewController: UIViewController {
 
@@ -138,6 +139,9 @@ class HomeViewController: UIViewController {
         aboutViewController.websiteURLTitle = aboutViewController.websiteURL!.absoluteString
 
         let aboutNavigationController = UINavigationController(rootViewController: aboutViewController)
+        aboutNavigationController.navigationBar.isTranslucent = false
+        aboutNavigationController.hidesNavigationBarHairline = true
+
         present(aboutNavigationController, animated: true, completion: nil)
     }
 
