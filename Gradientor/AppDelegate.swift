@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setAppearance() {
         UINavigationBar.appearance().barTintColor = UIColor(hexString: "#F5F5F5")
-        UINavigationBar.appearance().tintColor = FlatBlueDark()
+        UINavigationBar.appearance().tintColor = FlatBlue()
         UINavigationBar.appearance().titleTextAttributes = [
             NSForegroundColorAttributeName: UINavigationBar.appearance().tintColor
         ]

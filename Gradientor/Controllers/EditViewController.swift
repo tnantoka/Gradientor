@@ -78,7 +78,7 @@ class EditViewController: UITableViewController {
         colors.drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
                 cell.backgroundColor = model
                 cell.textLabel?.text = model.hexValue()
-                cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: false)
+                cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: true)
                 let backgroundView = UIView()
                 backgroundView.backgroundColor = model
                 cell.backgroundView = backgroundView

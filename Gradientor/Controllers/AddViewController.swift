@@ -98,17 +98,18 @@ class AddViewController: UIViewController {
 
                 guard let cell = collectionView.cellForItem(at: indexPath) else { return }
                 guard let backgroundColor = cell.backgroundColor else { return }
-                let backgroundView = UIView()
-                backgroundView.backgroundColor = ContrastColorOf(backgroundColor, returnFlat: false)
-                cell.selectedBackgroundView = backgroundView
-                cell.selectedBackgroundView?.alpha = 0.3
 
+                let overlayView = UIView(frame: cell.contentView.bounds)
+                overlayView.backgroundColor = ContrastColorOf(backgroundColor, returnFlat: true)
+                cell.contentView.addSubview(overlayView)
+
+                overlayView.alpha = 0.3
                 UIView.animate(
                     withDuration: 0.3,
                     animations: {
-                        cell.selectedBackgroundView?.alpha = 0.0
+                        overlayView.alpha = 0.0
                     }) { _ in
-                        cell.selectedBackgroundView = nil
+                        overlayView.removeFromSuperview()
                     }
             })
             .addDisposableTo(self.bag)
@@ -125,7 +126,7 @@ class AddViewController: UIViewController {
             .drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
                 cell.backgroundColor = model
                 cell.textLabel?.text = model.hexValue()
-                cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: false)
+                cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: true)
                 cell.selectionStyle = .none
             }
             .addDisposableTo(self.bag)
@@ -144,7 +145,7 @@ class AddViewController: UIViewController {
                 guard let backgroundColor = cell.backgroundColor else { return }
 
                 let overlayView = UIView(frame: cell.contentView.bounds)
-                overlayView.backgroundColor = ContrastColorOf(backgroundColor, returnFlat: false)
+                overlayView.backgroundColor = ContrastColorOf(backgroundColor, returnFlat: true)
                 cell.contentView.addSubview(overlayView)
 
                 overlayView.alpha = 0.3
