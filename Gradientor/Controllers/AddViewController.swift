@@ -95,6 +95,21 @@ class AddViewController: UIViewController {
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] indexPath in
                 self?.groupColors.value = MaterialDesign.colorGroups[indexPath.row]
+
+                guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+                guard let backgroundColor = cell.backgroundColor else { return }
+                let backgroundView = UIView()
+                backgroundView.backgroundColor = ContrastColorOf(backgroundColor, returnFlat: false)
+                cell.selectedBackgroundView = backgroundView
+                cell.selectedBackgroundView?.alpha = 0.3
+
+                UIView.animate(
+                    withDuration: 0.3,
+                    animations: {
+                        cell.selectedBackgroundView?.alpha = 0.0
+                    }) { _ in
+                        cell.selectedBackgroundView = nil
+                    }
             })
             .addDisposableTo(self.bag)
 
@@ -120,6 +135,26 @@ class AddViewController: UIViewController {
             .subscribe(onNext: { [weak self] color in
                 mainStore.dispatch(AppAction.addColor(color))
                 self?.showSuccess(subtitle: color.hexValue())
+            })
+            .addDisposableTo(self.bag)
+        tableView.rx.itemSelected
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let cell = tableView.cellForRow(at: indexPath) else { return }
+                guard let backgroundColor = cell.backgroundColor else { return }
+
+                let overlayView = UIView(frame: cell.contentView.bounds)
+                overlayView.backgroundColor = ContrastColorOf(backgroundColor, returnFlat: false)
+                cell.contentView.addSubview(overlayView)
+
+                overlayView.alpha = 0.3
+                UIView.animate(
+                    withDuration: 0.3,
+                    animations: {
+                        overlayView.alpha = 0.0
+                    }) { _ in
+                        overlayView.removeFromSuperview()
+                    }
             })
             .addDisposableTo(self.bag)
 

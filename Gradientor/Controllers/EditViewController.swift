@@ -79,9 +79,9 @@ class EditViewController: UITableViewController {
                 cell.backgroundColor = model
                 cell.textLabel?.text = model.hexValue()
                 cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: false)
-                let bgView = UIView()
-                bgView.backgroundColor = model
-                cell.backgroundView = bgView
+                let backgroundView = UIView()
+                backgroundView.backgroundColor = model
+                cell.backgroundView = backgroundView
             }
             .addDisposableTo(bag)
         colors.drive(onNext: { [weak self] colors in

@@ -62,7 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setAppearance() {
         UINavigationBar.appearance().barTintColor = UIColor(hexString: "#F5F5F5")
-        UINavigationBar.appearance().tintColor = UIColor(white: 0.0, alpha: 0.87)
+        UINavigationBar.appearance().tintColor = FlatBlueDark()
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSForegroundColorAttributeName: UINavigationBar.appearance().tintColor
+        ]
 
         UIToolbar.appearance().barTintColor = UINavigationBar.appearance().barTintColor
         UIToolbar.appearance().tintColor = UINavigationBar.appearance().tintColor

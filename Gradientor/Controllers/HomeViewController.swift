@@ -111,7 +111,10 @@ class HomeViewController: UIViewController {
             })
             .addDisposableTo(bag)
 
-        refresh()
+         refresh()
+//        mainStore.dispatch(AppAction.addColor(FlatBlue()))
+//        mainStore.dispatch(AppAction.addColor(FlatPowderBlueDark()))
+//        mainStore.dispatch(AppAction.addColor(FlatPowderBlue()))
     }
 
     // MARK - Utilities
@@ -192,6 +195,7 @@ class HomeViewController: UIViewController {
         aboutViewController.tableViewSeparatorColor = .clear
         aboutViewController.navigationBarTintColor = UINavigationBar.appearance().tintColor
         aboutViewController.navigationBarBarTintColor = UINavigationBar.appearance().barTintColor
+        aboutViewController.navigationBarTitleTextColor = UINavigationBar.appearance().tintColor
         aboutViewController.backgroundColor = MaterialDesign.backgroundColor
 
         let aboutNavigationController = UINavigationController(rootViewController: aboutViewController)
