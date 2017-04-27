@@ -14,6 +14,13 @@ import ReSwift
 struct AppState: StateType {
     var colors = [UIColor]()
     var direction = Gradient.Direction.horizontal
+    var exportSize = CGSize(
+        width: UIScreen.main.bounds.size.width * UIScreen.main.scale,
+        height: UIScreen.main.bounds.size.height * UIScreen.main.scale
+    )
+    var isExportImage = true
+    var isExportText = false
+    var exportCount = 1
 
     static var randomColor: UIColor {
         let random = GKRandomSource()

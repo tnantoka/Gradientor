@@ -19,4 +19,9 @@ enum AppAction: Action {
     case deleteColor(Int)
 
     case setDirection(Gradient.Direction)
+
+    case setExportSize(CGSize)
+    case setIsExportImage(Bool)
+    case setIsExportText(Bool)
+    case incrementExportCount
 }

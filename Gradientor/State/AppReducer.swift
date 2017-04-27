@@ -31,6 +31,15 @@ func appReducer(action: Action, state: AppState?) -> AppState {
 
     case .setDirection(let direction):
         state.direction = direction
+
+    case .setExportSize(let exportSize):
+        state.exportSize = exportSize
+    case .setIsExportImage(let isExportImage):
+        state.isExportImage = isExportImage
+    case .setIsExportText(let isExportText):
+        state.isExportText = isExportText
+    case .incrementExportCount:
+        state.exportCount += 1
     }
 
     return state

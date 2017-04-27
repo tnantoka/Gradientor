@@ -37,7 +37,6 @@ class HomeViewController: UIViewController {
             .addDisposableTo(self.bag)
         return infoItem
     }()
-
     lazy private var editItem: UIBarButtonItem = {
         let editItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
 
@@ -54,6 +53,7 @@ class HomeViewController: UIViewController {
             .addDisposableTo(self.bag)
         return editItem
     }()
+
     lazy private var clearItem: UIBarButtonItem = {
         let clearItem = UIBarButtonItem(barButtonSystemItem: .trash, target: nil, action: nil)
 
@@ -79,6 +79,12 @@ class HomeViewController: UIViewController {
     lazy private var exportItem: UIBarButtonItem = {
         let exportItem = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
 
+        exportItem.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.exportDidTap()
+            })
+            .addDisposableTo(self.bag)
         return exportItem
     }()
     private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -204,5 +210,19 @@ class HomeViewController: UIViewController {
         ) { [weak self] in
             self?.refresh()
         }
+    }
+
+    private func exportDidTap() {
+        let exportViewController = ExportViewController()
+
+        exportViewController.didClose = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
+
+        let exportNavigationController = UINavigationController(rootViewController: exportViewController)
+        exportNavigationController.navigationBar.isTranslucent = false
+        exportNavigationController.hidesNavigationBarHairline = true
+
+        present(exportNavigationController, animated: true, completion: nil)
     }
 }

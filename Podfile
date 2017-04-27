@@ -2,6 +2,7 @@ target 'Gradientor' do
   use_frameworks!
 
   pod 'ChameleonFramework/Swift', git: 'https://github.com/ViccAlexander/Chameleon.git'
+  pod 'Eureka'
   pod 'IGColorPicker'
   pod "IoniconsKit"
   pod 'PKHUD'

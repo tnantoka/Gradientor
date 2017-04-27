@@ -66,6 +66,17 @@ struct Gradient {
             }
         }
     }
+
+    var image: UIImage {
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, 1.0)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        guard let context = UIGraphicsGetCurrentContext() else { return UIImage() }
+        layer.render(in: context)
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
+        return image
+    }
 }
 
 class LinerLayer: CAGradientLayer {
