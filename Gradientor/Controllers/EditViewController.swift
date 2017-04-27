@@ -64,12 +64,6 @@ class EditViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
         isEditing = true
         navigationItem.rightBarButtonItem = addItem
         toolbarItems = [flexibleItem, directionItem, flexibleItem]
@@ -114,19 +108,7 @@ class EditViewController: UITableViewController {
     // MARK - Actions
 
     private func addDidTap() {
-//        let colorsViewController = ColorsViewController()
-//
-//        colorsViewController.selectedColors
-//            .distinctUntilChanged()
-//            .subscribe(onNext: { newColor in
-//                mainStore.dispatch(AppAction.addColor(newColor))
-//            })
-//            .addDisposableTo(colorsViewController.bag)
-//
-//        navigationController?.pushViewController(colorsViewController, animated: true)
-
         let addViewController = AddViewController()
-
         navigationController?.pushViewController(addViewController, animated: true)
     }
 }

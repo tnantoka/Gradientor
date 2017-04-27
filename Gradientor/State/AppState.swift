@@ -12,10 +12,7 @@ import GameplayKit
 import ReSwift
 
 struct AppState: StateType {
-    var colors: [UIColor] = [
-        AppState.randomColor,
-        AppState.randomColor
-    ]
+    var colors = [UIColor]()
     var direction = Gradient.Direction.horizontal
 
     static var randomColor: UIColor {

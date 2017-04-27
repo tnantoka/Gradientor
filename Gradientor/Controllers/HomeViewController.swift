@@ -65,6 +65,17 @@ class HomeViewController: UIViewController {
             .addDisposableTo(self.bag)
         return clearItem
     }()
+    lazy private var refreshItem: UIBarButtonItem = {
+        let refreshItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: nil, action: nil)
+
+        refreshItem.rx.tap
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.refreshDidTap()
+            })
+            .addDisposableTo(self.bag)
+        return refreshItem
+    }()
     lazy private var exportItem: UIBarButtonItem = {
         let exportItem = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
 
@@ -75,13 +86,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         title = NSLocalizedString("Gradientor", comment: "")
         view.backgroundColor = .white
 
         navigationItem.leftBarButtonItem = infoItem
         navigationItem.rightBarButtonItem = editItem
-        toolbarItems = [flexibleItem, clearItem, flexibleItem, exportItem, flexibleItem]
+        toolbarItems = [flexibleItem, clearItem, flexibleItem, refreshItem, flexibleItem, exportItem, flexibleItem]
 
         let colors = store.state.asDriver()
             .map { $0.colors }
@@ -94,11 +104,8 @@ class HomeViewController: UIViewController {
                 self?.updateUI(colors: colors)
             })
             .addDisposableTo(bag)
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        refresh()
     }
 
     // MARK - Utilities
@@ -120,6 +127,42 @@ class HomeViewController: UIViewController {
     private func updateUI(colors: [UIColor]) {
         clearItem.isEnabled = colors.count > 1
         exportItem.isEnabled = colors.count > 1
+    }
+
+    private func clear() {
+        mainStore.dispatch(AppAction.clearColors)
+    }
+
+    private func refresh() {
+        clear()
+        mainStore.dispatch(AppAction.addRandomColor)
+        mainStore.dispatch(AppAction.addRandomColor)
+    }
+
+    private func confirm(title: String, actionTitle: String, didConfirm: @escaping () -> Void) {
+        let alertViewController = UIAlertController(
+            title: NSLocalizedString(title, comment: ""),
+            message: NSLocalizedString("Are you sure?", comment: ""),
+            preferredStyle: .alert
+        )
+
+        alertViewController.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+        alertViewController.addAction(
+            UIAlertAction(
+                title: NSLocalizedString(actionTitle, comment: ""),
+                style: .destructive
+            ) { _ in
+                didConfirm()
+            }
+        )
+
+        present(alertViewController, animated: true, completion: nil)
     }
 
     // MARK - Actions
@@ -146,28 +189,20 @@ class HomeViewController: UIViewController {
     }
 
     private func clearDidTap() {
-        let alertViewController = UIAlertController(
-            title: NSLocalizedString("Delete All Colors", comment: ""),
-            message: NSLocalizedString("Are you sure?", comment: ""),
-            preferredStyle: .alert
-        )
+        confirm(
+            title: "Delete All Colors",
+            actionTitle: "Delete"
+        ) { [weak self] in
+            self?.clear()
+        }
+    }
 
-        alertViewController.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Cancel", comment: ""),
-                style: .cancel,
-                handler: nil
-            )
-        )
-        alertViewController.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Delete", comment: ""),
-                style: .destructive
-            ) { _ in
-                mainStore.dispatch(AppAction.clearColors)
-            }
-        )
-
-        present(alertViewController, animated: true, completion: nil)
+    private func refreshDidTap() {
+        confirm(
+            title: "Recreate Colors",
+            actionTitle: "OK"
+        ) { [weak self] in
+            self?.refresh()
+        }
     }
 }
