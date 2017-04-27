@@ -332,4 +332,6 @@ struct MaterialDesign {
             "#FFFFFF"
         ]
     ].map { $0.map { UIColor(hexString: $0)! } }
+
+    static let backgroundColor = UIColor(hexString: "#FAFAFA")!
 }

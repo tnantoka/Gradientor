@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setAppearance()
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = .white
+        window?.backgroundColor = MaterialDesign.backgroundColor
 
         let homeViewController = HomeViewController()
         let navigationController = UINavigationController(rootViewController: homeViewController)

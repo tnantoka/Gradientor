@@ -53,7 +53,7 @@ class ExportViewController: FormViewController {
         navigationItem.leftBarButtonItem = closeItem
         navigationItem.rightBarButtonItem = saveItem
 
-        tableView.backgroundColor = UIColor(hexString: "#FAFAFA")
+        tableView.backgroundColor = MaterialDesign.backgroundColor
         tableView.separatorColor = .clear
 
         form.append(

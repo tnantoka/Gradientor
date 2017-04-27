@@ -93,7 +93,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         title = NSLocalizedString("Gradientor", comment: "")
-        view.backgroundColor = .white
+        view.backgroundColor = MaterialDesign.backgroundColor
 
         navigationItem.leftBarButtonItem = infoItem
         navigationItem.rightBarButtonItem = editItem
@@ -180,12 +180,19 @@ class HomeViewController: UIViewController {
 
     private func infoDidTap() {
         let aboutViewController = RFAboutViewController()
-        aboutViewController.closeButtonAsImage = false
+
         aboutViewController.copyrightHolderName = "tnantoka"
 //        aboutViewController.contactEmail = "tnantoka+gradientor@bornneet.com"
 //        aboutViewController.contactEmailTitle = NSLocalizedString("Contact", comment: "")
         aboutViewController.websiteURL = URL(string: "http://gradientor.com/")!
         aboutViewController.websiteURLTitle = aboutViewController.websiteURL!.absoluteString
+
+        aboutViewController.closeButtonAsImage = false
+        aboutViewController.headerBorderColor = .clear
+        aboutViewController.tableViewSeparatorColor = .clear
+        aboutViewController.navigationBarTintColor = UINavigationBar.appearance().tintColor
+        aboutViewController.navigationBarBarTintColor = UINavigationBar.appearance().barTintColor
+        aboutViewController.backgroundColor = MaterialDesign.backgroundColor
 
         let aboutNavigationController = UINavigationController(rootViewController: aboutViewController)
         aboutNavigationController.navigationBar.isTranslucent = false
