@@ -63,6 +63,10 @@ class ExportViewController: FormViewController {
                     row.add(rule: RuleGreaterThan(min: 0))
                     row.value = Int(mainStore.state.exportSize.width)
                     row.formatter = nil
+                    row.disabled = Condition.function(["preset"]) { form in
+                        guard let row = form.rowBy(tag: "preset") as? ActionSheetRow<String> else { return false }
+                        return row.value != NSLocalizedString("None", comment: "")
+                    }
                 }
                 .onChange { row in
                     guard let width = row.value else { return }
@@ -81,6 +85,10 @@ class ExportViewController: FormViewController {
                     row.add(rule: RuleGreaterThan(min: 0))
                     row.value = Int(mainStore.state.exportSize.height)
                     row.formatter = nil
+                    row.disabled = Condition.function(["preset"]) { form in
+                        guard let row = form.rowBy(tag: "preset") as? ActionSheetRow<String> else { return false }
+                        return row.value != NSLocalizedString("None", comment: "")
+                    }
                 }
                 .onChange { row in
                     guard let height = row.value else { return }
@@ -97,7 +105,7 @@ class ExportViewController: FormViewController {
                 section.append(widthRow)
                 section.append(heightRow)
                 section.append(
-                    ActionSheetRow<String> { row in
+                    ActionSheetRow<String>("preset") { row in
                         let none = NSLocalizedString("None", comment: "")
                         row.title = NSLocalizedString("Preset", comment: "")
                         row.options = [none] + Preset.names
@@ -118,27 +126,35 @@ class ExportViewController: FormViewController {
         form.append(
             Section(NSLocalizedString("Options", comment: "")) { section in
                 section.append(
-                    SwitchRow { row in
+                    SwitchRow("image") { row in
                         row.title = NSLocalizedString("Image", comment: "")
                         row.value = mainStore.state.isExportImage
                     }
-                    .onChange { row in
+                    .onChange { [weak self] row in
                         guard let value = row.value else { return }
                         mainStore.dispatch(AppAction.setIsExportImage(value))
+                        self?.updateUI()
                     }
                 )
                 section.append(
-                    SwitchRow { row in
+                    SwitchRow("text") { row in
                         row.title = NSLocalizedString("Text", comment: "")
                         row.value = mainStore.state.isExportText
                     }
-                    .onChange { row in
+                    .onChange { [weak self] row in
                         guard let value = row.value else { return }
                         mainStore.dispatch(AppAction.setIsExportText(value))
+                        self?.updateUI()
                     }
                 )
             }
         )
+    }
+
+    // MARK - Utilities
+
+    private func updateUI() {
+        saveItem.isEnabled = mainStore.state.isExportImage || mainStore.state.isExportText
     }
 
     // MARK - Actions
