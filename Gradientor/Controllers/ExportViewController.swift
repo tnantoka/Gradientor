@@ -145,6 +145,25 @@ class ExportViewController: FormViewController {
         saveItem.isEnabled = mainStore.state.isExportImage || mainStore.state.isExportText
     }
 
+    private func saveToDocs(gradient: Gradient) {
+        guard let docs = try? FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+        ) else { return }
+        let name = (form.rowBy(tag: "preset") as? ActionSheetRow<String>)?.value ?? "preset"
+
+        let imageURL = docs.appendingPathComponent("\(name).png")
+        guard let data = UIImagePNGRepresentation(gradient.image) else { return }
+        try? data.write(to: imageURL)
+
+        let textURL = docs.appendingPathComponent("\(name).txt")
+        try? gradient.text.write(to: textURL, atomically: true, encoding: .utf8)
+
+        print(docs.absoluteString)
+    }
+
     // MARK - Actions
 
     private func closeDidTap() {
@@ -152,9 +171,6 @@ class ExportViewController: FormViewController {
     }
 
     private func saveDidTap() {
-        #if DEBUG
-        #endif
-
         var items = [Any]()
 
         var gradient = Gradient()
@@ -162,11 +178,15 @@ class ExportViewController: FormViewController {
         gradient.colors = mainStore.state.colors
         gradient.frame = CGRect(origin: CGPoint.zero, size: mainStore.state.exportSize)
 
+        #if DEBUG
+//            saveToDocs(gradient: gradient)
+        #endif
+
         if mainStore.state.isExportImage {
             items.append(gradient.image)
         }
         if mainStore.state.isExportText {
-            items.append(gradient.colors.map { $0.hexValue() }.joined(separator: ", "))
+            items.append(gradient.text)
         }
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)

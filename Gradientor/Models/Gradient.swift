@@ -77,6 +77,10 @@ struct Gradient {
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
         return image
     }
+
+    var text: String {
+        return colors.map { $0.hexValue() }.joined(separator: ", ")
+    }
 }
 
 class LinerLayer: CAGradientLayer {

@@ -73,14 +73,18 @@ class HomeViewController: UIViewController {
 
         refresh()
         #if DEBUG
-//            mainStore.dispatch(AppAction.clearColors)
-//            mainStore.dispatch(AppAction.addColor(FlatBlue()))
-//            mainStore.dispatch(AppAction.addColor(FlatPowderBlueDark()))
-//            mainStore.dispatch(AppAction.addColor(FlatPowderBlue()))
+//            setIconColors()
         #endif
     }
 
     // MARK - Utilities
+
+    private func setIconColors() {
+        mainStore.dispatch(AppAction.clearColors)
+        mainStore.dispatch(AppAction.addColor(FlatBlue()))
+        mainStore.dispatch(AppAction.addColor(FlatPowderBlueDark()))
+        mainStore.dispatch(AppAction.addColor(FlatPowderBlue()))
+    }
 
     private func updateGradient(colors: [UIColor]) {
         view.layer.sublayers?.forEach { sublayer in
