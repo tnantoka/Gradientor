@@ -22,70 +22,30 @@ class HomeViewController: UIViewController {
     private var gradient = Gradient()
 
     lazy private var infoItem: UIBarButtonItem = {
-        let infoItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-
-        infoItem.setTitleTextAttributes([
-            NSFontAttributeName: UIFont.ionicon(of: 22.0)
-        ], for: .normal)
-        infoItem.title = String.ionicon(with: .information)
-
-        infoItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.infoDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return infoItem
+        self.barButtomItem(icon: .information, bag: self.bag) { [weak self] _ in
+            self?.infoDidTap()
+        }
     }()
     lazy private var editItem: UIBarButtonItem = {
-        let editItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-
-        editItem.setTitleTextAttributes([
-            NSFontAttributeName: UIFont.ionicon(of: 22.0)
-        ], for: .normal)
-        editItem.title = String.ionicon(with: .edit)
-
-        editItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.editDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return editItem
+        self.barButtomItem(icon: .edit, bag: self.bag) { [weak self] _ in
+            self?.editDidTap()
+        }
     }()
 
     lazy private var clearItem: UIBarButtonItem = {
-        let clearItem = UIBarButtonItem(barButtonSystemItem: .trash, target: nil, action: nil)
-
-        clearItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.clearDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return clearItem
+        self.barButtomItem(systemItem: .trash, bag: self.bag) { [weak self] _ in
+            self?.clearDidTap()
+        }
     }()
     lazy private var refreshItem: UIBarButtonItem = {
-        let refreshItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: nil, action: nil)
-
-        refreshItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.refreshDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return refreshItem
+        self.barButtomItem(systemItem: .refresh, bag: self.bag) { [weak self] _ in
+            self?.refreshDidTap()
+        }
     }()
     lazy private var exportItem: UIBarButtonItem = {
-        let exportItem = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
-
-        exportItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.exportDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return exportItem
+        self.barButtomItem(systemItem: .action, bag: self.bag) { [weak self] _ in
+            self?.exportDidTap()
+        }
     }()
     private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
@@ -112,7 +72,7 @@ class HomeViewController: UIViewController {
             .addDisposableTo(bag)
 
          refresh()
-//        mainStore.dispatch(AppAction.addColor(FlatBlue()))
+        mainStore.dispatch(AppAction.addColor(FlatBlue()))
 //        mainStore.dispatch(AppAction.addColor(FlatPowderBlueDark()))
 //        mainStore.dispatch(AppAction.addColor(FlatPowderBlue()))
     }

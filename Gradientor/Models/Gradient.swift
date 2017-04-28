@@ -20,7 +20,7 @@ struct Gradient {
         case diagonalRL
     }
 
-    var layer = CAGradientLayer()
+    var layer: CAGradientLayer = LinerLayer()
 
     var colors = [UIColor]() {
         didSet {

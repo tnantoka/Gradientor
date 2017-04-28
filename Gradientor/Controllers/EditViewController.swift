@@ -20,29 +20,18 @@ class EditViewController: UITableViewController {
     private let store = RxStore<AppState>(store: mainStore)
 
     lazy private var addItem: UIBarButtonItem = {
-        let addItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-
-        addItem.setTitleTextAttributes([
-            NSFontAttributeName: UIFont.ionicon(of: 22.0)
-        ], for: .normal)
-        addItem.title = String.ionicon(with: .plus)
-
-        addItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.addDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return addItem
+        self.barButtomItem(systemItem: .add, bag: self.bag) { [weak self] _ in
+            self?.addDidTap()
+        }
     }()
     lazy private var directionControl: UISegmentedControl = {
         let size = CGSize(width: 24.0, height: 24.0)
         let segmentedControl = UISegmentedControl(items: [
-            UIImage.ionicon(with: .minus, textColor: .black, size: size),
-            UIImage.ionicon(with: .minus, textColor: .black, size: size).rotated(degree: 90.0),
+            UIImage.ionicon(with: .androidRemove, textColor: .black, size: size),
+            UIImage.ionicon(with: .androidRemove, textColor: .black, size: size).rotated(degree: 90.0),
             UIImage.ionicon(with: .androidRadioButtonOff, textColor: .black, size: size),
-            UIImage.ionicon(with: .minus, textColor: .black, size: size).rotated(degree: 45.0),
-            UIImage.ionicon(with: .minus, textColor: .black, size: size).rotated(degree: -45.0)
+            UIImage.ionicon(with: .androidRemove, textColor: .black, size: size).rotated(degree: 45.0),
+            UIImage.ionicon(with: .androidRemove, textColor: .black, size: size).rotated(degree: -45.0)
         ])
         segmentedControl.selectedSegmentIndex = mainStore.state.direction.rawValue
         segmentedControl.rx.selectedSegmentIndex
@@ -56,8 +45,7 @@ class EditViewController: UITableViewController {
         return segmentedControl
     }()
     lazy private var directionItem: UIBarButtonItem = {
-        let directionItem = UIBarButtonItem(customView: self.directionControl)
-        return directionItem
+        UIBarButtonItem(customView: self.directionControl)
     }()
     private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
@@ -110,29 +98,5 @@ class EditViewController: UITableViewController {
     private func addDidTap() {
         let addViewController = AddViewController()
         navigationController?.pushViewController(addViewController, animated: true)
-    }
-}
-
-extension UIImage {
-    fileprivate func rotated(degree: Float) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        defer {
-            UIGraphicsEndImageContext()
-        }
-        guard let context = UIGraphicsGetCurrentContext() else { return UIImage() }
-
-        let center = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
-
-        context.translateBy(x: center.x, y: center.y)
-        context.scaleBy(x: 1.0, y: -1.0)
-
-        let radian = CGFloat(GLKMathDegreesToRadians(degree))
-        context.rotate(by: radian)
-
-        guard let cgImage = cgImage else { return UIImage() }
-        context.draw(cgImage, in: CGRect(origin: CGPoint(x: -center.x, y: -center.y), size: size))
-
-        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
-        return image
     }
 }

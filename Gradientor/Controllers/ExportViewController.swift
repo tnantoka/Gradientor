@@ -19,31 +19,110 @@ class ExportViewController: FormViewController {
     let bag = DisposeBag()
 
     lazy private var closeItem: UIBarButtonItem = {
-        let closeItem = UIBarButtonItem(
-            title: NSLocalizedString("Close", comment: ""),
-            style: .plain,
-            target: nil,
-            action: nil
-        )
-
-        closeItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.closeDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return closeItem
+        self.barButtomItem(title: NSLocalizedString("Close", comment: ""), bag: self.bag) { [weak self] _ in
+            self?.closeDidTap()
+        }
     }()
     lazy private var saveItem: UIBarButtonItem = {
-        let saveItem = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
+        self.barButtomItem(systemItem: .save, bag: self.bag) { [weak self] _ in
+            self?.saveDidTap()
+        }
+    }()
 
-        saveItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.saveDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return saveItem
+    lazy private var widthRow: IntRow = {
+        IntRow { row in
+            row.title = NSLocalizedString("Width", comment: "")
+            row.add(rule: RuleGreaterThan(min: 0))
+            row.value = Int(mainStore.state.exportSize.width)
+            row.formatter = nil
+            row.disabled = Condition.function(["preset"]) { form in
+                guard let row = form.rowBy(tag: "preset") as? ActionSheetRow<String> else { return false }
+                return row.value != NSLocalizedString("None", comment: "")
+            }
+        }
+        .onChange { row in
+            guard let width = row.value else { return }
+            var size = mainStore.state.exportSize
+            size.width = CGFloat(width)
+            mainStore.dispatch(AppAction.setExportSize(size))
+        }
+        .cellUpdate { cell, row in
+            if !row.isValid {
+                cell.titleLabel?.textColor = .red
+            }
+        }
+    }()
+    lazy private var heightRow: IntRow = {
+        IntRow { row in
+            row.title = NSLocalizedString("Height", comment: "")
+            row.add(rule: RuleGreaterThan(min: 0))
+            row.value = Int(mainStore.state.exportSize.height)
+            row.formatter = nil
+            row.disabled = Condition.function(["preset"]) { form in
+                guard let row = form.rowBy(tag: "preset") as? ActionSheetRow<String> else { return false }
+                return row.value != NSLocalizedString("None", comment: "")
+            }
+        }
+        .onChange { row in
+            guard let height = row.value else { return }
+            var size = mainStore.state.exportSize
+            size.width = CGFloat(height)
+            mainStore.dispatch(AppAction.setExportSize(size))
+        }
+        .cellUpdate { cell, row in
+            if !row.isValid {
+                cell.titleLabel?.textColor = .red
+            }
+        }
+    }()
+    lazy private var sizeSection: Section = {
+        Section(NSLocalizedString("Size", comment: "")) { section in
+            section.append(self.widthRow)
+            section.append(self.heightRow)
+            section.append(
+                ActionSheetRow<String>("preset") { row in
+                    let none = NSLocalizedString("None", comment: "")
+                    row.title = NSLocalizedString("Preset", comment: "")
+                    row.options = [none] + Preset.names
+                    row.value = none
+                }
+                .onChange { [weak self] row in
+                    guard let name = row.value else { return }
+                    guard let index = Preset.names.index(of: name) else { return }
+                    let size = Preset.sizes[index]
+                    self?.widthRow.value = Int(size.width)
+                    self?.heightRow.value = Int(size.height)
+                    mainStore.dispatch(AppAction.setExportSize(size))
+                }
+            )
+        }
+    }()
+
+    lazy private var optionsSection: Section = {
+        Section(NSLocalizedString("Options", comment: "")) { section in
+            section.append(
+                SwitchRow("image") { row in
+                    row.title = NSLocalizedString("Image", comment: "")
+                    row.value = mainStore.state.isExportImage
+                }
+                .onChange { [weak self] row in
+                    guard let value = row.value else { return }
+                    mainStore.dispatch(AppAction.setIsExportImage(value))
+                    self?.updateUI()
+                }
+            )
+            section.append(
+                SwitchRow("text") { row in
+                    row.title = NSLocalizedString("Text", comment: "")
+                    row.value = mainStore.state.isExportText
+                }
+                .onChange { [weak self] row in
+                    guard let value = row.value else { return }
+                    mainStore.dispatch(AppAction.setIsExportText(value))
+                    self?.updateUI()
+                }
+            )
+        }
     }()
 
     override func viewDidLoad() {
@@ -56,99 +135,8 @@ class ExportViewController: FormViewController {
         tableView.backgroundColor = MaterialDesign.backgroundColor
         tableView.separatorColor = .clear
 
-        form.append(
-            Section(NSLocalizedString("Size", comment: "")) { section in
-                let widthRow = IntRow { row in
-                    row.title = NSLocalizedString("Width", comment: "")
-                    row.add(rule: RuleGreaterThan(min: 0))
-                    row.value = Int(mainStore.state.exportSize.width)
-                    row.formatter = nil
-                    row.disabled = Condition.function(["preset"]) { form in
-                        guard let row = form.rowBy(tag: "preset") as? ActionSheetRow<String> else { return false }
-                        return row.value != NSLocalizedString("None", comment: "")
-                    }
-                }
-                .onChange { row in
-                    guard let width = row.value else { return }
-                    var size = mainStore.state.exportSize
-                    size.width = CGFloat(width)
-                    mainStore.dispatch(AppAction.setExportSize(size))
-                }
-                .cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.titleLabel?.textColor = .red
-                    }
-                }
-
-                let heightRow = IntRow { row in
-                    row.title = NSLocalizedString("Height", comment: "")
-                    row.add(rule: RuleGreaterThan(min: 0))
-                    row.value = Int(mainStore.state.exportSize.height)
-                    row.formatter = nil
-                    row.disabled = Condition.function(["preset"]) { form in
-                        guard let row = form.rowBy(tag: "preset") as? ActionSheetRow<String> else { return false }
-                        return row.value != NSLocalizedString("None", comment: "")
-                    }
-                }
-                .onChange { row in
-                    guard let height = row.value else { return }
-                    var size = mainStore.state.exportSize
-                    size.width = CGFloat(height)
-                    mainStore.dispatch(AppAction.setExportSize(size))
-                }
-                .cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.titleLabel?.textColor = .red
-                    }
-                }
-
-                section.append(widthRow)
-                section.append(heightRow)
-                section.append(
-                    ActionSheetRow<String>("preset") { row in
-                        let none = NSLocalizedString("None", comment: "")
-                        row.title = NSLocalizedString("Preset", comment: "")
-                        row.options = [none] + Preset.names
-                        row.value = none
-                    }
-                    .onChange { row in
-                        guard let name = row.value else { return }
-                        guard let index = Preset.names.index(of: name) else { return }
-                        let size = Preset.sizes[index]
-                        widthRow.value = Int(size.width)
-                        heightRow.value = Int(size.height)
-                        mainStore.dispatch(AppAction.setExportSize(size))
-                    }
-                )
-            }
-        )
-
-        form.append(
-            Section(NSLocalizedString("Options", comment: "")) { section in
-                section.append(
-                    SwitchRow("image") { row in
-                        row.title = NSLocalizedString("Image", comment: "")
-                        row.value = mainStore.state.isExportImage
-                    }
-                    .onChange { [weak self] row in
-                        guard let value = row.value else { return }
-                        mainStore.dispatch(AppAction.setIsExportImage(value))
-                        self?.updateUI()
-                    }
-                )
-                section.append(
-                    SwitchRow("text") { row in
-                        row.title = NSLocalizedString("Text", comment: "")
-                        row.value = mainStore.state.isExportText
-                    }
-                    .onChange { [weak self] row in
-                        guard let value = row.value else { return }
-                        mainStore.dispatch(AppAction.setIsExportText(value))
-                        self?.updateUI()
-                    }
-                )
-            }
-        )
+        form.append(sizeSection)
+        form.append(optionsSection)
     }
 
     // MARK - Utilities

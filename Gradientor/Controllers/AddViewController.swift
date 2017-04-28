@@ -21,54 +21,19 @@ class AddViewController: UIViewController {
     let groupColors = Variable(MaterialDesign.colorGroups[0])
 
     lazy private var randomItem: UIBarButtonItem = {
-        let randomItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-
-        randomItem.setTitleTextAttributes([
-            NSFontAttributeName: UIFont.ionicon(of: 22.0)
-        ], for: .normal)
-        randomItem.title = String.ionicon(with: .shuffle)
-
-        randomItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                let color = AppState.randomColor
-                mainStore.dispatch(AppAction.addColor(color))
-                self?.showSuccess(subtitle: color.hexValue())
-            })
-            .addDisposableTo(self.bag)
-        return randomItem
+        self.barButtomItem(icon: .shuffle, bag: self.bag) { [weak self] _ in
+            self?.randomDidTap()
+        }
     }()
     lazy private var imageItem: UIBarButtonItem = {
-        let imageItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-
-        imageItem.setTitleTextAttributes([
-            NSFontAttributeName: UIFont.ionicon(of: 22.0)
-        ], for: .normal)
-        imageItem.title = String.ionicon(with: .image)
-
-        imageItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.imageDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return imageItem
+        self.barButtomItem(icon: .image, bag: self.bag) { [weak self] _ in
+            self?.imageDidTap()
+        }
     }()
     lazy private var rgbItem: UIBarButtonItem = {
-        let rgbItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-
-        rgbItem.setTitleTextAttributes([
-            NSFontAttributeName: UIFont.ionicon(of: 22.0)
-        ], for: .normal)
-        rgbItem.title = String.ionicon(with: .pound)
-
-        rgbItem.rx.tap
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.rgbDidTap()
-            })
-            .addDisposableTo(self.bag)
-        return rgbItem
+        self.barButtomItem(icon: .pound, bag: self.bag) { [weak self] _ in
+            self?.rgbDidTap()
+        }
     }()
     private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
@@ -189,6 +154,12 @@ class AddViewController: UIViewController {
     }
 
     // MARK - Actions
+
+    private func randomDidTap() {
+        let color = AppState.randomColor
+        mainStore.dispatch(AppAction.addColor(color))
+        showSuccess(subtitle: color.hexValue())
+    }
 
     private func rgbDidTap() {
         let alertViewController = UIAlertController(
