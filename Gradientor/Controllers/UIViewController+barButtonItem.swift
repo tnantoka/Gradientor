@@ -12,29 +12,30 @@ import RxSwift
 import IoniconsKit
 
 extension UIViewController {
-    func barButtomItem(
-        systemItem: UIBarButtonSystemItem? = nil,
-        title: String? = nil,
-        icon: Ionicons? = nil,
-        bag: DisposeBag,
-        didTap: @escaping () -> Void
-        ) -> UIBarButtonItem {
-        let item: UIBarButtonItem
+    func barButtomItem(systemItem: UIBarButtonSystemItem, bag: DisposeBag,
+                       didTap: @escaping () -> Void) -> UIBarButtonItem {
+        let item = UIBarButtonItem(barButtonSystemItem: systemItem, target: nil, action: nil)
+        return barButtomItem(item: item, bag: bag, didTap: didTap)
+    }
 
-        if let systemItem = systemItem {
-            item = UIBarButtonItem(barButtonSystemItem: systemItem, target: nil, action: nil)
-        } else if let title = title {
-            item = UIBarButtonItem(title: title, style: .plain, target: nil, action: nil)
-        } else if let icon = icon {
-            item = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-            item.setTitleTextAttributes([
-                NSFontAttributeName: UIFont.ionicon(of: 22.0)
-                ], for: .normal)
-            item.title = String.ionicon(with: icon)
-        } else {
-            item = UIBarButtonItem()
-        }
+    func barButtomItem(title: String, bag: DisposeBag,
+                       didTap: @escaping () -> Void) -> UIBarButtonItem {
+        let item = UIBarButtonItem(title: title, style: .plain, target: nil, action: nil)
+        return barButtomItem(item: item, bag: bag, didTap: didTap)
+    }
 
+    func barButtomItem(icon: Ionicons, bag: DisposeBag,
+                       didTap: @escaping () -> Void) -> UIBarButtonItem {
+        let item = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        item.setTitleTextAttributes([
+            NSFontAttributeName: UIFont.ionicon(of: 22.0)
+            ], for: .normal)
+        item.title = String.ionicon(with: icon)
+        return barButtomItem(item: item, bag: bag, didTap: didTap)
+    }
+
+    private func barButtomItem(item: UIBarButtonItem, bag: DisposeBag,
+                               didTap: @escaping () -> Void) -> UIBarButtonItem {
         item.rx.tap
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { _ in

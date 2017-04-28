@@ -71,10 +71,13 @@ class HomeViewController: UIViewController {
             })
             .addDisposableTo(bag)
 
-         refresh()
-        mainStore.dispatch(AppAction.addColor(FlatBlue()))
-//        mainStore.dispatch(AppAction.addColor(FlatPowderBlueDark()))
-//        mainStore.dispatch(AppAction.addColor(FlatPowderBlue()))
+        refresh()
+        #if DEBUG
+//            mainStore.dispatch(AppAction.clearColors)
+//            mainStore.dispatch(AppAction.addColor(FlatBlue()))
+//            mainStore.dispatch(AppAction.addColor(FlatPowderBlueDark()))
+//            mainStore.dispatch(AppAction.addColor(FlatPowderBlue()))
+        #endif
     }
 
     // MARK - Utilities
@@ -145,8 +148,6 @@ class HomeViewController: UIViewController {
         let aboutViewController = RFAboutViewController()
 
         aboutViewController.copyrightHolderName = "tnantoka"
-//        aboutViewController.contactEmail = "tnantoka+gradientor@bornneet.com"
-//        aboutViewController.contactEmailTitle = NSLocalizedString("Contact", comment: "")
         aboutViewController.websiteURL = URL(string: "http://gradientor.com/")!
         aboutViewController.websiteURLTitle = aboutViewController.websiteURL!.absoluteString
 

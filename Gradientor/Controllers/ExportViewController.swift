@@ -152,6 +152,9 @@ class ExportViewController: FormViewController {
     }
 
     private func saveDidTap() {
+        #if DEBUG
+        #endif
+
         var items = [Any]()
 
         var gradient = Gradient()
