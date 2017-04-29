@@ -117,7 +117,7 @@ class HomeViewController: UIViewController {
 
     private func confirm(title: String, actionTitle: String, didConfirm: @escaping () -> Void) {
         let alertViewController = UIAlertController(
-            title: NSLocalizedString(title, comment: ""),
+            title: title,
             message: NSLocalizedString("Are you sure?", comment: ""),
             preferredStyle: .alert
         )
@@ -131,7 +131,7 @@ class HomeViewController: UIViewController {
         )
         alertViewController.addAction(
             UIAlertAction(
-                title: NSLocalizedString(actionTitle, comment: ""),
+                title: actionTitle,
                 style: .destructive
             ) { _ in
                 didConfirm()
@@ -151,6 +151,7 @@ class HomeViewController: UIViewController {
     private func infoDidTap() {
         let aboutViewController = RFAboutViewController()
 
+        aboutViewController.title = NSLocalizedString("About", comment: "")
         aboutViewController.copyrightHolderName = "tnantoka"
         aboutViewController.websiteURL = URL(string: "http://gradientor.com/")!
         aboutViewController.websiteURLTitle = aboutViewController.websiteURL!.absoluteString
@@ -172,8 +173,8 @@ class HomeViewController: UIViewController {
 
     private func clearDidTap() {
         confirm(
-            title: "Delete All Colors",
-            actionTitle: "Delete"
+            title: NSLocalizedString("Delete All Colors", comment: ""),
+            actionTitle: NSLocalizedString("Delete", comment: "")
         ) { [weak self] in
             self?.clear()
         }
@@ -181,8 +182,8 @@ class HomeViewController: UIViewController {
 
     private func refreshDidTap() {
         confirm(
-            title: "Recreate Colors",
-            actionTitle: "OK"
+            title: NSLocalizedString("Recreate Colors", comment: ""),
+            actionTitle: NSLocalizedString("OK", comment: "")
         ) { [weak self] in
             self?.refresh()
         }
