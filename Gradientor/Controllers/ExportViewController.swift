@@ -66,7 +66,7 @@ class ExportViewController: FormViewController {
         .onChange { row in
             guard let height = row.value else { return }
             var size = mainStore.state.exportSize
-            size.width = CGFloat(height)
+            size.height = CGFloat(height)
             mainStore.dispatch(AppAction.setExportSize(size))
         }
         .cellUpdate { cell, row in
