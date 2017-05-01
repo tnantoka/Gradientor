@@ -20,7 +20,7 @@ struct AppState: StateType {
     )
     var isExportImage = true
     var isExportText = false
-    var exportCount = 1
+    var exportCount = 0
 
     static var randomColor: UIColor {
         let random = GKRandomSource()

@@ -1,4 +1,5 @@
 PODS:
+  - AdFooter (7.19.1)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -6,6 +7,7 @@ PODS:
   - IGColorPicker (0.2.1):
     - M13Checkbox (~> 2.2.0)
   - IoniconsKit (0.1.1)
+  - Keys (1.0.0)
   - M13Checkbox (2.2.6)
   - PKHUD (4.2.1)
   - ReSwift (4.0.0)
@@ -17,10 +19,12 @@ PODS:
   - SwiftLint (0.18.1)
 
 DEPENDENCIES:
+  - AdFooter (from `https://github.com/tnantoka/AdFooter.git`)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Eureka
   - IGColorPicker
   - IoniconsKit
+  - Keys (from `Pods/CocoaPodsKeys`)
   - PKHUD
   - ReSwift
   - RFAboutView-Swift
@@ -30,19 +34,28 @@ DEPENDENCIES:
   - SwiftLint
 
 EXTERNAL SOURCES:
+  AdFooter:
+    :git: https://github.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :git: https://github.com/ViccAlexander/Chameleon.git
+  Keys:
+    :path: Pods/CocoaPodsKeys
 
 CHECKOUT OPTIONS:
+  AdFooter:
+    :commit: ce9cd1dd9bba176f6a9b6366183f4d7145042ebd
+    :git: https://github.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
     :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
+  AdFooter: b99d86fa671e50ed706e1ba44c60e15b32d2ac0c
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Eureka: f36fd440c3ebb7bfea0a4fbe6f16a05f1cb35906
   IGColorPicker: a6ed1bf42cccf9e260e24d33faec5263310b4cef
   IoniconsKit: da4e3826b706e59adfb7ef5633e44764dd0acd90
+  Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   M13Checkbox: 9989b7e275f18493bd33b960dc68374c47d0027b
   PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
@@ -52,6 +65,6 @@ SPEC CHECKSUMS:
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: a136cc994ddb8292e909c066ab0ac16fd223ceb4
+PODFILE CHECKSUM: 3954065dccbc7f6fa8debbb0cd4ebdf32ac70559
 
 COCOAPODS: 1.1.1

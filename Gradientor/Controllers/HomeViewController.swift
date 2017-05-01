@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import GameplayKit
 
 import RxSwift
 import RxCocoa
 import IoniconsKit
 import RFAboutView_Swift
 import ChameleonFramework
+import AdFooter
 
 class HomeViewController: UIViewController {
 
@@ -75,6 +77,8 @@ class HomeViewController: UIViewController {
         #if DEBUG
 //            setIconColors()
         #endif
+
+        AdFooter.shared.interstitial.load()
     }
 
     // MARK - Utilities
@@ -141,6 +145,17 @@ class HomeViewController: UIViewController {
         present(alertViewController, animated: true, completion: nil)
     }
 
+    private func showInterstitial() {
+        #if DEBUG
+            let threshold = 0
+        #else
+            let threshold = GKRandomDistribution(lowestValue: 2, highestValue: 4).nextInt()
+        #endif
+        if mainStore.state.exportCount > threshold {
+            AdFooter.shared.interstitial.present(for: self)
+        }
+    }
+
     // MARK - Actions
 
     private func editDidTap() {
@@ -194,6 +209,7 @@ class HomeViewController: UIViewController {
 
         exportViewController.didClose = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
+            self?.showInterstitial()
         }
 
         let exportNavigationController = UINavigationController(rootViewController: exportViewController)
