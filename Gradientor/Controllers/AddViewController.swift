@@ -60,6 +60,7 @@ class AddViewController: UIViewController {
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] indexPath in
                 self?.groupColors.value = MaterialDesign.colorGroups[indexPath.row]
+                self?.title = MaterialDesign.names[indexPath.row]
 
                 guard let cell = collectionView.cellForItem(at: indexPath) else { return }
                 guard let backgroundColor = cell.backgroundColor else { return }
@@ -99,8 +100,10 @@ class AddViewController: UIViewController {
         tableView.rx.modelSelected(UIColor.self)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] color in
-                mainStore.dispatch(AppAction.addColor(color))
-                self?.showSuccess(subtitle: color.hexValue())
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    mainStore.dispatch(AppAction.addColor(color))
+                    self?.showSuccess(subtitle: color.hexValue())
+                }
             })
             .addDisposableTo(self.bag)
         tableView.rx.itemSelected
@@ -130,6 +133,7 @@ class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = MaterialDesign.names[0]
         view.backgroundColor = MaterialDesign.backgroundColor
 
         toolbarItems = [flexibleItem, randomItem, flexibleItem, imageItem, flexibleItem, rgbItem, flexibleItem]

@@ -11,7 +11,31 @@ import UIKit
 import ChameleonFramework
 
 struct MaterialDesign {
-    static var mainColors = [
+
+    static let names = [
+        NSLocalizedString("Red", comment: ""),
+        NSLocalizedString("Pink", comment: ""),
+        NSLocalizedString("Purple", comment: ""),
+        NSLocalizedString("Deep Purple", comment: ""),
+        NSLocalizedString("Indigo", comment: ""),
+        NSLocalizedString("Blue", comment: ""),
+        NSLocalizedString("Light Blue", comment: ""),
+        NSLocalizedString("Cyan", comment: ""),
+        NSLocalizedString("Teal", comment: ""),
+        NSLocalizedString("Green", comment: ""),
+        NSLocalizedString("Light Green", comment: ""),
+        NSLocalizedString("Lime", comment: ""),
+        NSLocalizedString("Yellow", comment: ""),
+        NSLocalizedString("Amber", comment: ""),
+        NSLocalizedString("Orange", comment: ""),
+        NSLocalizedString("Deep Orange", comment: ""),
+        NSLocalizedString("Brown", comment: ""),
+        NSLocalizedString("Grey", comment: ""),
+        NSLocalizedString("Blue Grey", comment: ""),
+        NSLocalizedString("Black", comment: "")
+    ]
+
+    static let mainColors = [
         "#F44336",
         "#E91E63",
         "#9C27B0",
@@ -34,7 +58,7 @@ struct MaterialDesign {
         "#000000"
     ].map { UIColor(hexString: $0)! }
 
-    static var colorGroups = [
+    static let colorGroups = [
         [
             "#FFEBEE",
             "#FFCDD2",
