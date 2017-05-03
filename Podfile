@@ -22,6 +22,16 @@ end
 post_install do |installer|
   require 'fileutils'
   FileUtils.cp_r 'Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor-acknowledgements.plist', 'Gradientor/Acknowledgements.plist', remove_destination: true
+
+  installer.pods_project.targets.each do |target|
+    if target.name == 'RxSwift'
+      target.build_configurations.each do |config|
+        if config.name == 'Debug'
+          config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
+        end
+      end
+    end
+  end
 end
 
 plugin 'cocoapods-keys', project: 'Gradientor', keys: %w[

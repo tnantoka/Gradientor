@@ -81,6 +81,13 @@ class HomeViewController: UIViewController {
         AdFooter.shared.interstitial.load()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        #if DEBUG
+            print("RxSwift Resources: \(RxSwift.Resources.total)")
+        #endif
+    }
+
     // MARK - Utilities
 
     private func setIconColors() {
