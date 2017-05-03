@@ -75,7 +75,7 @@ class HomeViewController: UIViewController {
 
         refresh()
         #if DEBUG
-//            setIconColors()
+//            setIconColors(); let fixme = ""
         #endif
 
         AdFooter.shared.interstitial.load()
