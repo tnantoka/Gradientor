@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		042DD117A998FF2B46E066BE /* Pods_GradientorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */; };
 		85D9695EE6798ABBCF3E6B70 /* Pods_Gradientor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */; };
+		9B316D561EBB57D600338C48 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */; };
+		9BA06F9D1EBB5B45001D3C23 /* EditViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA06F9C1EBB5B45001D3C23 /* EditViewControllerTests.swift */; };
+		9BA06F9F1EBB5E18001D3C23 /* AddViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA06F9E1EBB5E18001D3C23 /* AddViewControllerTests.swift */; };
+		9BA06FA11EBB6068001D3C23 /* ExportViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA06FA01EBB6068001D3C23 /* ExportViewControllerTests.swift */; };
 		9BB79A121EB3743F0079808A /* UIImage+rotated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB79A111EB3743F0079808A /* UIImage+rotated.swift */; };
 		9BB79A141EB374610079808A /* UIViewController+barButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB79A131EB374610079808A /* UIViewController+barButtonItem.swift */; };
 		9BB79A171EB4D7F50079808A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BB79A191EB4D7F50079808A /* Localizable.strings */; };
@@ -45,6 +49,10 @@
 		2E52D2CCAC8729B3B8F68974 /* Pods-GradientorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.release.xcconfig"; sourceTree = "<group>"; };
 		4451127B46BCEE557A6AB5C3 /* Pods-GradientorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GradientorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
+		9BA06F9C1EBB5B45001D3C23 /* EditViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewControllerTests.swift; sourceTree = "<group>"; };
+		9BA06F9E1EBB5E18001D3C23 /* AddViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewControllerTests.swift; sourceTree = "<group>"; };
+		9BA06FA01EBB6068001D3C23 /* ExportViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportViewControllerTests.swift; sourceTree = "<group>"; };
 		9BB79A111EB3743F0079808A /* UIImage+rotated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+rotated.swift"; sourceTree = "<group>"; };
 		9BB79A131EB374610079808A /* UIViewController+barButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+barButtonItem.swift"; sourceTree = "<group>"; };
 		9BB79A181EB4D7F50079808A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -114,6 +122,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9BA06FA21EBB62BC001D3C23 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */,
+				9BA06F9C1EBB5B45001D3C23 /* EditViewControllerTests.swift */,
+				9BA06F9E1EBB5E18001D3C23 /* AddViewControllerTests.swift */,
+				9BA06FA01EBB6068001D3C23 /* ExportViewControllerTests.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		9BECCB8C1EA4FD24003E4EC5 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +174,7 @@
 			children = (
 				9BECCBAD1EA4FD24003E4EC5 /* GradientorTests.swift */,
 				9BECCBAF1EA4FD24003E4EC5 /* Info.plist */,
+				9BA06FA21EBB62BC001D3C23 /* Controllers */,
 			);
 			path = GradientorTests;
 			sourceTree = "<group>";
@@ -434,6 +454,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BECCBAE1EA4FD24003E4EC5 /* GradientorTests.swift in Sources */,
+				9B316D561EBB57D600338C48 /* HomeViewControllerTests.swift in Sources */,
+				9BA06F9F1EBB5E18001D3C23 /* AddViewControllerTests.swift in Sources */,
+				9BA06FA11EBB6068001D3C23 /* ExportViewControllerTests.swift in Sources */,
+				9BA06F9D1EBB5B45001D3C23 /* EditViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
