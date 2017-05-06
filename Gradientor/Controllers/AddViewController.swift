@@ -157,15 +157,23 @@ class AddViewController: UIViewController {
         }
     }
 
+    // MARK - Utilities
+
+    fileprivate func showSuccess(subtitle: String?) {
+        let size = CGSize(width: 88.0, height: 88.0)
+        let image = UIImage.ionicon(with: .iosCheckmarkEmpty, textColor: UIColor(white: 0.0, alpha: 0.87), size: size)
+        HUD.flash(.labeledImage(image: image, title: nil, subtitle: subtitle), delay: 0.5)
+    }
+
     // MARK - Actions
 
-    private func randomDidTap() {
+    internal func randomDidTap() {
         let color = AppState.randomColor
         mainStore.dispatch(AppAction.addColor(color))
         showSuccess(subtitle: color.hexValue())
     }
 
-    private func rgbDidTap() {
+    internal func rgbDidTap() {
         let alertViewController = UIAlertController(
             title: NSLocalizedString("Add Color", comment: ""),
             message: NSLocalizedString("Enter a color code.", comment: ""),
@@ -199,19 +207,11 @@ class AddViewController: UIViewController {
         present(alertViewController, animated: true, completion: nil)
     }
 
-    private func imageDidTap() {
+    internal func imageDidTap() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true, completion: nil)
-    }
-
-    // MARK - Utilities
-
-    fileprivate func showSuccess(subtitle: String?) {
-        let size = CGSize(width: 88.0, height: 88.0)
-        let image = UIImage.ionicon(with: .iosCheckmarkEmpty, textColor: UIColor(white: 0.0, alpha: 0.87), size: size)
-        HUD.flash(.labeledImage(image: image, title: nil, subtitle: subtitle), delay: 0.5)
     }
 }
 

@@ -13,9 +13,17 @@ import Eureka
 
 class ExportViewControllerTests: XCTestCase {
 
+    let exportViewController = ExportViewController()
+
+    var presentedViewController: UIViewController? {
+        return exportViewController.presentedViewController
+    }
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        let navigationController = UINavigationController(rootViewController: exportViewController)
+        UIApplication.shared.keyWindow?.rootViewController = navigationController
     }
 
     override func tearDown() {
@@ -28,5 +36,19 @@ class ExportViewControllerTests: XCTestCase {
         _ = exportViewController.view
         let numberOfSections = exportViewController.form.allSections.count
         XCTAssertEqual(numberOfSections, 2)
+    }
+
+    // MARK - Actions
+
+    func testCloseDidTap() {
+        exportViewController.didClose = {
+            XCTAssertTrue(true)
+        }
+        exportViewController.closeDidTap()
+    }
+
+    func testSaveDidTap() {
+        exportViewController.saveDidTap()
+        XCTAssertTrue(presentedViewController is UIActivityViewController)
     }
 }

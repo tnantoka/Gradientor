@@ -165,12 +165,12 @@ class HomeViewController: UIViewController {
 
     // MARK - Actions
 
-    private func editDidTap() {
+    internal func editDidTap() {
         let editViewController = EditViewController()
         navigationController?.pushViewController(editViewController, animated: true)
     }
 
-    private func infoDidTap() {
+    internal func infoDidTap() {
         let aboutViewController = RFAboutViewController()
 
         aboutViewController.title = NSLocalizedString("About", comment: "")
@@ -193,7 +193,7 @@ class HomeViewController: UIViewController {
         present(aboutNavigationController, animated: true, completion: nil)
     }
 
-    private func clearDidTap() {
+    internal func clearDidTap() {
         confirm(
             title: NSLocalizedString("Delete All Colors", comment: ""),
             actionTitle: NSLocalizedString("Delete", comment: "")
@@ -202,7 +202,7 @@ class HomeViewController: UIViewController {
         }
     }
 
-    private func refreshDidTap() {
+    internal func refreshDidTap() {
         confirm(
             title: NSLocalizedString("Recreate Colors", comment: ""),
             actionTitle: NSLocalizedString("OK", comment: "")
@@ -211,7 +211,7 @@ class HomeViewController: UIViewController {
         }
     }
 
-    private func exportDidTap() {
+    internal func exportDidTap() {
         let exportViewController = ExportViewController()
 
         exportViewController.didClose = { [weak self] in

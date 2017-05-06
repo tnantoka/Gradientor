@@ -12,9 +12,13 @@ import XCTest
 
 class EditViewControllerTests: XCTestCase {
 
+    let editViewController = EditViewController()
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        let navigationController = UINavigationController(rootViewController: editViewController)
+        UIApplication.shared.keyWindow?.rootViewController = navigationController
     }
 
     override func tearDown() {
@@ -23,9 +27,23 @@ class EditViewControllerTests: XCTestCase {
     }
 
     func testViewDidLoad() {
-        let editViewController = EditViewController()
         let tableView = editViewController.tableView!
         let numberOfRows = tableView.dataSource!.tableView(tableView, numberOfRowsInSection: 0)
-        XCTAssertEqual(numberOfRows, 2)
+        XCTAssertEqual(numberOfRows, mainStore.state.colors.count)
+    }
+
+    // MARK - Actions
+
+    func testAddDidTap() {
+        editViewController.addDidTap()
+
+        let expectation = self.expectation(description: "")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            XCTAssertTrue(self.editViewController.navigationController?.topViewController is AddViewController)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1.0)
     }
 }

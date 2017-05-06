@@ -166,11 +166,11 @@ class ExportViewController: FormViewController {
 
     // MARK - Actions
 
-    private func closeDidTap() {
+    internal func closeDidTap() {
         didClose()
     }
 
-    private func saveDidTap() {
+    internal func saveDidTap() {
         var items = [Any]()
 
         var gradient = Gradient()

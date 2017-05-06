@@ -95,7 +95,7 @@ class EditViewController: UITableViewController {
 
     // MARK - Actions
 
-    private func addDidTap() {
+    internal func addDidTap() {
         let addViewController = AddViewController()
         navigationController?.pushViewController(addViewController, animated: true)
     }
