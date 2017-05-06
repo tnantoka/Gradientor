@@ -1,0 +1,13 @@
+language: objective-c
+osx_image: xcode8.3
+before_install:
+  - pod repo update
+  - gem install cocoapods-keys
+  # https://firebase.google.com/docs/admob/ios/quick-start
+  - pod keys set AdMobBannerUnitID ca-app-pub-3940256099942544/2934735716
+  # https://firebase.google.com/docs/admob/ios/interstitial 
+  - pod keys set AdMobInterstitialUnitID ca-app-pub-3940256099942544/4411468910
+script:
+  - xcodebuild -scheme Gradientor -workspace Gradientor.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' build test | xcpretty
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -J Gradientor
