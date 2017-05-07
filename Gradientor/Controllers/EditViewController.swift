@@ -19,7 +19,7 @@ class EditViewController: UITableViewController {
     private let bag = DisposeBag()
     private let store = RxStore<AppState>(store: mainStore)
 
-    lazy private var addItem: UIBarButtonItem = {
+    lazy internal var addItem: UIBarButtonItem = {
         self.barButtomItem(systemItem: .add, bag: self.bag) { [weak self] _ in
             self?.addDidTap()
         }
@@ -44,7 +44,7 @@ class EditViewController: UITableViewController {
             .addDisposableTo(self.bag)
         return segmentedControl
     }()
-    lazy private var directionItem: UIBarButtonItem = {
+    lazy internal var directionItem: UIBarButtonItem = {
         UIBarButtonItem(customView: self.directionControl)
     }()
     private let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -95,7 +95,7 @@ class EditViewController: UITableViewController {
 
     // MARK - Actions
 
-    internal func addDidTap() {
+    private func addDidTap() {
         let addViewController = AddViewController()
         navigationController?.pushViewController(addViewController, animated: true)
     }

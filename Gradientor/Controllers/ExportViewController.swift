@@ -18,12 +18,12 @@ class ExportViewController: FormViewController {
 
     let bag = DisposeBag()
 
-    lazy private var closeItem: UIBarButtonItem = {
+    lazy internal var closeItem: UIBarButtonItem = {
         self.barButtomItem(title: NSLocalizedString("Close", comment: ""), bag: self.bag) { [weak self] _ in
             self?.closeDidTap()
         }
     }()
-    lazy private var saveItem: UIBarButtonItem = {
+    lazy internal var saveItem: UIBarButtonItem = {
         self.barButtomItem(systemItem: .save, bag: self.bag) { [weak self] _ in
             self?.saveDidTap()
         }
@@ -166,11 +166,11 @@ class ExportViewController: FormViewController {
 
     // MARK - Actions
 
-    internal func closeDidTap() {
+    private func closeDidTap() {
         didClose()
     }
 
-    internal func saveDidTap() {
+    private func saveDidTap() {
         var items = [Any]()
 
         var gradient = Gradient()

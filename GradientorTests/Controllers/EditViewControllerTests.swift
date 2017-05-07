@@ -35,7 +35,8 @@ class EditViewControllerTests: XCTestCase {
     // MARK - Actions
 
     func testAddDidTap() {
-        editViewController.addDidTap()
+        let addItem = editViewController.addItem
+        UIApplication.shared.sendAction(addItem.action!, to: addItem.target, from: nil, for: nil)
 
         let expectation = self.expectation(description: "")
 

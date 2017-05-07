@@ -20,17 +20,17 @@ class AddViewController: UIViewController {
     let bag = DisposeBag()
     let groupColors = Variable(MaterialDesign.colorGroups[0])
 
-    lazy private var randomItem: UIBarButtonItem = {
+    lazy internal var randomItem: UIBarButtonItem = {
         self.barButtomItem(icon: .shuffle, bag: self.bag) { [weak self] _ in
             self?.randomDidTap()
         }
     }()
-    lazy private var imageItem: UIBarButtonItem = {
+    lazy internal var imageItem: UIBarButtonItem = {
         self.barButtomItem(icon: .image, bag: self.bag) { [weak self] _ in
             self?.imageDidTap()
         }
     }()
-    lazy private var rgbItem: UIBarButtonItem = {
+    lazy internal var rgbItem: UIBarButtonItem = {
         self.barButtomItem(icon: .pound, bag: self.bag) { [weak self] _ in
             self?.rgbDidTap()
         }
@@ -167,13 +167,13 @@ class AddViewController: UIViewController {
 
     // MARK - Actions
 
-    internal func randomDidTap() {
+    private func randomDidTap() {
         let color = AppState.randomColor
         mainStore.dispatch(AppAction.addColor(color))
         showSuccess(subtitle: color.hexValue())
     }
 
-    internal func rgbDidTap() {
+    private func rgbDidTap() {
         let alertViewController = UIAlertController(
             title: NSLocalizedString("Add Color", comment: ""),
             message: NSLocalizedString("Enter a color code.", comment: ""),
@@ -207,7 +207,7 @@ class AddViewController: UIViewController {
         present(alertViewController, animated: true, completion: nil)
     }
 
-    internal func imageDidTap() {
+    private func imageDidTap() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary

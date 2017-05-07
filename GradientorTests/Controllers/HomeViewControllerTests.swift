@@ -38,7 +38,8 @@ class HomeViewControllerTests: XCTestCase {
     // MARK: - Actions
 
     func testEditDidTap() {
-        homeViewController.editDidTap()
+        let editItem = homeViewController.editItem
+        UIApplication.shared.sendAction(editItem.action!, to: editItem.target, from: nil, for: nil)
 
         let expectation = self.expectation(description: "")
 
@@ -51,27 +52,31 @@ class HomeViewControllerTests: XCTestCase {
     }
 
     func testInfoDidTap() {
-        homeViewController.infoDidTap()
+        let infoItem = homeViewController.infoItem
+        UIApplication.shared.sendAction(infoItem.action!, to: infoItem.target, from: nil, for: nil)
 
         XCTAssertTrue((presentedViewController as? UINavigationController)?.topViewController is RFAboutViewController)
     }
 
     func testClearDidTap() {
-        homeViewController.clearDidTap()
+        let clearItem = homeViewController.clearItem
+        UIApplication.shared.sendAction(clearItem.action!, to: clearItem.target, from: nil, for: nil)
 
         XCTAssertTrue(presentedViewController is UIAlertController)
         XCTAssertEqual(presentedViewController?.title, "Delete All Colors")
     }
 
     func testRefreshDidTap() {
-        homeViewController.refreshDidTap()
+        let refreshItem = homeViewController.refreshItem
+        UIApplication.shared.sendAction(refreshItem.action!, to: refreshItem.target, from: nil, for: nil)
 
         XCTAssertTrue(presentedViewController is UIAlertController)
         XCTAssertEqual(presentedViewController?.title, "Recreate Colors")
     }
 
     func testExportDidTap() {
-        homeViewController.exportDidTap()
+        let exportItem = homeViewController.exportItem
+        UIApplication.shared.sendAction(exportItem.action!, to: exportItem.target, from: nil, for: nil)
 
         XCTAssertTrue((presentedViewController as? UINavigationController)?.topViewController is ExportViewController)
     }

@@ -23,28 +23,28 @@ class HomeViewController: UIViewController {
 
     private var gradient = Gradient()
 
-    lazy private var infoItem: UIBarButtonItem = {
+    lazy internal var infoItem: UIBarButtonItem = {
         self.barButtomItem(icon: .information, bag: self.bag) { [weak self] _ in
             self?.infoDidTap()
         }
     }()
-    lazy private var editItem: UIBarButtonItem = {
+    lazy internal var editItem: UIBarButtonItem = {
         self.barButtomItem(icon: .edit, bag: self.bag) { [weak self] _ in
             self?.editDidTap()
         }
     }()
 
-    lazy private var clearItem: UIBarButtonItem = {
+    lazy internal var clearItem: UIBarButtonItem = {
         self.barButtomItem(systemItem: .trash, bag: self.bag) { [weak self] _ in
             self?.clearDidTap()
         }
     }()
-    lazy private var refreshItem: UIBarButtonItem = {
+    lazy internal var refreshItem: UIBarButtonItem = {
         self.barButtomItem(systemItem: .refresh, bag: self.bag) { [weak self] _ in
             self?.refreshDidTap()
         }
     }()
-    lazy private var exportItem: UIBarButtonItem = {
+    lazy internal var exportItem: UIBarButtonItem = {
         self.barButtomItem(systemItem: .action, bag: self.bag) { [weak self] _ in
             self?.exportDidTap()
         }
@@ -165,12 +165,12 @@ class HomeViewController: UIViewController {
 
     // MARK - Actions
 
-    internal func editDidTap() {
+    private func editDidTap() {
         let editViewController = EditViewController()
         navigationController?.pushViewController(editViewController, animated: true)
     }
 
-    internal func infoDidTap() {
+    private func infoDidTap() {
         let aboutViewController = RFAboutViewController()
 
         aboutViewController.title = NSLocalizedString("About", comment: "")
@@ -193,7 +193,7 @@ class HomeViewController: UIViewController {
         present(aboutNavigationController, animated: true, completion: nil)
     }
 
-    internal func clearDidTap() {
+    private func clearDidTap() {
         confirm(
             title: NSLocalizedString("Delete All Colors", comment: ""),
             actionTitle: NSLocalizedString("Delete", comment: "")
@@ -202,7 +202,7 @@ class HomeViewController: UIViewController {
         }
     }
 
-    internal func refreshDidTap() {
+    private func refreshDidTap() {
         confirm(
             title: NSLocalizedString("Recreate Colors", comment: ""),
             actionTitle: NSLocalizedString("OK", comment: "")
@@ -211,7 +211,7 @@ class HomeViewController: UIViewController {
         }
     }
 
-    internal func exportDidTap() {
+    private func exportDidTap() {
         let exportViewController = ExportViewController()
 
         exportViewController.didClose = { [weak self] in

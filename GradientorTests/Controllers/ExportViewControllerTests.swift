@@ -44,11 +44,13 @@ class ExportViewControllerTests: XCTestCase {
         exportViewController.didClose = {
             XCTAssertTrue(true)
         }
-        exportViewController.closeDidTap()
+        let closeItem = exportViewController.closeItem
+        UIApplication.shared.sendAction(closeItem.action!, to: closeItem.target, from: nil, for: nil)
     }
 
     func testSaveDidTap() {
-        exportViewController.saveDidTap()
+        let saveItem = exportViewController.saveItem
+        UIApplication.shared.sendAction(saveItem.action!, to: saveItem.target, from: nil, for: nil)
         XCTAssertTrue(presentedViewController is UIActivityViewController)
     }
 }
