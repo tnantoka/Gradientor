@@ -18,10 +18,14 @@ class HomeViewControllerTests: XCTestCase {
     var presentedViewController: UIViewController? {
         return homeViewController.presentedViewController
     }
+    var topViewController: UIViewController? {
+        return (presentedViewController as? UINavigationController)?.topViewController
+    }
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        mainStore.dispatch(AppAction.clearColors)
         let navigationController = UINavigationController(rootViewController: homeViewController)
         UIApplication.shared.keyWindow?.rootViewController = navigationController
     }
@@ -32,7 +36,15 @@ class HomeViewControllerTests: XCTestCase {
     }
 
     func testViewDidLoad() {
+        _ = homeViewController.view
         XCTAssertEqual(mainStore.state.colors.count, 2)
+    }
+
+    // MARK: - Utilities
+
+    func testSetIconColors() {
+        homeViewController.setIconColors()
+        XCTAssertEqual(mainStore.state.colors.count, 3)
     }
 
     // MARK: - Actions
@@ -78,6 +90,17 @@ class HomeViewControllerTests: XCTestCase {
         let exportItem = homeViewController.exportItem
         UIApplication.shared.sendAction(exportItem.action!, to: exportItem.target, from: nil, for: nil)
 
-        XCTAssertTrue((presentedViewController as? UINavigationController)?.topViewController is ExportViewController)
+        XCTAssertTrue(topViewController is ExportViewController)
+
+        (topViewController as? ExportViewController)?.didClose()
+
+        let expectation = self.expectation(description: "")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            XCTAssertNil(self.topViewController)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3.0)
     }
 }

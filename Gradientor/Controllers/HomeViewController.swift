@@ -90,7 +90,7 @@ class HomeViewController: UIViewController {
 
     // MARK - Utilities
 
-    private func setIconColors() {
+    internal func setIconColors() {
         mainStore.dispatch(AppAction.clearColors)
         mainStore.dispatch(AppAction.addColor(FlatBlue()))
         mainStore.dispatch(AppAction.addColor(FlatPowderBlueDark()))
