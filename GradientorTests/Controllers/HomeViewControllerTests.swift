@@ -43,12 +43,12 @@ class HomeViewControllerTests: XCTestCase {
 
         let expectation = self.expectation(description: "")
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             XCTAssertTrue(self.homeViewController.navigationController?.topViewController is EditViewController)
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 3.0)
     }
 
     func testInfoDidTap() {
