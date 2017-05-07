@@ -154,11 +154,11 @@ class HomeViewController: UIViewController {
 
     private func showInterstitial() {
         #if DEBUG
-            let threshold = 0
+            let threshold = 1
         #else
-            let threshold = GKRandomDistribution(lowestValue: 2, highestValue: 4).nextInt()
+            let threshold = GKRandomDistribution(lowestValue: 3, highestValue: 5).nextInt()
         #endif
-        if mainStore.state.exportCount > threshold {
+        if mainStore.state.exportCount % threshold == 0 {
             AdFooter.shared.interstitial.present(for: self)
         }
     }
