@@ -4,7 +4,6 @@ target 'Gradientor' do
   pod 'AdFooter', git: 'https://github.com/tnantoka/AdFooter.git'
   pod 'ChameleonFramework/Swift', git: 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'Eureka'
-  pod 'IGColorPicker'
   pod "IoniconsKit"
   pod 'PKHUD'
   pod 'ReSwift'

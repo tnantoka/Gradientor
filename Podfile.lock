@@ -4,11 +4,8 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - Eureka (3.0.0)
-  - IGColorPicker (0.2.1):
-    - M13Checkbox (~> 2.2.0)
   - IoniconsKit (0.1.1)
   - Keys (1.0.0)
-  - M13Checkbox (2.2.6)
   - PKHUD (4.2.1)
   - ReSwift (4.0.0)
   - RFAboutView-Swift (2.0.1)
@@ -22,7 +19,6 @@ DEPENDENCIES:
   - AdFooter (from `https://github.com/tnantoka/AdFooter.git`)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Eureka
-  - IGColorPicker
   - IoniconsKit
   - Keys (from `Pods/CocoaPodsKeys`)
   - PKHUD
@@ -53,10 +49,8 @@ SPEC CHECKSUMS:
   AdFooter: b99d86fa671e50ed706e1ba44c60e15b32d2ac0c
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Eureka: f36fd440c3ebb7bfea0a4fbe6f16a05f1cb35906
-  IGColorPicker: a6ed1bf42cccf9e260e24d33faec5263310b4cef
   IoniconsKit: da4e3826b706e59adfb7ef5633e44764dd0acd90
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  M13Checkbox: 9989b7e275f18493bd33b960dc68374c47d0027b
   PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
   RFAboutView-Swift: dc31db0e7bc890ab6c9e1ca8f50e8f97bdba9622
@@ -65,6 +59,6 @@ SPEC CHECKSUMS:
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: 3b3906760a5a6c51ff27f080831c7c3ee8f98d99
+PODFILE CHECKSUM: c48c8dea118a66fb8ad59615ce1da49ec71a3956
 
 COCOAPODS: 1.1.1
