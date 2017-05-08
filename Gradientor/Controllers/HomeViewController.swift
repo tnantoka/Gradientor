@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     private let bag = DisposeBag()
     private let store = RxStore<AppState>(store: mainStore)
 
-    private var gradient = Gradient()
+    internal var gradient = Gradient()
 
     lazy internal var infoItem: UIBarButtonItem = {
         self.barButtomItem(icon: .information, bag: self.bag) { [weak self] _ in
@@ -99,7 +99,7 @@ class HomeViewController: UIViewController {
 
     private func updateGradient(colors: [UIColor]) {
         view.layer.sublayers?.forEach { sublayer in
-            if sublayer.isKind(of: LinerLayer.self) || sublayer.isKind(of: RadialLayer.self) {
+            if sublayer.isKind(of: GradientLayer.self) {
                 sublayer.removeFromSuperlayer()
             }
         }

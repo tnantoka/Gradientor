@@ -28,6 +28,7 @@ class HomeViewControllerTests: XCTestCase {
         mainStore.dispatch(AppAction.clearColors)
         let navigationController = UINavigationController(rootViewController: homeViewController)
         UIApplication.shared.keyWindow?.rootViewController = navigationController
+        _ = homeViewController.view
     }
 
     override func tearDown() {
@@ -36,7 +37,6 @@ class HomeViewControllerTests: XCTestCase {
     }
 
     func testViewDidLoad() {
-        _ = homeViewController.view
         XCTAssertEqual(mainStore.state.colors.count, 2)
     }
 
@@ -45,6 +45,20 @@ class HomeViewControllerTests: XCTestCase {
     func testSetIconColors() {
         homeViewController.setIconColors()
         XCTAssertEqual(mainStore.state.colors.count, 3)
+    }
+
+    func testUpdateGradient() {
+        mainStore.dispatch(AppAction.setDirection(.vertical))
+        XCTAssertEqual(homeViewController.gradient.direction, .vertical)
+
+        mainStore.dispatch(AppAction.setDirection(.radial))
+        XCTAssertEqual(homeViewController.gradient.direction, .radial)
+
+        mainStore.dispatch(AppAction.setDirection(.diagonalLR))
+        XCTAssertEqual(homeViewController.gradient.direction, .diagonalLR)
+
+        mainStore.dispatch(AppAction.setDirection(.diagonalRL))
+        XCTAssertEqual(homeViewController.gradient.direction, .diagonalRL)
     }
 
     // MARK: - Actions

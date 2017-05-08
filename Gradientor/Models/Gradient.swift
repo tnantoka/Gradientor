@@ -20,7 +20,7 @@ struct Gradient {
         case diagonalRL
     }
 
-    var layer: CAGradientLayer = LinerLayer()
+    var layer: GradientLayer = LinerLayer()
 
     var colors = [UIColor]() {
         didSet {
@@ -83,10 +83,13 @@ struct Gradient {
     }
 }
 
-class LinerLayer: CAGradientLayer {
+class GradientLayer: CAGradientLayer {
 }
 
-class RadialLayer: CAGradientLayer {
+class LinerLayer: GradientLayer {
+}
+
+class RadialLayer: GradientLayer {
     override var colors: [Any]? {
         didSet {
             setNeedsDisplay()
