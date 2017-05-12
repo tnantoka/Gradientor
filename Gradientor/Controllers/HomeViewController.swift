@@ -77,8 +77,6 @@ class HomeViewController: UIViewController {
         #if DEBUG
 //            setIconColors(); let fixme = ""
         #endif
-
-        AdFooter.shared.interstitial.load()
     }
 
     override func viewWillAppear(_ animated: Bool) {
