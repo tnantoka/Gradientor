@@ -90,7 +90,7 @@ class EditViewController: UITableViewController {
     // MARK - Utilities
 
     private func updateUI(colors: [UIColor]) {
-        title = String.init(format: NSLocalizedString("%d colors", comment: ""), colors.count)
+        title = String(format: NSLocalizedString("%d colors", comment: ""), colors.count)
     }
 
     // MARK - Actions
