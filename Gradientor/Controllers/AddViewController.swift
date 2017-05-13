@@ -174,29 +174,29 @@ class AddViewController: UIViewController {
     }
 
     private func rgbDidTap() {
-        let alertViewController = UIAlertController(
+        let alertController = UIAlertController(
             title: NSLocalizedString("Add Color", comment: ""),
             message: NSLocalizedString("Enter a color code.", comment: ""),
             preferredStyle: .alert
         )
 
-        alertViewController.addTextField { textField in
+        alertController.addTextField { textField in
             textField.placeholder = "RRGGBB"
         }
 
-        alertViewController.addAction(
+        alertController.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Cancel", comment: ""),
                 style: .cancel,
                 handler: nil
             )
         )
-        alertViewController.addAction(
+        alertController.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Add", comment: ""),
                 style: .default
             ) { [weak self]_ in
-                guard let rgb = alertViewController.textFields?.first?.text else { return }
+                guard let rgb = alertController.textFields?.first?.text else { return }
                 let code = rgb.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard let color = UIColor(hexString: code) else { return }
                 mainStore.dispatch(AppAction.addColor(color))
@@ -204,7 +204,7 @@ class AddViewController: UIViewController {
             }
         )
 
-        present(alertViewController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     private func imageDidTap() {

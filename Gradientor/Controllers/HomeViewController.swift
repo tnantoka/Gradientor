@@ -125,20 +125,20 @@ class HomeViewController: UIViewController {
     }
 
     private func confirm(title: String, actionTitle: String, didConfirm: @escaping () -> Void) {
-        let alertViewController = UIAlertController(
+        let alertController = UIAlertController(
             title: title,
             message: NSLocalizedString("Are you sure?", comment: ""),
             preferredStyle: .alert
         )
 
-        alertViewController.addAction(
+        alertController.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Cancel", comment: ""),
                 style: .cancel,
                 handler: nil
             )
         )
-        alertViewController.addAction(
+        alertController.addAction(
             UIAlertAction(
                 title: actionTitle,
                 style: .destructive
@@ -147,7 +147,7 @@ class HomeViewController: UIViewController {
             }
         )
 
-        present(alertViewController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     private func showInterstitial() {
