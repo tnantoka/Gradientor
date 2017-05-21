@@ -176,7 +176,7 @@ class ExportViewController: FormViewController {
         var gradient = Gradient()
         gradient.direction = mainStore.state.direction
         gradient.colors = mainStore.state.colors
-        gradient.frame = CGRect(origin: CGPoint.zero, size: mainStore.state.exportSize)
+        gradient.frame = CGRect(origin: .zero, size: mainStore.state.exportSize)
 
         #if DEBUG
 //            saveToDocs(gradient: gradient); let fixme = ""

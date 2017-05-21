@@ -45,7 +45,7 @@ class AddViewController: UIViewController {
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
 
-        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.backgroundColor = .clear
 
