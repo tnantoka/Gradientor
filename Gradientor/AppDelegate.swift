@@ -39,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.isTranslucent = false
         navigationController.hidesNavigationBarHairline = true
 
-        AdFooter.shared.adMobAdUnitId = Keys.GradientorKeys().adMobBannerUnitID
-        AdFooter.shared.interstitial.adMobAdUnitId = Keys.GradientorKeys().adMobInterstitialUnitID
+        AdFooter.shared.adMobAdUnitId = GradientorKeys().adMobBannerUnitID
+        AdFooter.shared.interstitial.adMobAdUnitId = GradientorKeys().adMobInterstitialUnitID
         #if DEBUG
             window?.rootViewController = navigationController
 //            window?.rootViewController = AdFooter.shared.wrap(navigationController)
