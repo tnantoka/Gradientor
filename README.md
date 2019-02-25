@@ -5,9 +5,9 @@
 
 Gradient Generator App.
 
-https://www.gradientor.com/
+https://gradientor.tnantoka.com/
 
-<img src="https://www.gradientor.com/assets/screenshots/1.png" width="25%"><img src="https://www.gradientor.com/assets/screenshots/2.png" width="25%"><img src="https://www.gradientor.com/assets/screenshots/3.png" width="25%"><img src="https://www.gradientor.com/assets/screenshots/4.png" width="25%">
+<img src="https://gradientor.tnantoka.com/assets/screenshots/1.png" width="25%"><img src="https://gradientor.tnantoka.com/assets/screenshots/2.png" width="25%"><img src="https://gradientor.tnantoka.com/assets/screenshots/3.png" width="25%"><img src="https://gradientor.tnantoka.com/assets/screenshots/4.png" width="25%">
 
 ## Requirements
 
