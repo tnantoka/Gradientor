@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		042DD117A998FF2B46E066BE /* Pods_GradientorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */; };
 		85D9695EE6798ABBCF3E6B70 /* Pods_Gradientor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */; };
+		9B2F50182971506D003E3FFD /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F50172971506D003E3FFD /* Keys.swift */; };
 		9B316D561EBB57D600338C48 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */; };
 		9BA06F9D1EBB5B45001D3C23 /* EditViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA06F9C1EBB5B45001D3C23 /* EditViewControllerTests.swift */; };
 		9BA06F9F1EBB5E18001D3C23 /* AddViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA06F9E1EBB5E18001D3C23 /* AddViewControllerTests.swift */; };
@@ -49,6 +50,7 @@
 		2E52D2CCAC8729B3B8F68974 /* Pods-GradientorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.release.xcconfig"; sourceTree = "<group>"; };
 		4451127B46BCEE557A6AB5C3 /* Pods-GradientorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GradientorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B2F50172971506D003E3FFD /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		9BA06F9C1EBB5B45001D3C23 /* EditViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewControllerTests.swift; sourceTree = "<group>"; };
 		9BA06F9E1EBB5E18001D3C23 /* AddViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewControllerTests.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				9BECCBDB1EB0D2E8003E4EC5 /* MaterialDesign.swift */,
 				9BECCBE01EB1AE67003E4EC5 /* Preset.swift */,
 				9BB79A111EB3743F0079808A /* UIImage+rotated.swift */,
+				9B2F50172971506D003E3FFD /* Keys.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,8 +228,6 @@
 				9BECCB921EA4FD24003E4EC5 /* Frameworks */,
 				9BECCB931EA4FD24003E4EC5 /* Resources */,
 				BC87099B946A144669F18EF0 /* [CP] Embed Pods Frameworks */,
-				36D744CB22E91BB868902E04 /* [CP] Copy Pods Resources */,
-				9BECCBCC1EAD5826003E4EC5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -245,8 +246,6 @@
 				9BECCBA51EA4FD24003E4EC5 /* Sources */,
 				9BECCBA61EA4FD24003E4EC5 /* Frameworks */,
 				9BECCBA71EA4FD24003E4EC5 /* Resources */,
-				BAA211737A8FB251376C15FC /* [CP] Embed Pods Frameworks */,
-				69EF2B0239298C05652EFEA5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -322,49 +321,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36D744CB22E91BB868902E04 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		69EF2B0239298C05652EFEA5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7B3626E05AB029BDB7E32AE6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GradientorTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		96C7CB92AA8BDC7B2BEE1736 /* [CP] Check Pods Manifest.lock */ = {
@@ -373,41 +345,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gradientor-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9BECCBCC1EAD5826003E4EC5 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
-		};
-		BAA211737A8FB251376C15FC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BC87099B946A144669F18EF0 /* [CP] Embed Pods Frameworks */ = {
@@ -416,13 +363,34 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gradientor/Pods-Gradientor-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AdFooter/AdFooter.framework",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/IoniconsKit/IoniconsKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/RFAboutView-Swift/RFAboutView_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AdFooter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IoniconsKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFAboutView_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gradientor/Pods-Gradientor-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -436,6 +404,7 @@
 				9BECCBBE1EAB8639003E4EC5 /* EditViewController.swift in Sources */,
 				9BECCBC21EAB9E49003E4EC5 /* AppState.swift in Sources */,
 				9BECCBDA1EB0C031003E4EC5 /* AddViewController.swift in Sources */,
+				9B2F50182971506D003E3FFD /* Keys.swift in Sources */,
 				9BECCBDF1EB1A4CD003E4EC5 /* ExportViewController.swift in Sources */,
 				9BECCBC61EABA092003E4EC5 /* AppReducer.swift in Sources */,
 				9BECCBDC1EB0D2E8003E4EC5 /* MaterialDesign.swift in Sources */,

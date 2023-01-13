@@ -5,7 +5,6 @@ PODS:
     - ChameleonFramework/Default
   - Eureka (3.0.0)
   - IoniconsKit (0.1.1)
-  - Keys (1.0.0)
   - PKHUD (4.2.1)
   - ReSwift (4.0.0)
   - RFAboutView-Swift (2.0.1)
@@ -13,29 +12,37 @@ PODS:
     - RxSwift (~> 3.4)
   - RxSwift (3.4.0)
   - SnapKit (3.2.0)
-  - SwiftLint (0.18.1)
 
 DEPENDENCIES:
   - AdFooter (from `https://github.com/tnantoka/AdFooter.git`)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
-  - Eureka
+  - Eureka (from `https://github.com/xmartlabs/Eureka.git`, branch `Swift-3.3`)
   - IoniconsKit
-  - Keys (from `Pods/CocoaPodsKeys`)
   - PKHUD
   - ReSwift
   - RFAboutView-Swift
   - RxCocoa
   - RxSwift
   - SnapKit
-  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - IoniconsKit
+    - PKHUD
+    - ReSwift
+    - RFAboutView-Swift
+    - RxCocoa
+    - RxSwift
+    - SnapKit
 
 EXTERNAL SOURCES:
   AdFooter:
     :git: https://github.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :git: https://github.com/ViccAlexander/Chameleon.git
-  Keys:
-    :path: Pods/CocoaPodsKeys
+  Eureka:
+    :branch: Swift-3.3
+    :git: https://github.com/xmartlabs/Eureka.git
 
 CHECKOUT OPTIONS:
   AdFooter:
@@ -44,21 +51,22 @@ CHECKOUT OPTIONS:
   ChameleonFramework:
     :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
     :git: https://github.com/ViccAlexander/Chameleon.git
+  Eureka:
+    :commit: 8fcc11477411b1ac96339d3d9d0973956ed05151
+    :git: https://github.com/xmartlabs/Eureka.git
 
 SPEC CHECKSUMS:
   AdFooter: b99d86fa671e50ed706e1ba44c60e15b32d2ac0c
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  Eureka: f36fd440c3ebb7bfea0a4fbe6f16a05f1cb35906
+  Eureka: 5b9418d7bfdc21ca977d69d124a6409f3e9af2c7
   IoniconsKit: da4e3826b706e59adfb7ef5633e44764dd0acd90
-  Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
   RFAboutView-Swift: dc31db0e7bc890ab6c9e1ca8f50e8f97bdba9622
   RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: c48c8dea118a66fb8ad59615ce1da49ec71a3956
+PODFILE CHECKSUM: ac465edf60505254073007d7b3a417fa9a9a3d95
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.11.3

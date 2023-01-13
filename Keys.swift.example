@@ -1,0 +1,21 @@
+//
+//  Keys.swift
+//  Gradientor
+//
+//  Created by Tatsuya Tobioka on 2023/01/13.
+//  Copyright © 2023 tnantoka. All rights reserved.
+//
+
+import Foundation
+
+struct Keys {
+    #if DEBUG
+    static let adMobApplicationId = "ca-app-pub-3940256099942544~1458002511"
+    static let adMobBannerUnitID = "ca-app-pub-3940256099942544/2934735716"
+    static let adMobInterstitialUnitID = "ca-app-pub-3940256099942544/4411468910"
+    #else
+    static let adMobApplicationId = ""
+    static let adMobBannerUnitID = ""
+    static let adMobInterstitialUnitID = ""
+    #endif
+}

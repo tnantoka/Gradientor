@@ -3,7 +3,7 @@ target 'Gradientor' do
 
   pod 'AdFooter', git: 'https://github.com/tnantoka/AdFooter.git'
   pod 'ChameleonFramework/Swift', git: 'https://github.com/ViccAlexander/Chameleon.git'
-  pod 'Eureka'
+  pod 'Eureka', git: 'https://github.com/xmartlabs/Eureka.git', branch: 'Swift-3.3'
   pod "IoniconsKit"
   pod 'PKHUD'
   pod 'ReSwift'
@@ -11,7 +11,6 @@ target 'Gradientor' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SnapKit'
-  pod 'SwiftLint'
 
   target 'GradientorTests' do
     inherit! :search_paths
@@ -33,7 +32,3 @@ post_install do |installer|
   end
 end
 
-plugin 'cocoapods-keys', project: 'Gradientor', keys: %w[
-	AdMobBannerUnitID
-	AdMobInterstitialUnitID
-]

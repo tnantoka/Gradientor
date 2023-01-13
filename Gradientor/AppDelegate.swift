@@ -10,7 +10,6 @@ import UIKit
 
 import ReSwift
 import ChameleonFramework
-import Keys
 import AdFooter
 
 let mainStore = Store<AppState>(
@@ -39,11 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.isTranslucent = false
         navigationController.hidesNavigationBarHairline = true
 
-        AdFooter.shared.adMobAdUnitId = GradientorKeys().adMobBannerUnitID
-        AdFooter.shared.interstitial.adMobAdUnitId = GradientorKeys().adMobInterstitialUnitID
+        AdFooter.shared.adMobAdUnitId = Keys.adMobBannerUnitID
+        AdFooter.shared.interstitial.adMobAdUnitId = Keys.adMobInterstitialUnitID
         #if DEBUG
-            window?.rootViewController = navigationController
-//            window?.rootViewController = AdFooter.shared.wrap(navigationController)
+//            window?.rootViewController = navigationController
+            window?.rootViewController = AdFooter.shared.wrap(navigationController)
         #else
             window?.rootViewController = AdFooter.shared.wrap(navigationController)
         #endif
