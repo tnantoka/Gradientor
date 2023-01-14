@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         setAppearance()
 
@@ -59,11 +59,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setAppearance() {
         UINavigationBar.appearance().barTintColor = UIColor(hexString: "#F5F5F5")
         UINavigationBar.appearance().tintColor = FlatBlue()
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSForegroundColorAttributeName: UINavigationBar.appearance().tintColor
-        ]
+        UINavigationBar.appearance().titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([
+            NSAttributedString.Key.foregroundColor.rawValue: UINavigationBar.appearance().tintColor
+        ])
 
         UIToolbar.appearance().barTintColor = UINavigationBar.appearance().barTintColor
         UIToolbar.appearance().tintColor = UINavigationBar.appearance().tintColor
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

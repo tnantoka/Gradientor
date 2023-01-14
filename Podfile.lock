@@ -1,72 +1,76 @@
 PODS:
-  - AdFooter (7.19.1)
+  - AdFooter (7.37.0)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
-  - Eureka (3.0.0)
-  - IoniconsKit (0.1.1)
-  - PKHUD (4.2.1)
+  - Eureka (4.3.1)
+  - IoniconsKit (1.1.0)
+  - PKHUD (5.2.1)
   - ReSwift (4.0.0)
-  - RFAboutView-Swift (2.0.1)
-  - RxCocoa (3.4.0):
-    - RxSwift (~> 3.4)
-  - RxSwift (3.4.0)
-  - SnapKit (3.2.0)
+  - RFAboutView-Swift (2.0.4)
+  - RxCocoa (4.5.0):
+    - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxSwift (4.5.0)
+  - SnapKit (4.2.0)
 
 DEPENDENCIES:
-  - AdFooter (from `https://github.com/tnantoka/AdFooter.git`)
+  - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`, commit `782d2aff5b8caa091e8964a42dd84ce337eb8029`)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
-  - Eureka (from `https://github.com/xmartlabs/Eureka.git`, branch `Swift-3.3`)
-  - IoniconsKit
-  - PKHUD
+  - Eureka (= 4.3.1)
+  - IoniconsKit (from `https://github.com/anzfactory/IoniconsKit.git`)
+  - PKHUD (= 5.2.1)
   - ReSwift
-  - RFAboutView-Swift
-  - RxCocoa
-  - RxSwift
-  - SnapKit
+  - RFAboutView-Swift (from `https://github.com/arno608rw/RFAboutView-Swift.git`)
+  - RxCocoa (= 4.5.0)
+  - RxSwift (= 4.5.0)
+  - SnapKit (= 4.2.0)
 
 SPEC REPOS:
   trunk:
-    - IoniconsKit
+    - Eureka
     - PKHUD
     - ReSwift
-    - RFAboutView-Swift
     - RxCocoa
     - RxSwift
     - SnapKit
 
 EXTERNAL SOURCES:
   AdFooter:
-    :git: https://github.com/tnantoka/AdFooter.git
+    :commit: 782d2aff5b8caa091e8964a42dd84ce337eb8029
+    :git: https://gitlab.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :git: https://github.com/ViccAlexander/Chameleon.git
-  Eureka:
-    :branch: Swift-3.3
-    :git: https://github.com/xmartlabs/Eureka.git
+  IoniconsKit:
+    :git: https://github.com/anzfactory/IoniconsKit.git
+  RFAboutView-Swift:
+    :git: https://github.com/arno608rw/RFAboutView-Swift.git
 
 CHECKOUT OPTIONS:
   AdFooter:
-    :commit: ce9cd1dd9bba176f6a9b6366183f4d7145042ebd
-    :git: https://github.com/tnantoka/AdFooter.git
+    :commit: 782d2aff5b8caa091e8964a42dd84ce337eb8029
+    :git: https://gitlab.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
     :git: https://github.com/ViccAlexander/Chameleon.git
-  Eureka:
-    :commit: 8fcc11477411b1ac96339d3d9d0973956ed05151
-    :git: https://github.com/xmartlabs/Eureka.git
+  IoniconsKit:
+    :commit: 1a79623d0e06d013b69b26745cac3c058db93048
+    :git: https://github.com/anzfactory/IoniconsKit.git
+  RFAboutView-Swift:
+    :commit: 260cde48e46d3e3d598904cb1807ccef894898fe
+    :git: https://github.com/arno608rw/RFAboutView-Swift.git
 
 SPEC CHECKSUMS:
-  AdFooter: b99d86fa671e50ed706e1ba44c60e15b32d2ac0c
+  AdFooter: 68523deb883f01625f065981a61e9df363e80053
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  Eureka: 5b9418d7bfdc21ca977d69d124a6409f3e9af2c7
-  IoniconsKit: da4e3826b706e59adfb7ef5633e44764dd0acd90
-  PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
+  Eureka: 28ea296f06710f6745266b71f17862048941a32d
+  IoniconsKit: 11e04bb11af3d052bcdd34a837e0421affe6f3bd
+  PKHUD: 4e6162c4c39ac367c6934e9855c6b4762ee16256
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
-  RFAboutView-Swift: dc31db0e7bc890ab6c9e1ca8f50e8f97bdba9622
-  RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
-  RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
-  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  RFAboutView-Swift: 18064d3562583684d7d3d345061db91ce5def75c
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: ac465edf60505254073007d7b3a417fa9a9a3d95
+PODFILE CHECKSUM: 1e5b9618a7bad69d9b7abb3d13c311410349438d
 
 COCOAPODS: 1.11.3

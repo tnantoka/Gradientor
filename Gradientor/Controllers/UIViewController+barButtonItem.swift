@@ -12,7 +12,7 @@ import RxSwift
 import IoniconsKit
 
 extension UIViewController {
-    func barButtomItem(systemItem: UIBarButtonSystemItem, bag: DisposeBag,
+    func barButtomItem(systemItem: UIBarButtonItem.SystemItem, bag: DisposeBag,
                        didTap: @escaping () -> Void) -> UIBarButtonItem {
         let item = UIBarButtonItem(barButtonSystemItem: systemItem, target: nil, action: nil)
         return barButtomItem(item: item, bag: bag, didTap: didTap)
@@ -27,9 +27,9 @@ extension UIViewController {
     func barButtomItem(icon: Ionicons, bag: DisposeBag,
                        didTap: @escaping () -> Void) -> UIBarButtonItem {
         let item = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-        item.setTitleTextAttributes([
-            NSFontAttributeName: UIFont.ionicon(of: 22.0)
-            ], for: .normal)
+        item.setTitleTextAttributes(convertToOptionalNSAttributedStringKeyDictionary([
+            convertFromNSAttributedStringKey(NSAttributedString.Key.font): UIFont.ionicon(of: 22.0)
+            ]), for: .normal)
         item.title = String.ionicon(with: icon)
         return barButtomItem(item: item, bag: bag, didTap: didTap)
     }
@@ -44,4 +44,15 @@ extension UIViewController {
             .addDisposableTo(bag)
         return item
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

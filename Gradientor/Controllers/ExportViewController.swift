@@ -19,12 +19,12 @@ class ExportViewController: FormViewController {
     let bag = DisposeBag()
 
     lazy internal var closeItem: UIBarButtonItem = {
-        self.barButtomItem(title: NSLocalizedString("Close", comment: ""), bag: self.bag) { [weak self] _ in
+        self.barButtomItem(title: NSLocalizedString("Close", comment: ""), bag: self.bag) { [weak self] in
             self?.closeDidTap()
         }
     }()
     lazy internal var saveItem: UIBarButtonItem = {
-        self.barButtomItem(systemItem: .save, bag: self.bag) { [weak self] _ in
+        self.barButtomItem(systemItem: .save, bag: self.bag) { [weak self] in
             self?.saveDidTap()
         }
     }()
@@ -155,7 +155,7 @@ class ExportViewController: FormViewController {
         let name = (form.rowBy(tag: "preset") as? ActionSheetRow<String>)?.value ?? "preset"
 
         let imageURL = docs.appendingPathComponent("\(name).png")
-        guard let data = UIImagePNGRepresentation(gradient.image) else { return }
+        guard let data = gradient.image.pngData() else { return }
         try? data.write(to: imageURL)
 
         let textURL = docs.appendingPathComponent("\(name).txt")

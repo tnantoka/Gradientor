@@ -20,7 +20,7 @@ class EditViewController: UITableViewController {
     private let store = RxStore<AppState>(store: mainStore)
 
     lazy internal var addItem: UIBarButtonItem = {
-        self.barButtomItem(systemItem: .add, bag: self.bag) { [weak self] _ in
+        self.barButtomItem(systemItem: .add, bag: self.bag) { [weak self] in
             self?.addDidTap()
         }
     }()

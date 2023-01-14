@@ -24,28 +24,28 @@ class HomeViewController: UIViewController {
     internal var gradient = Gradient()
 
     lazy internal var infoItem: UIBarButtonItem = {
-        self.barButtomItem(icon: .information, bag: self.bag) { [weak self] _ in
+        self.barButtomItem(icon: .information, bag: self.bag) { [weak self] in
             self?.infoDidTap()
         }
     }()
     lazy internal var editItem: UIBarButtonItem = {
-        self.barButtomItem(icon: .edit, bag: self.bag) { [weak self] _ in
+        self.barButtomItem(icon: .edit, bag: self.bag) { [weak self] in
             self?.editDidTap()
         }
     }()
 
     lazy internal var clearItem: UIBarButtonItem = {
-        self.barButtomItem(systemItem: .trash, bag: self.bag) { [weak self] _ in
+        self.barButtomItem(systemItem: .trash, bag: self.bag) { [weak self] in
             self?.clearDidTap()
         }
     }()
     lazy internal var refreshItem: UIBarButtonItem = {
-        self.barButtomItem(systemItem: .refresh, bag: self.bag) { [weak self] _ in
+        self.barButtomItem(systemItem: .refresh, bag: self.bag) { [weak self] in
             self?.refreshDidTap()
         }
     }()
     lazy internal var exportItem: UIBarButtonItem = {
-        self.barButtomItem(systemItem: .action, bag: self.bag) { [weak self] _ in
+        self.barButtomItem(systemItem: .action, bag: self.bag) { [weak self] in
             self?.exportDidTap()
         }
     }()
