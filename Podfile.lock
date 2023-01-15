@@ -1,5 +1,5 @@
 PODS:
-  - AdFooter (7.37.0)
+  - AdFooter (7.69.0)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -14,7 +14,7 @@ PODS:
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
-  - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`, commit `782d2aff5b8caa091e8964a42dd84ce337eb8029`)
+  - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`, commit `58d873b20ecc3f95cbb5b5801a7fce8578753568`)
   - ChameleonFramework/Swift (from `https://github.com/redroostertech/Chameleon`, commit `56f36fbc69ad6389243f556a1faed4581f4e1df6`)
   - Eureka (= 4.3.1)
   - IoniconsKit (from `https://github.com/anzfactory/IoniconsKit.git`)
@@ -36,7 +36,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   AdFooter:
-    :commit: 782d2aff5b8caa091e8964a42dd84ce337eb8029
+    :commit: 58d873b20ecc3f95cbb5b5801a7fce8578753568
     :git: https://gitlab.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :commit: 56f36fbc69ad6389243f556a1faed4581f4e1df6
@@ -48,7 +48,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AdFooter:
-    :commit: 782d2aff5b8caa091e8964a42dd84ce337eb8029
+    :commit: 58d873b20ecc3f95cbb5b5801a7fce8578753568
     :git: https://gitlab.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :commit: 56f36fbc69ad6389243f556a1faed4581f4e1df6
@@ -61,7 +61,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/arno608rw/RFAboutView-Swift.git
 
 SPEC CHECKSUMS:
-  AdFooter: 68523deb883f01625f065981a61e9df363e80053
+  AdFooter: 162feea90beaede76145f33f8db9156a450fd2f6
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Eureka: 28ea296f06710f6745266b71f17862048941a32d
   IoniconsKit: 11e04bb11af3d052bcdd34a837e0421affe6f3bd
@@ -72,6 +72,6 @@ SPEC CHECKSUMS:
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 00d08e229262cfd395fdac07daa7167d3bdc4dff
+PODFILE CHECKSUM: 7926ef89b997c08af7dffae341ccd508ce955df7
 
 COCOAPODS: 1.11.3

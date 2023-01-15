@@ -6,3 +6,4 @@
   Copyright © 2017 tnantoka. All rights reserved.
 */
 "NSPhotoLibraryUsageDescription" = "Access the photo library to extract colors from image files.";
+"NSUserTrackingUsageDescription" = "It will be used to deliver personalized ads to you.";
