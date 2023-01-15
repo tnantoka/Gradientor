@@ -65,6 +65,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIToolbar.appearance().barTintColor = UINavigationBar.appearance().barTintColor
         UIToolbar.appearance().tintColor = UINavigationBar.appearance().tintColor
+
+        if #available(iOS 15.0, *) {
+            let navAppearance = UINavigationBarAppearance()
+            navAppearance.configureWithOpaqueBackground()
+            navAppearance.backgroundColor = UIColor(hexString: "#F5F5F5")
+            navAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: FlatBlue()]
+
+            UINavigationBar.appearance().standardAppearance = navAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+
+            let toolbarAppearance = UIToolbarAppearance()
+            toolbarAppearance.configureWithOpaqueBackground()
+            toolbarAppearance.backgroundColor = navAppearance.backgroundColor
+
+            UIToolbar.appearance().standardAppearance = toolbarAppearance
+            UIToolbar.appearance().scrollEdgeAppearance = toolbarAppearance
+        }
     }
 }
 
