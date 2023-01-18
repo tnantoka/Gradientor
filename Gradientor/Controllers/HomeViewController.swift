@@ -60,7 +60,14 @@ class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = infoItem
         navigationItem.rightBarButtonItem = editItem
         toolbarItems = [flexibleItem, clearItem, flexibleItem, refreshItem, flexibleItem, exportItem, flexibleItem]
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        #if DEBUG
+            print("RxSwift Resources: \(RxSwift.Resources.total)")
+        #endif
+        
         let colors = store.state.asDriver()
             .map { $0.colors }
 
@@ -75,14 +82,7 @@ class HomeViewController: UIViewController {
 
         refresh()
         #if DEBUG
-//            setIconColors(); let fixme = ""
-        #endif
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        #if DEBUG
-            print("RxSwift Resources: \(RxSwift.Resources.total)")
+            setIconColors(); let fixme = ""
         #endif
     }
 

@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AdFooter.shared.adMobAdUnitId = Keys.adMobBannerUnitID
         AdFooter.shared.interstitial.adMobAdUnitId = Keys.adMobInterstitialUnitID
         #if DEBUG
-//            window?.rootViewController = navigationController
-            window?.rootViewController = AdFooter.shared.wrap(navigationController)
+            window?.rootViewController = navigationController
+//            window?.rootViewController = AdFooter.shared.wrap(navigationController)
         #else
             window?.rootViewController = AdFooter.shared.wrap(navigationController)
         #endif
