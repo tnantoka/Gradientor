@@ -37,6 +37,10 @@ Pod installation complete!
 $ open Gradientor.xcworkspace
 ```
 
+### Generate App Icon
+
+Use the `setIconColors`.
+
 ## Acknowledgements
 
 - [Pods](/Podfile) 
