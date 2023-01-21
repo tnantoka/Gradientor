@@ -213,8 +213,9 @@ class HomeViewController: UIViewController {
         let exportViewController = ExportViewController()
 
         exportViewController.didClose = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-            self?.showInterstitial()
+            self?.dismiss(animated: true) {
+                self?.showInterstitial()
+            }
         }
 
         let exportNavigationController = UINavigationController(rootViewController: exportViewController)

@@ -49,8 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window?.makeKeyAndVisible()
 
-        AdFooter.shared.interstitial.load()
-
         return true
     }
 

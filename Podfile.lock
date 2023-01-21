@@ -14,7 +14,7 @@ PODS:
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
-  - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`, commit `58d873b20ecc3f95cbb5b5801a7fce8578753568`)
+  - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`, commit `970ab1353912a43436b3198683dbded2e3fa7bb8`)
   - ChameleonFramework/Swift (from `https://github.com/redroostertech/Chameleon`, commit `56f36fbc69ad6389243f556a1faed4581f4e1df6`)
   - Eureka (= 4.3.1)
   - IoniconsKit (from `https://github.com/anzfactory/IoniconsKit.git`)
@@ -36,7 +36,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   AdFooter:
-    :commit: 58d873b20ecc3f95cbb5b5801a7fce8578753568
+    :commit: 970ab1353912a43436b3198683dbded2e3fa7bb8
     :git: https://gitlab.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :commit: 56f36fbc69ad6389243f556a1faed4581f4e1df6
@@ -48,7 +48,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AdFooter:
-    :commit: 58d873b20ecc3f95cbb5b5801a7fce8578753568
+    :commit: 970ab1353912a43436b3198683dbded2e3fa7bb8
     :git: https://gitlab.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :commit: 56f36fbc69ad6389243f556a1faed4581f4e1df6
@@ -72,6 +72,6 @@ SPEC CHECKSUMS:
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 7926ef89b997c08af7dffae341ccd508ce955df7
+PODFILE CHECKSUM: 5ecaf3a9b97eca99d2f0adf09a4c95a15e8eed0d
 
 COCOAPODS: 1.11.3
