@@ -1,11 +1,55 @@
 PODS:
-  - AdFooter (7.69.0)
+  - AdFooter (10.5.0):
+    - GoogleAppMeasurement (< 11.0, >= 7.0)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - Eureka (4.3.1)
+  - GoogleAppMeasurement (10.10.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.10.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.10.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.11.1):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.11.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.11.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.11.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.11.1)"
+  - GoogleUtilities/Reachability (7.11.1):
+    - GoogleUtilities/Logger
   - IoniconsKit (1.1.0)
+  - nanopb (2.30909.0):
+    - nanopb/decode (= 2.30909.0)
+    - nanopb/encode (= 2.30909.0)
+  - nanopb/decode (2.30909.0)
+  - nanopb/encode (2.30909.0)
   - PKHUD (5.2.1)
+  - PromisesObjC (2.2.0)
   - ReSwift (4.0.0)
   - RFAboutView-Swift (2.0.4)
   - RxCocoa (4.5.0):
@@ -14,7 +58,7 @@ PODS:
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
-  - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`, commit `970ab1353912a43436b3198683dbded2e3fa7bb8`)
+  - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`)
   - ChameleonFramework/Swift (from `https://github.com/redroostertech/Chameleon`, commit `56f36fbc69ad6389243f556a1faed4581f4e1df6`)
   - Eureka (= 4.3.1)
   - IoniconsKit (from `https://github.com/anzfactory/IoniconsKit.git`)
@@ -28,7 +72,11 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Eureka
+    - GoogleAppMeasurement
+    - GoogleUtilities
+    - nanopb
     - PKHUD
+    - PromisesObjC
     - ReSwift
     - RxCocoa
     - RxSwift
@@ -36,7 +84,6 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   AdFooter:
-    :commit: 970ab1353912a43436b3198683dbded2e3fa7bb8
     :git: https://gitlab.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :commit: 56f36fbc69ad6389243f556a1faed4581f4e1df6
@@ -48,7 +95,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AdFooter:
-    :commit: 970ab1353912a43436b3198683dbded2e3fa7bb8
+    :commit: 4ff09b49eae2d53cb95594cdb3c60072f8a62d3e
     :git: https://gitlab.com/tnantoka/AdFooter.git
   ChameleonFramework:
     :commit: 56f36fbc69ad6389243f556a1faed4581f4e1df6
@@ -61,17 +108,21 @@ CHECKOUT OPTIONS:
     :git: https://github.com/arno608rw/RFAboutView-Swift.git
 
 SPEC CHECKSUMS:
-  AdFooter: 162feea90beaede76145f33f8db9156a450fd2f6
+  AdFooter: 6cdfc7237e841d74af2504c9cf0395e35b5c7df4
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Eureka: 28ea296f06710f6745266b71f17862048941a32d
+  GoogleAppMeasurement: bbbfd4bcb2b40ae9b772c3b0823a58c1e3d618f9
+  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   IoniconsKit: 11e04bb11af3d052bcdd34a837e0421affe6f3bd
+  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PKHUD: 4e6162c4c39ac367c6934e9855c6b4762ee16256
+  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
   RFAboutView-Swift: 18064d3562583684d7d3d345061db91ce5def75c
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 5ecaf3a9b97eca99d2f0adf09a4c95a15e8eed0d
+PODFILE CHECKSUM: e8a8662308f1153d32938e5b8463c492f5c928f4
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
