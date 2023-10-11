@@ -80,9 +80,11 @@ class HomeViewController: UIViewController {
             })
             .addDisposableTo(bag)
 
-        refresh()
+        if store.state.value.colors.isEmpty {
+            refresh()
+        }
         #if DEBUG
-            setIconColors(); let fixme = ""
+//            setIconColors(); let fixme = ""
         #endif
     }
 
