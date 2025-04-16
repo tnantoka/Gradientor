@@ -7,26 +7,25 @@
 //
 
 import Foundation
-
-import RxSwift
 import ReSwift
+import RxSwift
 
 class RxStore<AppStateType: StateType>: StoreSubscriber {
-    let state: Variable<AppStateType>
-    private let store: Store<AppStateType>
+  let state: Variable<AppStateType>
+  private let store: Store<AppStateType>
 
-    init(store: Store<AppStateType>) {
-        self.store = store
-        state = Variable(store.state)
+  init(store: Store<AppStateType>) {
+    self.store = store
+    state = Variable(store.state)
 
-        store.subscribe(self)
-    }
+    store.subscribe(self)
+  }
 
-    deinit {
-        store.unsubscribe(self)
-    }
+  deinit {
+    store.unsubscribe(self)
+  }
 
-    func newState(state: AppStateType) {
-        self.state.value = state
-    }
+  func newState(state: AppStateType) {
+    self.state.value = state
+  }
 }
