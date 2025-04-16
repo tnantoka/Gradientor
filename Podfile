@@ -2,7 +2,6 @@ target 'Gradientor' do
   use_frameworks!
 
   pod 'AdFooter', git: 'https://gitlab.com/tnantoka/AdFooter.git'
-  pod 'ChameleonFramework/Swift', git: 'https://github.com/redroostertech/Chameleon', commit: '56f36fbc69ad6389243f556a1faed4581f4e1df6'
   pod 'Eureka', '4.3.1'
   pod "IoniconsKit", git: 'https://github.com/anzfactory/IoniconsKit.git'
   pod 'PKHUD', '5.2.1'

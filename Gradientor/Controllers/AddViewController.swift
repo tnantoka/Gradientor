@@ -10,7 +10,6 @@ import UIKit
 
 import RxSwift
 import RxCocoa
-import ChameleonFramework
 import PKHUD
 import IoniconsKit
 import SnapKit
@@ -23,11 +22,6 @@ class AddViewController: UIViewController {
     lazy internal var randomItem: UIBarButtonItem = {
         self.barButtomItem(icon: .shuffle, bag: self.bag) { [weak self] in
             self?.randomDidTap()
-        }
-    }()
-    lazy internal var imageItem: UIBarButtonItem = {
-        self.barButtomItem(icon: .image, bag: self.bag) { [weak self] in
-            self?.imageDidTap()
         }
     }()
     lazy internal var rgbItem: UIBarButtonItem = {
@@ -66,7 +60,7 @@ class AddViewController: UIViewController {
                 guard let backgroundColor = cell.backgroundColor else { return }
 
                 let overlayView = UIView(frame: cell.contentView.bounds)
-                overlayView.backgroundColor = ContrastColorOf(backgroundColor, returnFlat: true)
+                overlayView.backgroundColor = backgroundColor.contrastColor()
                 cell.contentView.addSubview(overlayView)
 
                 overlayView.alpha = 0.3
@@ -90,10 +84,13 @@ class AddViewController: UIViewController {
 
         self.groupColors.asDriver()
             .drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
-                cell.backgroundColor = model
                 cell.textLabel?.text = model.hexValue()
-                cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: true)
+                cell.textLabel?.textColor = model.contrastColor()
                 cell.selectionStyle = .none
+                
+                let backgroundView = UIView()
+                backgroundView.backgroundColor = model
+                cell.backgroundView = backgroundView                
             }
             .addDisposableTo(self.bag)
 
@@ -113,7 +110,7 @@ class AddViewController: UIViewController {
                 guard let backgroundColor = cell.backgroundColor else { return }
 
                 let overlayView = UIView(frame: cell.contentView.bounds)
-                overlayView.backgroundColor = ContrastColorOf(backgroundColor, returnFlat: true)
+                overlayView.backgroundColor = backgroundColor.contrastColor()
                 cell.contentView.addSubview(overlayView)
 
                 overlayView.alpha = 0.3
@@ -136,7 +133,7 @@ class AddViewController: UIViewController {
         title = MaterialDesign.names[0]
         view.backgroundColor = MaterialDesign.backgroundColor
 
-        toolbarItems = [flexibleItem, randomItem, flexibleItem, imageItem, flexibleItem, rgbItem, flexibleItem]
+        toolbarItems = [flexibleItem, randomItem, flexibleItem, rgbItem, flexibleItem]
 
         PKHUD.sharedHUD.dimsBackground = false
 
@@ -198,7 +195,7 @@ class AddViewController: UIViewController {
             ) { [weak self]_ in
                 guard let rgb = alertController.textFields?.first?.text else { return }
                 let code = rgb.trimmingCharacters(in: .whitespacesAndNewlines)
-                guard let color = UIColor(hexString: code) else { return }
+                let color = UIColor(hexString: code)
                 mainStore.dispatch(AppAction.addColor(color))
                 self?.showSuccess(subtitle: color.hexValue())
             }
@@ -206,39 +203,4 @@ class AddViewController: UIViewController {
 
         present(alertController, animated: true, completion: nil)
     }
-
-    private func imageDidTap() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true, completion: nil)
-    }
-}
-
-extension AddViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
-        guard let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else { return }
-        HUD.show(.systemActivity)
-        DispatchQueue.global().async { [weak self] in
-            let colors = ColorsFromImage(image, withFlatScheme: false)
-            DispatchQueue.main.async {
-                mainStore.dispatch(AppAction.addColors(colors))
-                self?.showSuccess(subtitle: nil)
-            }
-        }
-        dismiss(animated: true, completion: nil)
-    }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
 }
