@@ -7,21 +7,20 @@
 //
 
 import Foundation
-
 import ReSwift
 
 enum AppAction: Action {
-    case addColor(UIColor)
-    case addRandomColor
-    case addColors([UIColor])
-    case clearColors
-    case moveColor(from: Int, to: Int)
-    case deleteColor(Int)
+  case addColor(UIColor)
+  case addRandomColor
+  case addColors([UIColor])
+  case clearColors
+  case moveColor(from: Int, to: Int)
+  case deleteColor(Int)
 
-    case setDirection(Gradient.Direction)
+  case setDirection(Gradient.Direction)
 
-    case setExportSize(CGSize)
-    case setIsExportImage(Bool)
-    case setIsExportText(Bool)
-    case incrementExportCount
+  case setExportSize(CGSize)
+  case setIsExportImage(Bool)
+  case setIsExportText(Bool)
+  case incrementExportCount
 }
