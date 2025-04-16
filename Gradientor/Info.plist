@@ -49,7 +49,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access the photo library to extract colors from image files.</string>
 </dict>
 </plist>

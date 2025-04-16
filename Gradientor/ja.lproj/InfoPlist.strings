@@ -5,5 +5,4 @@
   Created by Tatsuya Tobioka on 2017/04/25.
   Copyright © 2017 tnantoka. All rights reserved.
 */
-"NSPhotoLibraryUsageDescription" = "画像から色を抽出するためにフォトライブラリーにアクセスします";
 "NSUserTrackingUsageDescription" = "できるだけ関心のある広告を表示するために使用します";

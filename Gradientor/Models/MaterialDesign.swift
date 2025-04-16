@@ -8,8 +8,6 @@
 
 import UIKit
 
-import ChameleonFramework
-
 struct MaterialDesign {
 
     static let names = [
@@ -56,7 +54,7 @@ struct MaterialDesign {
         "#9E9E9E",
         "#607D8B",
         "#000000"
-    ].map { UIColor(hexString: $0)! }
+    ].map { UIColor(hexString: $0) }
 
     static let colorGroups = [
         [
@@ -355,7 +353,12 @@ struct MaterialDesign {
             "#000000",
             "#FFFFFF"
         ]
-    ].map { $0.map { UIColor(hexString: $0)! } }
+    ].map { $0.map { UIColor(hexString: $0) } }
 
-    static let backgroundColor = UIColor(hexString: "#FAFAFA")!
+    static let backgroundColor = UIColor(hexString: "#FAFAFA")
+    
+    // https://github.com/vicc/chameleon/blob/6dd284bde21ea2e7f9fd89bc36f40df16e16369d/Pod/Classes/Objective-C/UIColor%2BChameleon.m#L57
+    static let flatBlueColor = UIColor(hue: 224.0 / 360.0, saturation: 50.0 / 100.0, brightness: 63.0 / 100.0, alpha: 1.0)
+    static let flatPowderBlueDarkColor = UIColor(hue: 222.0 / 360.0, saturation: 28.0 / 100.0, brightness: 84.0 / 100.0, alpha: 1.0)
+    static let flatPowderBlueColor = UIColor(hue: 222.0 / 360.0, saturation: 24.0 / 100.0, brightness: 95.0 / 100.0, alpha: 1.0)
 }

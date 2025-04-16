@@ -11,7 +11,6 @@ import GameplayKit
 
 import RxSwift
 import RxCocoa
-import ChameleonFramework
 import IoniconsKit
 
 class EditViewController: UITableViewController {
@@ -64,9 +63,9 @@ class EditViewController: UITableViewController {
         let colors = store.state.asDriver()
             .map { $0.colors }
         colors.drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
-                cell.backgroundColor = model
                 cell.textLabel?.text = model.hexValue()
-                cell.textLabel?.textColor = ContrastColorOf(model, returnFlat: true)
+                cell.textLabel?.textColor = model.contrastColor()
+            
                 let backgroundView = UIView()
                 backgroundView.backgroundColor = model
                 cell.backgroundView = backgroundView

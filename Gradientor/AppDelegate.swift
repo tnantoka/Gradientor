@@ -9,7 +9,6 @@
 import UIKit
 
 import ReSwift
-import ChameleonFramework
 import AdFooter
 
 let mainStore = Store<AppState>(
@@ -36,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.toolbar.clipsToBounds = true
         navigationController.toolbar.isTranslucent = false
         navigationController.navigationBar.isTranslucent = false
-        navigationController.hidesNavigationBarHairline = true
 
         AdFooter.shared.adMobAdUnitId = Keys.adMobBannerUnitID
         AdFooter.shared.interstitial.adMobAdUnitId = Keys.adMobInterstitialUnitID
@@ -56,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setAppearance() {
         UINavigationBar.appearance().barTintColor = UIColor(hexString: "#F5F5F5")
-        UINavigationBar.appearance().tintColor = FlatBlue()
+        UINavigationBar.appearance().tintColor = MaterialDesign.flatBlueColor
         UINavigationBar.appearance().titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([
             NSAttributedString.Key.foregroundColor.rawValue: UINavigationBar.appearance().tintColor
         ])
@@ -68,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let navAppearance = UINavigationBarAppearance()
             navAppearance.configureWithOpaqueBackground()
             navAppearance.backgroundColor = UIColor(hexString: "#F5F5F5")
-            navAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: FlatBlue()]
+            navAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: MaterialDesign.flatBlueColor]
 
             UINavigationBar.appearance().standardAppearance = navAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navAppearance

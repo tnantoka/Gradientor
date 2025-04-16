@@ -13,7 +13,6 @@ import RxSwift
 import RxCocoa
 import IoniconsKit
 import RFAboutView_Swift
-import ChameleonFramework
 import AdFooter
 
 class HomeViewController: UIViewController {
@@ -92,9 +91,9 @@ class HomeViewController: UIViewController {
 
     internal func setIconColors() {
         mainStore.dispatch(AppAction.clearColors)
-        mainStore.dispatch(AppAction.addColor(FlatBlue()))
-        mainStore.dispatch(AppAction.addColor(FlatPowderBlueDark()))
-        mainStore.dispatch(AppAction.addColor(FlatPowderBlue()))
+        mainStore.dispatch(AppAction.addColor(MaterialDesign.flatBlueColor))
+        mainStore.dispatch(AppAction.addColor(MaterialDesign.flatPowderBlueDarkColor))
+        mainStore.dispatch(AppAction.addColor(MaterialDesign.flatPowderBlueColor))
     }
 
     private func updateGradient(colors: [UIColor]) {
@@ -188,7 +187,6 @@ class HomeViewController: UIViewController {
 
         let aboutNavigationController = UINavigationController(rootViewController: aboutViewController)
         aboutNavigationController.navigationBar.isTranslucent = false
-        aboutNavigationController.hidesNavigationBarHairline = true
 
         present(aboutNavigationController, animated: true, completion: nil)
     }
@@ -222,7 +220,6 @@ class HomeViewController: UIViewController {
 
         let exportNavigationController = UINavigationController(rootViewController: exportViewController)
         exportNavigationController.navigationBar.isTranslucent = false
-        exportNavigationController.hidesNavigationBarHairline = true
 
         present(exportNavigationController, animated: true, completion: nil)
     }

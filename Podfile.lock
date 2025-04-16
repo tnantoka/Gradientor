@@ -2,9 +2,6 @@ PODS:
   - AdFooter (10.12.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 2.1)
-  - ChameleonFramework/Default (2.1.0)
-  - ChameleonFramework/Swift (2.1.0):
-    - ChameleonFramework/Default
   - Eureka (4.3.1)
   - GoogleAppMeasurement (10.16.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.16.0)
@@ -64,7 +61,6 @@ PODS:
 
 DEPENDENCIES:
   - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`)
-  - ChameleonFramework/Swift (from `https://github.com/redroostertech/Chameleon`, commit `56f36fbc69ad6389243f556a1faed4581f4e1df6`)
   - Eureka (= 4.3.1)
   - IoniconsKit (from `https://github.com/anzfactory/IoniconsKit.git`)
   - PKHUD (= 5.2.1)
@@ -92,9 +88,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AdFooter:
     :git: https://gitlab.com/tnantoka/AdFooter.git
-  ChameleonFramework:
-    :commit: 56f36fbc69ad6389243f556a1faed4581f4e1df6
-    :git: https://github.com/redroostertech/Chameleon
   IoniconsKit:
     :git: https://github.com/anzfactory/IoniconsKit.git
   RFAboutView-Swift:
@@ -104,9 +97,6 @@ CHECKOUT OPTIONS:
   AdFooter:
     :commit: 03fcdc12280eb859b5808046627f41429b2f684f
     :git: https://gitlab.com/tnantoka/AdFooter.git
-  ChameleonFramework:
-    :commit: 56f36fbc69ad6389243f556a1faed4581f4e1df6
-    :git: https://github.com/redroostertech/Chameleon
   IoniconsKit:
     :commit: 1a79623d0e06d013b69b26745cac3c058db93048
     :git: https://github.com/anzfactory/IoniconsKit.git
@@ -116,7 +106,6 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AdFooter: c34980f80797384ef35518316f45c1a9986dbef1
-  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Eureka: 28ea296f06710f6745266b71f17862048941a32d
   GoogleAppMeasurement: 079d7632810e9d9704a99932547ba1554acc4342
   GoogleUserMessagingPlatform: dce302b8f1b84d6e945812ee7a15c3f65a102cbf
@@ -132,6 +121,6 @@ SPEC CHECKSUMS:
   RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 7cf833d64351d53a70571d382559c9ba57761f8b
+PODFILE CHECKSUM: ad653be9d908d436500162346ff6aab5c398bde9
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0
