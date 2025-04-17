@@ -3,7 +3,6 @@ target 'Gradientor' do
 
   pod 'AdFooter', git: 'https://gitlab.com/tnantoka/AdFooter.git'
   pod 'Eureka', '4.3.1'
-  pod "IoniconsKit", git: 'https://github.com/anzfactory/IoniconsKit.git'
   pod 'PKHUD', '5.2.1'
   pod 'ReSwift'
   pod 'RFAboutView-Swift', git: 'https://github.com/arno608rw/RFAboutView-Swift.git'

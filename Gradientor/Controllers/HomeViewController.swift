@@ -8,7 +8,6 @@
 
 import AdFooter
 import GameplayKit
-import IoniconsKit
 import RFAboutView_Swift
 import RxCocoa
 import RxSwift
@@ -22,12 +21,12 @@ class HomeViewController: UIViewController {
   internal var gradient = Gradient()
 
   lazy internal var infoItem: UIBarButtonItem = {
-    self.barButtomItem(icon: .information, bag: self.bag) { [weak self] in
+    self.barButtomItem(systemName: "info", bag: self.bag) { [weak self] in
       self?.infoDidTap()
     }
   }()
   lazy internal var editItem: UIBarButtonItem = {
-    self.barButtomItem(icon: .edit, bag: self.bag) { [weak self] in
+    self.barButtomItem(systemName: "pencil", bag: self.bag) { [weak self] in
       self?.editDidTap()
     }
   }()
