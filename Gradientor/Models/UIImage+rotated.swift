@@ -11,24 +11,25 @@ import UIKit
 
 extension UIImage {
   func rotated(degree: Float) -> UIImage {
-    UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+    let radian = CGFloat(GLKMathDegreesToRadians(degree))
+    let rotatedSize = CGRect(origin: .zero, size: size)
+      .applying(CGAffineTransform(rotationAngle: radian))
+      .size
+
+    UIGraphicsBeginImageContextWithOptions(rotatedSize, false, self.scale)
     defer {
       UIGraphicsEndImageContext()
     }
+
     guard let context = UIGraphicsGetCurrentContext() else { return UIImage() }
 
-    let center = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
-
-    context.translateBy(x: center.x, y: center.y)
-    context.scaleBy(x: 1.0, y: -1.0)
-
-    let radian = CGFloat(GLKMathDegreesToRadians(degree))
+    context.translateBy(x: rotatedSize.width / 2.0, y: rotatedSize.height / 2.0)
     context.rotate(by: radian)
+    context.translateBy(x: -size.width / 2.0, y: -size.height / 2.0)
 
-    guard let cgImage = cgImage else { return UIImage() }
-    context.draw(cgImage, in: CGRect(origin: CGPoint(x: -center.x, y: -center.y), size: size))
+    self.draw(at: .zero)
 
-    guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
-    return image
+    guard let rotatedImage = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
+    return rotatedImage
   }
 }

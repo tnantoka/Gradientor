@@ -7,7 +7,6 @@
 //
 
 import GameplayKit
-import IoniconsKit
 import RxCocoa
 import RxSwift
 import UIKit
@@ -23,14 +22,16 @@ class EditViewController: UITableViewController {
     }
   }()
   lazy private var directionControl: UISegmentedControl = {
-    let size = CGSize(width: 24.0, height: 24.0)
-    let segmentedControl = UISegmentedControl(items: [
-      UIImage.ionicon(with: .androidRemove, textColor: .black, size: size),
-      UIImage.ionicon(with: .androidRemove, textColor: .black, size: size).rotated(degree: 90.0),
-      UIImage.ionicon(with: .androidRadioButtonOff, textColor: .black, size: size),
-      UIImage.ionicon(with: .androidRemove, textColor: .black, size: size).rotated(degree: 45.0),
-      UIImage.ionicon(with: .androidRemove, textColor: .black, size: size).rotated(degree: -45.0),
-    ])
+    let config = UIImage.SymbolConfiguration(pointSize: 18.0, weight: .regular)
+
+    let segmentedControl = UISegmentedControl(
+      items: [
+        UIImage(systemName: "minus", withConfiguration: config),
+        UIImage(systemName: "minus", withConfiguration: config)?.rotated(degree: 90.0),
+        UIImage(systemName: "circle", withConfiguration: config),
+        UIImage(systemName: "line.diagonal", withConfiguration: config),
+        UIImage(systemName: "line.diagonal", withConfiguration: config)?.rotated(degree: 90.0),
+      ].compactMap { $0 })
     segmentedControl.selectedSegmentIndex = mainStore.state.direction.rawValue
     segmentedControl.rx.selectedSegmentIndex
       .asObservable()

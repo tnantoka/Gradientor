@@ -6,7 +6,6 @@
 //  Copyright © 2017 tnantoka. All rights reserved.
 //
 
-import IoniconsKit
 import PKHUD
 import RxCocoa
 import RxSwift
@@ -19,12 +18,12 @@ class AddViewController: UIViewController {
   let groupColors = Variable(MaterialDesign.colorGroups[0])
 
   lazy internal var randomItem: UIBarButtonItem = {
-    self.barButtomItem(icon: .shuffle, bag: self.bag) { [weak self] in
+    self.barButtomItem(systemName: "shuffle", bag: self.bag) { [weak self] in
       self?.randomDidTap()
     }
   }()
   lazy internal var rgbItem: UIBarButtonItem = {
-    self.barButtomItem(icon: .pound, bag: self.bag) { [weak self] in
+    self.barButtomItem(systemName: "number", bag: self.bag) { [weak self] in
       self?.rgbDidTap()
     }
   }()
@@ -159,9 +158,10 @@ class AddViewController: UIViewController {
   // MARK - Utilities
 
   fileprivate func showSuccess(subtitle: String?) {
-    let size = CGSize(width: 88.0, height: 88.0)
-    let image = UIImage.ionicon(
-      with: .iosCheckmarkEmpty, textColor: UIColor(white: 0.0, alpha: 0.87), size: size)
+    let config = UIImage.SymbolConfiguration(pointSize: 64.0, weight: .regular)
+    let image = UIImage(systemName: "checkmark", withConfiguration: config)?.withTintColor(
+      UIColor(white: 0.0, alpha: 0.87), renderingMode: .alwaysOriginal)
+
     HUD.flash(.labeledImage(image: image, title: nil, subtitle: subtitle), delay: 0.5)
   }
 
