@@ -46,7 +46,6 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - PKHUD (5.2.1)
   - PromisesObjC (2.3.1)
   - ReSwift (4.0.0)
   - RFAboutView-Swift (2.0.4)
@@ -61,7 +60,6 @@ PODS:
 DEPENDENCIES:
   - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`)
   - Eureka (= 4.3.1)
-  - PKHUD (= 5.2.1)
   - ReSwift
   - RFAboutView-Swift (from `https://github.com/arno608rw/RFAboutView-Swift.git`)
   - RxCocoa (= 5.1.3)
@@ -75,7 +73,6 @@ SPEC REPOS:
     - GoogleUserMessagingPlatform
     - GoogleUtilities
     - nanopb
-    - PKHUD
     - PromisesObjC
     - ReSwift
     - RxCocoa
@@ -104,7 +101,6 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: dce302b8f1b84d6e945812ee7a15c3f65a102cbf
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  PKHUD: 4e6162c4c39ac367c6934e9855c6b4762ee16256
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
   RFAboutView-Swift: 18064d3562583684d7d3d345061db91ce5def75c
@@ -113,6 +109,6 @@ SPEC CHECKSUMS:
   RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: e94de55e93bb0c11369025c62295fb6cec74af8a
+PODFILE CHECKSUM: 5301a073c318cc00c16c25f4df4eadc7b005a6db
 
 COCOAPODS: 1.13.0
