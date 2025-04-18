@@ -6,7 +6,6 @@
 //  Copyright © 2017 tnantoka. All rights reserved.
 //
 
-import PKHUD
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -136,8 +135,6 @@ class AddViewController: UIViewController {
 
     toolbarItems = [flexibleItem, randomItem, flexibleItem, rgbItem, flexibleItem]
 
-    PKHUD.sharedHUD.dimsBackground = false
-
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints { make in
       make.top.equalTo(view)
@@ -162,7 +159,50 @@ class AddViewController: UIViewController {
     let image = UIImage(systemName: "checkmark", withConfiguration: config)?.withTintColor(
       UIColor(white: 0.0, alpha: 0.87), renderingMode: .alwaysOriginal)
 
-    HUD.flash(.labeledImage(image: image, title: nil, subtitle: subtitle), delay: 0.5)
+    let hudSize = CGSize(width: 180.0, height: 180.0)
+    let hudOrigin = CGPoint(
+      x: view.bounds.width * 0.5 - hudSize.width * 0.5,
+      y: view.bounds.height * 0.5 - hudSize.height * 0.5
+    )
+    let hudFrame = CGRect(origin: hudOrigin, size: hudSize)
+    let hudView = UIView(frame: hudFrame)
+    hudView.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+    hudView.layer.cornerRadius = 8.0
+
+    let imageView = UIImageView(image: image)
+    imageView.frame.origin = CGPoint(
+      x: hudSize.width * 0.5 - imageView.bounds.width * 0.5,
+      y: hudSize.height * 0.5 - imageView.bounds.height * 0.6
+    )
+    hudView.addSubview(imageView)
+
+    let labelHeight = 44.0
+    let label = UILabel(
+      frame: CGRect(
+        x: 0.0,
+        y: hudSize.height - labelHeight * 1.5,
+        width: hudSize.width,
+        height: labelHeight
+      )
+    )
+    label.text = subtitle
+    label.textAlignment = .center
+    label.textColor = UIColor(white: 0.0, alpha: 0.87)
+    hudView.addSubview(label)
+
+    let backdropView = UIView(frame: view.bounds)
+    backdropView.backgroundColor = .clear
+    backdropView.addSubview(hudView)
+    view.addSubview(backdropView)
+
+    UIView.animate(
+      withDuration: 0.3, delay: 1.0, options: [],
+      animations: {
+        backdropView.alpha = 0
+      },
+      completion: { _ in
+        backdropView.removeFromSuperview()
+      })
   }
 
   // MARK - Actions
