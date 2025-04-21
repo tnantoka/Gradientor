@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		042DD117A998FF2B46E066BE /* Pods_GradientorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */; };
 		85D9695EE6798ABBCF3E6B70 /* Pods_Gradientor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */; };
+		9B083DA82DB3DB2E00D109D8 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B083DA72DB3DB2900D109D8 /* AboutViewController.swift */; };
 		9B2F50182971506D003E3FFD /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F50172971506D003E3FFD /* Keys.swift */; };
 		9B316D561EBB57D600338C48 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */; };
 		9BA06F9D1EBB5B45001D3C23 /* EditViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA06F9C1EBB5B45001D3C23 /* EditViewControllerTests.swift */; };
@@ -54,6 +55,7 @@
 		2E52D2CCAC8729B3B8F68974 /* Pods-GradientorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.release.xcconfig"; sourceTree = "<group>"; };
 		4451127B46BCEE557A6AB5C3 /* Pods-GradientorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GradientorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B083DA72DB3DB2900D109D8 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		9B2F50172971506D003E3FFD /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		9BA06F9C1EBB5B45001D3C23 /* EditViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewControllerTests.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		9BECCBB81EA4FFAC003E4EC5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9B083DA72DB3DB2900D109D8 /* AboutViewController.swift */,
 				9BB79A131EB374610079808A /* UIViewController+barButtonItem.swift */,
 				9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */,
 				9BECCBBD1EAB8639003E4EC5 /* EditViewController.swift */,
@@ -383,7 +386,6 @@
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/RFAboutView-Swift/RFAboutView_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
@@ -396,7 +398,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFAboutView_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
@@ -425,6 +426,7 @@
 				9BED864A2DAE94A200C9B789 /* UIColor+hexString.swift in Sources */,
 				9BECCBC61EABA092003E4EC5 /* AppReducer.swift in Sources */,
 				9BECCBDC1EB0D2E8003E4EC5 /* MaterialDesign.swift in Sources */,
+				9B083DA82DB3DB2E00D109D8 /* AboutViewController.swift in Sources */,
 				9BECCB991EA4FD24003E4EC5 /* AppDelegate.swift in Sources */,
 				9BECCBC41EAB9F82003E4EC5 /* AppAction.swift in Sources */,
 				9BECCBBA1EA4FFF7003E4EC5 /* HomeViewController.swift in Sources */,

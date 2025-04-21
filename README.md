@@ -25,6 +25,7 @@ Use the `setIconColors`.
 
 - [Pods](/Podfile) 
 - [MaterialDesignColorPicker](https://github.com/CodeCatalyst/MaterialDesignColorPicker) 
+- [Chameleon](https://github.com/vicc/chameleon)
 
 ## License
 

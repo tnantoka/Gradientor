@@ -8,7 +8,6 @@
 
 import AdFooter
 import GameplayKit
-import RFAboutView_Swift
 import RxCocoa
 import RxSwift
 import UIKit
@@ -171,20 +170,7 @@ class HomeViewController: UIViewController {
   }
 
   private func infoDidTap() {
-    let aboutViewController = RFAboutViewController()
-
-    aboutViewController.title = NSLocalizedString("About", comment: "")
-    aboutViewController.copyrightHolderName = "tnantoka"
-    aboutViewController.websiteURL = URL(string: "http://gradientor.com/")!
-    aboutViewController.websiteURLTitle = aboutViewController.websiteURL!.absoluteString
-
-    aboutViewController.closeButtonAsImage = false
-    aboutViewController.headerBorderColor = .clear
-    aboutViewController.tableViewSeparatorColor = .clear
-    aboutViewController.navigationBarTintColor = UINavigationBar.appearance().tintColor
-    aboutViewController.navigationBarBarTintColor = UINavigationBar.appearance().barTintColor
-    aboutViewController.navigationBarTitleTextColor = UINavigationBar.appearance().tintColor
-    aboutViewController.backgroundColor = MaterialDesign.backgroundColor
+    let aboutViewController = AboutViewController(style: .grouped)
 
     let aboutNavigationController = UINavigationController(rootViewController: aboutViewController)
     aboutNavigationController.navigationBar.isTranslucent = false
