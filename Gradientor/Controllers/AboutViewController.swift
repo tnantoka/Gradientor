@@ -21,6 +21,10 @@ class AboutViewController: UITableViewController {
       "https://github.com/vicc/chameleon",
     ],
     [
+      "Eureka",
+      "https://github.com/xmartlabs/Eureka",
+    ],
+    [
       "MaterialDesignColorPicker",
       "https://github.com/CodeCatalyst/MaterialDesignColorPicker",
     ],

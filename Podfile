@@ -2,7 +2,7 @@ target 'Gradientor' do
   use_frameworks!
 
   pod 'AdFooter', git: 'https://gitlab.com/tnantoka/AdFooter.git'
-  pod 'Eureka', '4.3.1'
+  pod 'Eureka'
   pod 'ReSwift'
   pod 'RxSwift', '5.1.3'
   pod 'RxCocoa', '5.1.3'
