@@ -8,7 +8,6 @@
 
 import RxCocoa
 import RxSwift
-import SnapKit
 import UIKit
 
 class AddViewController: UIViewController {
@@ -136,20 +135,22 @@ class AddViewController: UIViewController {
     toolbarItems = [flexibleItem, randomItem, flexibleItem, rgbItem, flexibleItem]
 
     view.addSubview(collectionView)
-    collectionView.snp.makeConstraints { make in
-      make.top.equalTo(view)
-      make.left.equalTo(view)
-      make.right.equalTo(view)
-      make.height.equalTo(UIScreen.main.bounds.width / 5.0)
-    }
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      collectionView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 5.0),
+    ])
 
     view.addSubview(tableView)
-    tableView.snp.makeConstraints { make in
-      make.top.equalTo(collectionView.snp.bottom)
-      make.left.equalTo(view)
-      make.right.equalTo(view)
-      make.bottom.equalTo(view)
-    }
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+      tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ])
   }
 
   // MARK - Utilities

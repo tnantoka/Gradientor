@@ -6,7 +6,6 @@ target 'Gradientor' do
   pod 'ReSwift'
   pod 'RxSwift', '5.1.3'
   pod 'RxCocoa', '5.1.3'
-  pod 'SnapKit', '4.2.0'
 
   target 'GradientorTests' do
     inherit! :search_paths
