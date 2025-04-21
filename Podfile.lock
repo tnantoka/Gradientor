@@ -48,7 +48,6 @@ PODS:
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.3.1)
   - ReSwift (4.0.0)
-  - RFAboutView-Swift (2.0.4)
   - RxCocoa (5.1.3):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`)
   - Eureka (= 4.3.1)
   - ReSwift
-  - RFAboutView-Swift (from `https://github.com/arno608rw/RFAboutView-Swift.git`)
   - RxCocoa (= 5.1.3)
   - RxSwift (= 5.1.3)
   - SnapKit (= 4.2.0)
@@ -83,16 +81,11 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AdFooter:
     :git: https://gitlab.com/tnantoka/AdFooter.git
-  RFAboutView-Swift:
-    :git: https://github.com/arno608rw/RFAboutView-Swift.git
 
 CHECKOUT OPTIONS:
   AdFooter:
     :commit: 03fcdc12280eb859b5808046627f41429b2f684f
     :git: https://gitlab.com/tnantoka/AdFooter.git
-  RFAboutView-Swift:
-    :commit: 260cde48e46d3e3d598904cb1807ccef894898fe
-    :git: https://github.com/arno608rw/RFAboutView-Swift.git
 
 SPEC CHECKSUMS:
   AdFooter: c34980f80797384ef35518316f45c1a9986dbef1
@@ -103,12 +96,11 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
-  RFAboutView-Swift: 18064d3562583684d7d3d345061db91ce5def75c
   RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 5301a073c318cc00c16c25f4df4eadc7b005a6db
+PODFILE CHECKSUM: 25e3d3634b7d8405ffc89a0fc5126cb36d92a921
 
 COCOAPODS: 1.13.0
