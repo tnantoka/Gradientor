@@ -2,7 +2,7 @@ PODS:
   - AdFooter (10.12.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 2.1)
-  - Eureka (4.3.1)
+  - Eureka (5.5.0)
   - GoogleAppMeasurement (10.16.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.16.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -57,7 +57,7 @@ PODS:
 
 DEPENDENCIES:
   - AdFooter (from `https://gitlab.com/tnantoka/AdFooter.git`)
-  - Eureka (= 4.3.1)
+  - Eureka
   - ReSwift
   - RxCocoa (= 5.1.3)
   - RxSwift (= 5.1.3)
@@ -86,7 +86,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AdFooter: c34980f80797384ef35518316f45c1a9986dbef1
-  Eureka: 28ea296f06710f6745266b71f17862048941a32d
+  Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
   GoogleAppMeasurement: 079d7632810e9d9704a99932547ba1554acc4342
   GoogleUserMessagingPlatform: dce302b8f1b84d6e945812ee7a15c3f65a102cbf
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
@@ -97,6 +97,6 @@ SPEC CHECKSUMS:
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
 
-PODFILE CHECKSUM: 251fcbf6f1b0c61e63ed7b5b8c5f0f038fc3e87a
+PODFILE CHECKSUM: b024bd1098d07880d453e6e8fc6d6a7b5e35fac4
 
 COCOAPODS: 1.13.0
