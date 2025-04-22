@@ -17,9 +17,11 @@ class EditViewController: UITableViewController {
   private let store = RxStore<AppState>(store: mainStore)
 
   lazy internal var addItem: UIBarButtonItem = {
-    self.barButtomItem(systemItem: .add, bag: self.bag) { [weak self] in
-      self?.addDidTap()
-    }
+    UIBarButtonItem(
+      barButtonSystemItem: .add,
+      target: self,
+      action: #selector(addDidTap)
+    )
   }()
   lazy private var directionControl: UISegmentedControl = {
     let config = UIImage.SymbolConfiguration(pointSize: 18.0, weight: .regular)
@@ -95,7 +97,7 @@ class EditViewController: UITableViewController {
 
   // MARK - Actions
 
-  private func addDidTap() {
+  @objc private func addDidTap() {
     let addViewController = AddViewController()
     navigationController?.pushViewController(addViewController, animated: true)
   }

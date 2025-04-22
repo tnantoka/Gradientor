@@ -16,17 +16,15 @@ class AddViewController: UIViewController {
   let groupColors = Variable(MaterialDesign.colorGroups[0])
 
   lazy internal var randomItem: UIBarButtonItem = {
-    self.barButtomItem(systemName: "shuffle", bag: self.bag) { [weak self] in
-      self?.randomDidTap()
-    }
+    barButtonItem(systemName: "shuffle", target: self, action: #selector(throttledRandomDidTap))
   }()
   lazy internal var rgbItem: UIBarButtonItem = {
-    self.barButtomItem(systemName: "number", bag: self.bag) { [weak self] in
-      self?.rgbDidTap()
-    }
+    barButtonItem(systemName: "number", target: self, action: #selector(rgbDidTap))
   }()
   private let flexibleItem = UIBarButtonItem(
     barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+  private var lastRandomTapTime = Date.distantPast
 
   lazy private var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -208,13 +206,22 @@ class AddViewController: UIViewController {
 
   // MARK - Actions
 
-  private func randomDidTap() {
+  @objc private func throttledRandomDidTap() {
+    let now = Date()
+
+    if now.timeIntervalSince(lastRandomTapTime) >= 0.5 {
+      lastRandomTapTime = now
+      randomDidTap()
+    }
+  }
+
+  @objc private func randomDidTap() {
     let color = AppState.randomColor
     mainStore.dispatch(AppAction.addColor(color))
     showSuccess(subtitle: color.hexValue())
   }
 
-  private func rgbDidTap() {
+  @objc private func rgbDidTap() {
     let alertController = UIAlertController(
       title: NSLocalizedString("Add Color", comment: ""),
       message: NSLocalizedString("Enter a color code.", comment: ""),

@@ -17,15 +17,19 @@ class ExportViewController: FormViewController {
   let bag = DisposeBag()
 
   lazy internal var closeItem: UIBarButtonItem = {
-    self.barButtomItem(title: NSLocalizedString("Close", comment: ""), bag: self.bag) {
-      [weak self] in
-      self?.closeDidTap()
-    }
+    UIBarButtonItem(
+      title: NSLocalizedString("Close", comment: ""),
+      style: .plain,
+      target: self,
+      action: #selector(closeDidTap)
+    )
   }()
   lazy internal var saveItem: UIBarButtonItem = {
-    self.barButtomItem(systemItem: .save, bag: self.bag) { [weak self] in
-      self?.saveDidTap()
-    }
+    UIBarButtonItem(
+      barButtonSystemItem: .save,
+      target: self,
+      action: #selector(saveDidTap)
+    )
   }()
 
   lazy private var widthRow: IntRow = {
@@ -167,11 +171,11 @@ class ExportViewController: FormViewController {
 
   // MARK - Actions
 
-  private func closeDidTap() {
+  @objc private func closeDidTap() {
     didClose()
   }
 
-  private func saveDidTap() {
+  @objc private func saveDidTap() {
     var items = [Any]()
 
     var gradient = Gradient()

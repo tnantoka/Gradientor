@@ -20,30 +20,32 @@ class HomeViewController: UIViewController {
   internal var gradient = Gradient()
 
   lazy internal var infoItem: UIBarButtonItem = {
-    self.barButtomItem(systemName: "info", bag: self.bag) { [weak self] in
-      self?.infoDidTap()
-    }
+    self.barButtonItem(systemName: "info", target: self, action: #selector(infoDidTap))
   }()
   lazy internal var editItem: UIBarButtonItem = {
-    self.barButtomItem(systemName: "pencil", bag: self.bag) { [weak self] in
-      self?.editDidTap()
-    }
+    self.barButtonItem(systemName: "pencil", target: self, action: #selector(editDidTap))
   }()
 
   lazy internal var clearItem: UIBarButtonItem = {
-    self.barButtomItem(systemItem: .trash, bag: self.bag) { [weak self] in
-      self?.clearDidTap()
-    }
+    UIBarButtonItem(
+      barButtonSystemItem: .trash,
+      target: self,
+      action: #selector(clearDidTap)
+    )
   }()
   lazy internal var refreshItem: UIBarButtonItem = {
-    self.barButtomItem(systemItem: .refresh, bag: self.bag) { [weak self] in
-      self?.refreshDidTap()
-    }
+    UIBarButtonItem(
+      barButtonSystemItem: .refresh,
+      target: self,
+      action: #selector(refreshDidTap)
+    )
   }()
   lazy internal var exportItem: UIBarButtonItem = {
-    self.barButtomItem(systemItem: .action, bag: self.bag) { [weak self] in
-      self?.exportDidTap()
-    }
+    UIBarButtonItem(
+      barButtonSystemItem: .action,
+      target: self,
+      action: #selector(exportDidTap)
+    )
   }()
   private let flexibleItem = UIBarButtonItem(
     barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -164,12 +166,12 @@ class HomeViewController: UIViewController {
 
   // MARK - Actions
 
-  private func editDidTap() {
+  @objc private func editDidTap() {
     let editViewController = EditViewController()
     navigationController?.pushViewController(editViewController, animated: true)
   }
 
-  private func infoDidTap() {
+  @objc private func infoDidTap() {
     let aboutViewController = AboutViewController(style: .grouped)
 
     let aboutNavigationController = UINavigationController(rootViewController: aboutViewController)
@@ -178,7 +180,7 @@ class HomeViewController: UIViewController {
     present(aboutNavigationController, animated: true, completion: nil)
   }
 
-  private func clearDidTap() {
+  @objc private func clearDidTap() {
     confirm(
       title: NSLocalizedString("Delete All Colors", comment: ""),
       actionTitle: NSLocalizedString("Delete", comment: "")
@@ -187,7 +189,7 @@ class HomeViewController: UIViewController {
     }
   }
 
-  private func refreshDidTap() {
+  @objc private func refreshDidTap() {
     confirm(
       title: NSLocalizedString("Recreate Colors", comment: ""),
       actionTitle: NSLocalizedString("OK", comment: "")
@@ -196,7 +198,7 @@ class HomeViewController: UIViewController {
     }
   }
 
-  private func exportDidTap() {
+  @objc private func exportDidTap() {
     let exportViewController = ExportViewController()
 
     exportViewController.didClose = { [weak self] in
