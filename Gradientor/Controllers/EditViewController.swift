@@ -7,14 +7,10 @@
 //
 
 import GameplayKit
-import RxCocoa
-import RxSwift
 import UIKit
 
 class EditViewController: UITableViewController {
-
-  private let bag = DisposeBag()
-  private let store = RxStore<AppState>(store: mainStore)
+  let reuseIdentifier = "reuseIdentifier"
 
   lazy internal var addItem: UIBarButtonItem = {
     UIBarButtonItem(
@@ -34,15 +30,10 @@ class EditViewController: UITableViewController {
         UIImage(systemName: "line.diagonal", withConfiguration: config),
         UIImage(systemName: "line.diagonal", withConfiguration: config)?.rotated(degree: 90.0),
       ].compactMap { $0 })
-    segmentedControl.selectedSegmentIndex = mainStore.state.direction.rawValue
-    segmentedControl.rx.selectedSegmentIndex
-      .asObservable()
-      .throttle(0.5, scheduler: MainScheduler.instance)
-      .map { Gradient.Direction(rawValue: $0) ?? .vertical }
-      .subscribe(onNext: { direction in
-        mainStore.dispatch(AppAction.setDirection(direction))
-      })
-      .addDisposableTo(self.bag)
+
+    segmentedControl.selectedSegmentIndex = AppState.shared.direction.rawValue
+    segmentedControl.addTarget(self, action: #selector(segmentDidChange), for: .valueChanged)
+
     return segmentedControl
   }()
   lazy internal var directionItem: UIBarButtonItem = {
@@ -58,41 +49,35 @@ class EditViewController: UITableViewController {
     navigationItem.rightBarButtonItem = addItem
     toolbarItems = [flexibleItem, directionItem, flexibleItem]
 
-    tableView.delegate = nil
-    tableView.dataSource = nil
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-    tableView.separatorColor = .clear
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+    tableView.separatorStyle = .none
 
-    let colors = store.state.asDriver()
-      .map { $0.colors }
-    colors.drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
-      cell.textLabel?.text = model.hexValue()
-      cell.textLabel?.textColor = model.contrastColor()
+    updateUI()
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(updateUI),
+      name: .colorsDidChange,
+      object: AppState.shared
+    )
+  }
 
-      let backgroundView = UIView()
-      backgroundView.backgroundColor = model
-      cell.backgroundView = backgroundView
-    }
-    .addDisposableTo(bag)
-    colors.drive(onNext: { [weak self] colors in
-      self?.updateUI(colors: colors)
-    })
-    .addDisposableTo(bag)
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
 
-    tableView.rx.itemMoved.subscribe(onNext: { fromIndex, toIndex in
-      mainStore.dispatch(AppAction.moveColor(from: fromIndex.row, to: toIndex.row))
-    })
-    .addDisposableTo(bag)
-    tableView.rx.itemDeleted.subscribe(onNext: { indexPath in
-      mainStore.dispatch(AppAction.deleteColor(indexPath.row))
-    })
-    .addDisposableTo(bag)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    tableView.reloadData()
   }
 
   // MARK - Utilities
 
-  private func updateUI(colors: [UIColor]) {
-    title = String(format: NSLocalizedString("%d colors", comment: ""), colors.count)
+  @objc private func updateUI() {
+    title = String(
+      format: NSLocalizedString("%d colors", comment: ""), AppState.shared.colors.count)
   }
 
   // MARK - Actions
@@ -100,5 +85,49 @@ class EditViewController: UITableViewController {
   @objc private func addDidTap() {
     let addViewController = AddViewController()
     navigationController?.pushViewController(addViewController, animated: true)
+  }
+
+  @objc private func segmentDidChange(_ sender: UISegmentedControl) {
+    let direction = Gradient.Direction(rawValue: sender.selectedSegmentIndex) ?? .vertical
+    AppState.shared.direction = direction
+  }
+}
+
+extension EditViewController /*: UITableViewDataSource, UITableViewDelegate */ {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return AppState.shared.colors.count
+  }
+
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+    -> UITableViewCell
+  {
+    let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+
+    let color = AppState.shared.colors[indexPath.row]
+    cell.textLabel?.text = color.hexValue()
+    cell.textLabel?.textColor = color.contrastColor()
+
+    let backgroundView = UIView()
+    backgroundView.backgroundColor = color
+    cell.backgroundView = backgroundView
+
+    return cell
+  }
+
+  override func tableView(
+    _ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath,
+    to destinationIndexPath: IndexPath
+  ) {
+    AppState.shared.moveColor(from: sourceIndexPath.row, to: destinationIndexPath.row)
+  }
+
+  override func tableView(
+    _ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
+    forRowAt indexPath: IndexPath
+  ) {
+    if editingStyle == .delete {
+      AppState.shared.colors.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
   }
 }

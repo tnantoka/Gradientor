@@ -7,14 +7,11 @@
 //
 
 import Eureka
-import RxSwift
 import UIKit
 
 class ExportViewController: FormViewController {
 
   var didClose: () -> Void = {}
-
-  let bag = DisposeBag()
 
   lazy internal var closeItem: UIBarButtonItem = {
     UIBarButtonItem(
@@ -36,7 +33,7 @@ class ExportViewController: FormViewController {
     IntRow { row in
       row.title = NSLocalizedString("Width", comment: "")
       row.add(rule: RuleGreaterThan(min: 0))
-      row.value = Int(mainStore.state.exportSize.width)
+      row.value = Int(AppState.shared.exportSize.width)
       row.formatter = nil
       row.disabled = Condition.function(["preset"]) { form in
         guard let row = form.rowBy(tag: "preset") as? ActionSheetRow<String> else { return false }
@@ -45,9 +42,9 @@ class ExportViewController: FormViewController {
     }
     .onChange { row in
       guard let width = row.value else { return }
-      var size = mainStore.state.exportSize
+      var size = AppState.shared.exportSize
       size.width = CGFloat(width)
-      mainStore.dispatch(AppAction.setExportSize(size))
+      AppState.shared.exportSize = size
     }
     .cellUpdate { cell, row in
       if !row.isValid {
@@ -59,7 +56,7 @@ class ExportViewController: FormViewController {
     IntRow { row in
       row.title = NSLocalizedString("Height", comment: "")
       row.add(rule: RuleGreaterThan(min: 0))
-      row.value = Int(mainStore.state.exportSize.height)
+      row.value = Int(AppState.shared.exportSize.height)
       row.formatter = nil
       row.disabled = Condition.function(["preset"]) { form in
         guard let row = form.rowBy(tag: "preset") as? ActionSheetRow<String> else { return false }
@@ -68,9 +65,9 @@ class ExportViewController: FormViewController {
     }
     .onChange { row in
       guard let height = row.value else { return }
-      var size = mainStore.state.exportSize
+      var size = AppState.shared.exportSize
       size.height = CGFloat(height)
-      mainStore.dispatch(AppAction.setExportSize(size))
+      AppState.shared.exportSize = size
     }
     .cellUpdate { cell, row in
       if !row.isValid {
@@ -95,7 +92,7 @@ class ExportViewController: FormViewController {
           let size = Preset.sizes[index]
           self?.widthRow.value = Int(size.width)
           self?.heightRow.value = Int(size.height)
-          mainStore.dispatch(AppAction.setExportSize(size))
+          AppState.shared.exportSize = size
         }
       )
     }
@@ -106,22 +103,22 @@ class ExportViewController: FormViewController {
       section.append(
         SwitchRow("image") { row in
           row.title = NSLocalizedString("Image", comment: "")
-          row.value = mainStore.state.isExportImage
+          row.value = AppState.shared.isExportImage
         }
         .onChange { [weak self] row in
           guard let value = row.value else { return }
-          mainStore.dispatch(AppAction.setIsExportImage(value))
+          AppState.shared.isExportImage = value
           self?.updateUI()
         }
       )
       section.append(
         SwitchRow("text") { row in
           row.title = NSLocalizedString("Text", comment: "")
-          row.value = mainStore.state.isExportText
+          row.value = AppState.shared.isExportText
         }
         .onChange { [weak self] row in
           guard let value = row.value else { return }
-          mainStore.dispatch(AppAction.setIsExportText(value))
+          AppState.shared.isExportText = value
           self?.updateUI()
         }
       )
@@ -136,7 +133,7 @@ class ExportViewController: FormViewController {
     navigationItem.rightBarButtonItem = saveItem
 
     tableView.backgroundColor = MaterialDesign.backgroundColor
-    tableView.separatorColor = .clear
+    tableView.separatorStyle = .none
 
     form.append(sizeSection)
     form.append(optionsSection)
@@ -145,7 +142,7 @@ class ExportViewController: FormViewController {
   // MARK - Utilities
 
   private func updateUI() {
-    saveItem.isEnabled = mainStore.state.isExportImage || mainStore.state.isExportText
+    saveItem.isEnabled = AppState.shared.isExportImage || AppState.shared.isExportText
   }
 
   private func saveToDocs(gradient: Gradient) {
@@ -179,24 +176,24 @@ class ExportViewController: FormViewController {
     var items = [Any]()
 
     var gradient = Gradient()
-    gradient.direction = mainStore.state.direction
-    gradient.colors = mainStore.state.colors
-    gradient.frame = CGRect(origin: .zero, size: mainStore.state.exportSize)
+    gradient.direction = AppState.shared.direction
+    gradient.colors = AppState.shared.colors
+    gradient.frame = CGRect(origin: .zero, size: AppState.shared.exportSize)
 
     #if DEBUG
-      //            saveToDocs(gradient: gradient); let fixme = ""
+      //                  saveToDocs(gradient: gradient); let fixme = ""
     #endif
 
-    if mainStore.state.isExportImage {
+    if AppState.shared.isExportImage {
       items.append(gradient.image)
     }
-    if mainStore.state.isExportText {
+    if AppState.shared.isExportText {
       items.append(gradient.text)
     }
     let activityViewController = UIActivityViewController(
       activityItems: items, applicationActivities: nil)
     present(activityViewController, animated: true, completion: nil)
 
-    mainStore.dispatch(AppAction.incrementExportCount)
+    AppState.shared.exportCount += 1
   }
 }
