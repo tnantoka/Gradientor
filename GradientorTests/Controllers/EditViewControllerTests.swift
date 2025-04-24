@@ -29,7 +29,7 @@ class EditViewControllerTests: XCTestCase {
     func testViewDidLoad() {
         let tableView = editViewController.tableView!
         let numberOfRows = tableView.dataSource!.tableView(tableView, numberOfRowsInSection: 0)
-        XCTAssertEqual(numberOfRows, mainStore.state.colors.count)
+        XCTAssertEqual(numberOfRows, AppState.shared.colors.count)
     }
 
     // MARK - Actions

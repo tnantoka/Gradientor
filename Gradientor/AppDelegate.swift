@@ -7,13 +7,7 @@
 //
 
 import AdFooter
-import ReSwift
 import UIKit
-
-let mainStore = Store<AppState>(
-  reducer: appReducer,
-  state: nil
-)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -67,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if #available(iOS 15.0, *) {
       let navAppearance = UINavigationBarAppearance()
       navAppearance.configureWithOpaqueBackground()
+      navAppearance.shadowColor = .clear
       navAppearance.backgroundColor = UIColor(hexString: "#F5F5F5")
       navAppearance.titleTextAttributes = [
         NSAttributedString.Key.foregroundColor: MaterialDesign.flatBlueColor

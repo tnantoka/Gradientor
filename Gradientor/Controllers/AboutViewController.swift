@@ -46,6 +46,7 @@ class AboutViewController: UITableViewController {
 
     title = NSLocalizedString("About", comment: "")
 
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
   }
 
   @objc func closeItemDidTap(sender: Any?) {
@@ -92,8 +93,7 @@ extension AboutViewController /*: UITableViewDataSource, UITableViewDelegate*/ {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
     -> UITableViewCell
   {
-    let dequeued = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
-    let cell = dequeued ?? UITableViewCell(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
     cell.accessoryType = .disclosureIndicator
 

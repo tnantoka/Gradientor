@@ -3,9 +3,6 @@ target 'Gradientor' do
 
   pod 'AdFooter', git: 'https://gitlab.com/tnantoka/AdFooter.git'
   pod 'Eureka'
-  pod 'ReSwift'
-  pod 'RxSwift', '5.1.3'
-  pod 'RxCocoa', '5.1.3'
 
   target 'GradientorTests' do
     inherit! :search_paths

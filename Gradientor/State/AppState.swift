@@ -8,10 +8,17 @@
 
 import Foundation
 import GameplayKit
-import ReSwift
 
-struct AppState: StateType {
-  var colors = [UIColor]()
+final class AppState {
+  static let shared = AppState()
+
+  private init() {}
+
+  var colors = [UIColor]() {
+    didSet {
+      NotificationCenter.default.post(name: .colorsDidChange, object: self)
+    }
+  }
   var direction = Gradient.Direction.horizontal
   var exportSize = CGSize(
     width: UIScreen.main.bounds.size.width * UIScreen.main.scale,
@@ -31,4 +38,13 @@ struct AppState: StateType {
     )
     return randomColor
   }
+
+  func moveColor(from: Int, to: Int) {
+    let color = colors.remove(at: from)
+    colors.insert(color, at: to)
+  }
+}
+
+extension Notification.Name {
+  static let colorsDidChange = Notification.Name("colorsDidChange")
 }

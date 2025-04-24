@@ -6,27 +6,26 @@
 //  Copyright © 2017 tnantoka. All rights reserved.
 //
 
-import RxCocoa
-import RxSwift
 import UIKit
 
 class AddViewController: UIViewController {
-
-  let bag = DisposeBag()
-  let groupColors = Variable(MaterialDesign.colorGroups[0])
+  let reuseIdentifier = "reuseIdentifier"
 
   lazy internal var randomItem: UIBarButtonItem = {
-    self.barButtomItem(systemName: "shuffle", bag: self.bag) { [weak self] in
-      self?.randomDidTap()
-    }
+    barButtonItem(systemName: "shuffle", target: self, action: #selector(throttledRandomDidTap))
   }()
   lazy internal var rgbItem: UIBarButtonItem = {
-    self.barButtomItem(systemName: "number", bag: self.bag) { [weak self] in
-      self?.rgbDidTap()
-    }
+    barButtonItem(systemName: "number", target: self, action: #selector(rgbDidTap))
   }()
   private let flexibleItem = UIBarButtonItem(
     barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+  private var lastRandomTapTime = Date.distantPast
+  private var selectedGroup = 0 {
+    didSet {
+      tableView.reloadData()
+    }
+  }
 
   lazy private var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -37,91 +36,23 @@ class AddViewController: UIViewController {
     layout.minimumInteritemSpacing = 0.0
 
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     collectionView.backgroundColor = .clear
 
-    let items = Variable(MaterialDesign.mainColors)
-    items.asDriver()
-      .drive(collectionView.rx.items(cellIdentifier: "Cell")) { _, element, cell in
-        cell.backgroundColor = element
-      }
-      .addDisposableTo(self.bag)
-
-    collectionView.rx.itemSelected
-      .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] indexPath in
-        self?.groupColors.value = MaterialDesign.colorGroups[indexPath.row]
-        self?.title = MaterialDesign.names[indexPath.row]
-
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        guard let backgroundColor = cell.backgroundColor else { return }
-
-        let overlayView = UIView(frame: cell.contentView.bounds)
-        overlayView.backgroundColor = backgroundColor.contrastColor()
-        cell.contentView.addSubview(overlayView)
-
-        overlayView.alpha = 0.3
-        UIView.animate(
-          withDuration: 0.3,
-          animations: {
-            overlayView.alpha = 0.0
-          }
-        ) { _ in
-          overlayView.removeFromSuperview()
-        }
-      })
-      .addDisposableTo(self.bag)
+    collectionView.dataSource = self
+    collectionView.delegate = self
 
     return collectionView
   }()
 
   lazy private var tableView: UITableView = {
     let tableView = UITableView()
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-    tableView.separatorColor = .clear
 
-    self.groupColors.asDriver()
-      .drive(tableView.rx.items(cellIdentifier: "Cell")) { _, model, cell in
-        cell.textLabel?.text = model.hexValue()
-        cell.textLabel?.textColor = model.contrastColor()
-        cell.selectionStyle = .none
+    tableView.separatorStyle = .none
+    tableView.dataSource = self
+    tableView.delegate = self
 
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = model
-        cell.backgroundView = backgroundView
-      }
-      .addDisposableTo(self.bag)
-
-    tableView.rx.modelSelected(UIColor.self)
-      .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] color in
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-          mainStore.dispatch(AppAction.addColor(color))
-          self?.showSuccess(subtitle: color.hexValue())
-        }
-      })
-      .addDisposableTo(self.bag)
-    tableView.rx.itemSelected
-      .distinctUntilChanged()
-      .subscribe(onNext: { [weak self] indexPath in
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        guard let backgroundColor = cell.backgroundColor else { return }
-
-        let overlayView = UIView(frame: cell.contentView.bounds)
-        overlayView.backgroundColor = backgroundColor.contrastColor()
-        cell.contentView.addSubview(overlayView)
-
-        overlayView.alpha = 0.3
-        UIView.animate(
-          withDuration: 0.3,
-          animations: {
-            overlayView.alpha = 0.0
-          }
-        ) { _ in
-          overlayView.removeFromSuperview()
-        }
-      })
-      .addDisposableTo(self.bag)
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
 
     return tableView
   }()
@@ -208,13 +139,22 @@ class AddViewController: UIViewController {
 
   // MARK - Actions
 
-  private func randomDidTap() {
+  @objc private func throttledRandomDidTap() {
+    let now = Date()
+
+    if now.timeIntervalSince(lastRandomTapTime) >= 0.5 {
+      lastRandomTapTime = now
+      randomDidTap()
+    }
+  }
+
+  @objc private func randomDidTap() {
     let color = AppState.randomColor
-    mainStore.dispatch(AppAction.addColor(color))
+    AppState.shared.colors.append(color)
     showSuccess(subtitle: color.hexValue())
   }
 
-  private func rgbDidTap() {
+  @objc private func rgbDidTap() {
     let alertController = UIAlertController(
       title: NSLocalizedString("Add Color", comment: ""),
       message: NSLocalizedString("Enter a color code.", comment: ""),
@@ -240,11 +180,98 @@ class AddViewController: UIViewController {
         guard let rgb = alertController.textFields?.first?.text else { return }
         let code = rgb.trimmingCharacters(in: .whitespacesAndNewlines)
         let color = UIColor(hexString: code)
-        mainStore.dispatch(AppAction.addColor(color))
+        AppState.shared.colors.append(color)
         self?.showSuccess(subtitle: color.hexValue())
       }
     )
 
     present(alertController, animated: true, completion: nil)
+  }
+}
+
+extension AddViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int)
+    -> Int
+  {
+    return MaterialDesign.mainColors.count
+  }
+
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)
+    -> UICollectionViewCell
+  {
+    let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: reuseIdentifier, for: indexPath)
+
+    let color = MaterialDesign.mainColors[indexPath.row]
+    cell.backgroundColor = color
+
+    return cell
+  }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+
+    let color = MaterialDesign.mainColors[indexPath.row]
+    selectedGroup = indexPath.row
+    title = MaterialDesign.names[indexPath.row]
+
+    let overlayView = UIView(frame: cell.contentView.bounds)
+    overlayView.backgroundColor = color.contrastColor()
+    cell.contentView.addSubview(overlayView)
+
+    overlayView.alpha = 0.3
+    UIView.animate(
+      withDuration: 0.3,
+      animations: {
+        overlayView.alpha = 0.0
+      }
+    ) { _ in
+      overlayView.removeFromSuperview()
+    }
+
+  }
+}
+
+extension AddViewController: UITableViewDataSource, UITableViewDelegate {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return MaterialDesign.colorGroups[selectedGroup].count
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+
+    let color = MaterialDesign.colorGroups[selectedGroup][indexPath.row]
+    cell.textLabel?.text = color.hexValue()
+    cell.textLabel?.textColor = color.contrastColor()
+    cell.selectionStyle = .none
+
+    let backgroundView = UIView()
+    backgroundView.backgroundColor = color
+    cell.backgroundView = backgroundView
+
+    return cell
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let cell = tableView.cellForRow(at: indexPath) else { return }
+
+    let color = MaterialDesign.colorGroups[selectedGroup][indexPath.row]
+
+    AppState.shared.colors.append(color)
+    showSuccess(subtitle: color.hexValue())
+
+    let overlayView = UIView(frame: cell.contentView.bounds)
+    overlayView.backgroundColor = color.contrastColor()
+    cell.contentView.addSubview(overlayView)
+
+    overlayView.alpha = 0.3
+    UIView.animate(
+      withDuration: 0.3,
+      animations: {
+        overlayView.alpha = 0.0
+      }
+    ) { _ in
+      overlayView.removeFromSuperview()
+    }
   }
 }

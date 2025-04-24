@@ -42,7 +42,7 @@ class AddViewControllerTests: XCTestCase {
         let randomItem = addViewController.randomItem
         UIApplication.shared.sendAction(randomItem.action!, to: randomItem.target, from: nil, for: nil)
 
-        XCTAssertEqual(mainStore.state.colors.count, 3)
+        XCTAssertEqual(AppState.shared.colors.count, 3)
     }
 
     func testRGBDidTap() {
@@ -51,12 +51,5 @@ class AddViewControllerTests: XCTestCase {
 
         XCTAssertTrue(presentedViewController is UIAlertController)
         XCTAssertEqual(presentedViewController?.title, "Add Color")
-    }
-
-    func testImageDidTap() {
-        let imageItem = addViewController.imageItem
-        UIApplication.shared.sendAction(imageItem.action!, to: imageItem.target, from: nil, for: nil)
-
-        XCTAssertTrue(presentedViewController is UIImagePickerController)
     }
 }

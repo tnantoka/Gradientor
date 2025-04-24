@@ -8,42 +8,39 @@
 
 import AdFooter
 import GameplayKit
-import RxCocoa
-import RxSwift
 import UIKit
 
 class HomeViewController: UIViewController {
 
-  private let bag = DisposeBag()
-  private let store = RxStore<AppState>(store: mainStore)
-
   internal var gradient = Gradient()
 
   lazy internal var infoItem: UIBarButtonItem = {
-    self.barButtomItem(systemName: "info", bag: self.bag) { [weak self] in
-      self?.infoDidTap()
-    }
+    self.barButtonItem(systemName: "info", target: self, action: #selector(infoDidTap))
   }()
   lazy internal var editItem: UIBarButtonItem = {
-    self.barButtomItem(systemName: "pencil", bag: self.bag) { [weak self] in
-      self?.editDidTap()
-    }
+    self.barButtonItem(systemName: "pencil", target: self, action: #selector(editDidTap))
   }()
 
   lazy internal var clearItem: UIBarButtonItem = {
-    self.barButtomItem(systemItem: .trash, bag: self.bag) { [weak self] in
-      self?.clearDidTap()
-    }
+    UIBarButtonItem(
+      barButtonSystemItem: .trash,
+      target: self,
+      action: #selector(clearDidTap)
+    )
   }()
   lazy internal var refreshItem: UIBarButtonItem = {
-    self.barButtomItem(systemItem: .refresh, bag: self.bag) { [weak self] in
-      self?.refreshDidTap()
-    }
+    UIBarButtonItem(
+      barButtonSystemItem: .refresh,
+      target: self,
+      action: #selector(refreshDidTap)
+    )
   }()
   lazy internal var exportItem: UIBarButtonItem = {
-    self.barButtomItem(systemItem: .action, bag: self.bag) { [weak self] in
-      self?.exportDidTap()
-    }
+    UIBarButtonItem(
+      barButtonSystemItem: .action,
+      target: self,
+      action: #selector(exportDidTap)
+    )
   }()
   private let flexibleItem = UIBarButtonItem(
     barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -63,37 +60,25 @@ class HomeViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    #if DEBUG
-      print("RxSwift Resources: \(RxSwift.Resources.total)")
-    #endif
 
-    let colors = store.state.asDriver()
-      .map { $0.colors }
-
-    colors.drive(onNext: { [weak self] colors in
-      self?.updateGradient(colors: colors)
-    })
-    .addDisposableTo(bag)
-    colors.drive(onNext: { [weak self] colors in
-      self?.updateUI(colors: colors)
-    })
-    .addDisposableTo(bag)
-
-    if store.state.value.colors.isEmpty {
+    if AppState.shared.colors.isEmpty {
       refresh()
     }
     #if DEBUG
       //            setIconColors(); let fixme = ""
     #endif
+
+    updateUI()
   }
 
   // MARK - Utilities
 
   internal func setIconColors() {
-    mainStore.dispatch(AppAction.clearColors)
-    mainStore.dispatch(AppAction.addColor(MaterialDesign.flatBlueColor))
-    mainStore.dispatch(AppAction.addColor(MaterialDesign.flatPowderBlueDarkColor))
-    mainStore.dispatch(AppAction.addColor(MaterialDesign.flatPowderBlueColor))
+    AppState.shared.colors = [
+      MaterialDesign.flatBlueColor,
+      MaterialDesign.flatPowderBlueDarkColor,
+      MaterialDesign.flatPowderBlueColor,
+    ]
   }
 
   private func updateGradient(colors: [UIColor]) {
@@ -103,26 +88,29 @@ class HomeViewController: UIViewController {
       }
     }
 
-    gradient.direction = mainStore.state.direction
+    gradient.direction = AppState.shared.direction
     gradient.colors = colors
     gradient.frame = view.bounds
 
     view.layer.addSublayer(gradient.layer)
   }
 
-  private func updateUI(colors: [UIColor]) {
+  private func updateUI() {
+    let colors = AppState.shared.colors
+    updateGradient(colors: colors)
     clearItem.isEnabled = colors.count > 1
     exportItem.isEnabled = colors.count > 1
   }
 
   private func clear() {
-    mainStore.dispatch(AppAction.clearColors)
+    AppState.shared.colors = []
   }
 
   private func refresh() {
-    clear()
-    mainStore.dispatch(AppAction.addRandomColor)
-    mainStore.dispatch(AppAction.addRandomColor)
+    AppState.shared.colors = [
+      AppState.randomColor,
+      AppState.randomColor,
+    ]
   }
 
   private func confirm(title: String, actionTitle: String, didConfirm: @escaping () -> Void) {
@@ -157,19 +145,19 @@ class HomeViewController: UIViewController {
     #else
       let threshold = GKRandomDistribution(lowestValue: 3, highestValue: 5).nextInt()
     #endif
-    if mainStore.state.exportCount % threshold == 0 {
+    if AppState.shared.exportCount % threshold == 0 {
       AdFooter.shared.interstitial.present(for: self)
     }
   }
 
   // MARK - Actions
 
-  private func editDidTap() {
+  @objc private func editDidTap() {
     let editViewController = EditViewController()
     navigationController?.pushViewController(editViewController, animated: true)
   }
 
-  private func infoDidTap() {
+  @objc private func infoDidTap() {
     let aboutViewController = AboutViewController(style: .grouped)
 
     let aboutNavigationController = UINavigationController(rootViewController: aboutViewController)
@@ -178,25 +166,27 @@ class HomeViewController: UIViewController {
     present(aboutNavigationController, animated: true, completion: nil)
   }
 
-  private func clearDidTap() {
+  @objc private func clearDidTap() {
     confirm(
       title: NSLocalizedString("Delete All Colors", comment: ""),
       actionTitle: NSLocalizedString("Delete", comment: "")
     ) { [weak self] in
       self?.clear()
+      self?.updateUI()
     }
   }
 
-  private func refreshDidTap() {
+  @objc private func refreshDidTap() {
     confirm(
       title: NSLocalizedString("Recreate Colors", comment: ""),
       actionTitle: NSLocalizedString("OK", comment: "")
     ) { [weak self] in
       self?.refresh()
+      self?.updateUI()
     }
   }
 
-  private func exportDidTap() {
+  @objc private func exportDidTap() {
     let exportViewController = ExportViewController()
 
     exportViewController.didClose = { [weak self] in
