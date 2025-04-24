@@ -25,9 +25,6 @@
 		9BECCBBA1EA4FFF7003E4EC5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */; };
 		9BECCBBE1EAB8639003E4EC5 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBBD1EAB8639003E4EC5 /* EditViewController.swift */; };
 		9BECCBC21EAB9E49003E4EC5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC11EAB9E49003E4EC5 /* AppState.swift */; };
-		9BECCBC41EAB9F82003E4EC5 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC31EAB9F82003E4EC5 /* AppAction.swift */; };
-		9BECCBC61EABA092003E4EC5 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC51EABA092003E4EC5 /* AppReducer.swift */; };
-		9BECCBC81EABA11A003E4EC5 /* RxStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC71EABA11A003E4EC5 /* RxStore.swift */; };
 		9BECCBCE1EADB07E003E4EC5 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBCD1EADB07E003E4EC5 /* Gradient.swift */; };
 		9BECCBD11EAF90A9003E4EC5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BECCBD31EAF90A9003E4EC5 /* InfoPlist.strings */; };
 		9BECCBD61EAFEB0E003E4EC5 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BECCBD51EAFEB0E003E4EC5 /* Acknowledgements.plist */; };
@@ -76,9 +73,6 @@
 		9BECCBB91EA4FFF7003E4EC5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9BECCBBD1EAB8639003E4EC5 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		9BECCBC11EAB9E49003E4EC5 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		9BECCBC31EAB9F82003E4EC5 /* AppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
-		9BECCBC51EABA092003E4EC5 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
-		9BECCBC71EABA11A003E4EC5 /* RxStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxStore.swift; sourceTree = "<group>"; };
 		9BECCBCD1EADB07E003E4EC5 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		9BECCBD21EAF90A9003E4EC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9BECCBD41EAF90B4003E4EC5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -209,9 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				9BECCBC11EAB9E49003E4EC5 /* AppState.swift */,
-				9BECCBC31EAB9F82003E4EC5 /* AppAction.swift */,
-				9BECCBC51EABA092003E4EC5 /* AppReducer.swift */,
-				9BECCBC71EABA11A003E4EC5 /* RxStore.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -386,10 +377,6 @@
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -397,10 +384,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,13 +405,10 @@
 				9B2F50182971506D003E3FFD /* Keys.swift in Sources */,
 				9BECCBDF1EB1A4CD003E4EC5 /* ExportViewController.swift in Sources */,
 				9BED864A2DAE94A200C9B789 /* UIColor+hexString.swift in Sources */,
-				9BECCBC61EABA092003E4EC5 /* AppReducer.swift in Sources */,
 				9BECCBDC1EB0D2E8003E4EC5 /* MaterialDesign.swift in Sources */,
 				9B083DA82DB3DB2E00D109D8 /* AboutViewController.swift in Sources */,
 				9BECCB991EA4FD24003E4EC5 /* AppDelegate.swift in Sources */,
-				9BECCBC41EAB9F82003E4EC5 /* AppAction.swift in Sources */,
 				9BECCBBA1EA4FFF7003E4EC5 /* HomeViewController.swift in Sources */,
-				9BECCBC81EABA11A003E4EC5 /* RxStore.swift in Sources */,
 				9BED864E2DAE9F1700C9B789 /* UIColor+contrastColor.swift in Sources */,
 				9BB79A141EB374610079808A /* UIViewController+barButtonItem.swift in Sources */,
 				9BECCBE11EB1AE67003E4EC5 /* Preset.swift in Sources */,
@@ -621,6 +601,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = GradientorTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tnantoka.GradientorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -637,6 +618,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = GradientorTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tnantoka.GradientorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

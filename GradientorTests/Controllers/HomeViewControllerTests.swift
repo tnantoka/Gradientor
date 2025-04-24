@@ -9,7 +9,6 @@
 import XCTest
 
 @testable import Gradientor
-import RFAboutView_Swift
 
 class HomeViewControllerTests: XCTestCase {
 
@@ -25,7 +24,7 @@ class HomeViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        mainStore.dispatch(AppAction.clearColors)
+        AppState.shared.colors = []
         let navigationController = UINavigationController(rootViewController: homeViewController)
         UIApplication.shared.keyWindow?.rootViewController = navigationController
         _ = homeViewController.view
@@ -37,27 +36,38 @@ class HomeViewControllerTests: XCTestCase {
     }
 
     func testViewDidLoad() {
-        XCTAssertEqual(mainStore.state.colors.count, 2)
+        let expectation = self.expectation(description: "")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            XCTAssertEqual(AppState.shared.colors.count, 2)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3.0)
     }
 
     // MARK: - Utilities
 
     func testSetIconColors() {
         homeViewController.setIconColors()
-        XCTAssertEqual(mainStore.state.colors.count, 3)
+        XCTAssertEqual(AppState.shared.colors.count, 3)
     }
 
     func testUpdateGradient() {
-        mainStore.dispatch(AppAction.setDirection(.vertical))
+        AppState.shared.direction = .vertical
+        homeViewController.viewWillAppear(false)
         XCTAssertEqual(homeViewController.gradient.direction, .vertical)
 
-        mainStore.dispatch(AppAction.setDirection(.radial))
+        AppState.shared.direction = .radial
+        homeViewController.viewWillAppear(false)
         XCTAssertEqual(homeViewController.gradient.direction, .radial)
 
-        mainStore.dispatch(AppAction.setDirection(.diagonalLR))
+        AppState.shared.direction = .diagonalLR
+        homeViewController.viewWillAppear(false)
         XCTAssertEqual(homeViewController.gradient.direction, .diagonalLR)
 
-        mainStore.dispatch(AppAction.setDirection(.diagonalRL))
+        AppState.shared.direction = .diagonalRL
+        homeViewController.viewWillAppear(false)
         XCTAssertEqual(homeViewController.gradient.direction, .diagonalRL)
     }
 
@@ -81,7 +91,7 @@ class HomeViewControllerTests: XCTestCase {
         let infoItem = homeViewController.infoItem
         UIApplication.shared.sendAction(infoItem.action!, to: infoItem.target, from: nil, for: nil)
 
-        XCTAssertTrue((presentedViewController as? UINavigationController)?.topViewController is RFAboutViewController)
+        XCTAssertTrue((presentedViewController as? UINavigationController)?.topViewController is AboutViewController)
     }
 
     func testClearDidTap() {

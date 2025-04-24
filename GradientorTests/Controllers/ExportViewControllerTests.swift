@@ -49,8 +49,16 @@ class ExportViewControllerTests: XCTestCase {
     }
 
     func testSaveDidTap() {
+        let expectation = self.expectation(description: "")
+
         let saveItem = exportViewController.saveItem
         UIApplication.shared.sendAction(saveItem.action!, to: saveItem.target, from: nil, for: nil)
-        XCTAssertTrue(presentedViewController is UIActivityViewController)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            XCTAssertTrue(self.presentedViewController is UIActivityViewController)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 3.0)
     }
 }
