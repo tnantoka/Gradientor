@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		042DD117A998FF2B46E066BE /* Pods_GradientorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */; };
-		85D9695EE6798ABBCF3E6B70 /* Pods_Gradientor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */; };
+		616F4DDA06F71496262C31F0 /* libPods-GradientorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD641F45EB723AA3DE82BEAD /* libPods-GradientorTests.a */; };
 		9B083DA82DB3DB2E00D109D8 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B083DA72DB3DB2900D109D8 /* AboutViewController.swift */; };
 		9B2F50182971506D003E3FFD /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F50172971506D003E3FFD /* Keys.swift */; };
 		9B316D561EBB57D600338C48 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */; };
@@ -35,6 +34,7 @@
 		9BED864A2DAE94A200C9B789 /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED86492DAE94A200C9B789 /* UIColor+hexString.swift */; };
 		9BED864C2DAE9B0600C9B789 /* UIColor+hexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED864B2DAE9AFE00C9B789 /* UIColor+hexValue.swift */; };
 		9BED864E2DAE9F1700C9B789 /* UIColor+contrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED864D2DAE9F0E00C9B789 /* UIColor+contrastColor.swift */; };
+		BEE9903A99898B9FEAA07E44 /* libPods-Gradientor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B516317852039CC9C88738 /* libPods-Gradientor.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,6 @@
 		24737FB780A0D483DE3E77B1 /* Pods-Gradientor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gradientor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor.release.xcconfig"; sourceTree = "<group>"; };
 		2E52D2CCAC8729B3B8F68974 /* Pods-GradientorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.release.xcconfig"; sourceTree = "<group>"; };
 		4451127B46BCEE557A6AB5C3 /* Pods-GradientorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.debug.xcconfig"; sourceTree = "<group>"; };
-		839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GradientorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B083DA72DB3DB2900D109D8 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		9B2F50172971506D003E3FFD /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
@@ -84,8 +83,9 @@
 		9BED86492DAE94A200C9B789 /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
 		9BED864B2DAE9AFE00C9B789 /* UIColor+hexValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexValue.swift"; sourceTree = "<group>"; };
 		9BED864D2DAE9F0E00C9B789 /* UIColor+contrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+contrastColor.swift"; sourceTree = "<group>"; };
-		BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gradientor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0B516317852039CC9C88738 /* libPods-Gradientor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Gradientor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD864E0FC53E7718F3AE726 /* Pods-Gradientor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gradientor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor.debug.xcconfig"; sourceTree = "<group>"; };
+		FD641F45EB723AA3DE82BEAD /* libPods-GradientorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GradientorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85D9695EE6798ABBCF3E6B70 /* Pods_Gradientor.framework in Frameworks */,
+				BEE9903A99898B9FEAA07E44 /* libPods-Gradientor.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				042DD117A998FF2B46E066BE /* Pods_GradientorTests.framework in Frameworks */,
+				616F4DDA06F71496262C31F0 /* libPods-GradientorTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,8 +111,8 @@
 		13FD7DEAF284C4FE85239763 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BBDE4E94D61FDE87E7A4CA76 /* Pods_Gradientor.framework */,
-				839D5F70DC0A3F03DE51657D /* Pods_GradientorTests.framework */,
+				F0B516317852039CC9C88738 /* libPods-Gradientor.a */,
+				FD641F45EB723AA3DE82BEAD /* libPods-GradientorTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 				9BECCB911EA4FD24003E4EC5 /* Sources */,
 				9BECCB921EA4FD24003E4EC5 /* Frameworks */,
 				9BECCB931EA4FD24003E4EC5 /* Resources */,
-				BC87099B946A144669F18EF0 /* [CP] Embed Pods Frameworks */,
+				E8800BAF0D14B9A4FF114088 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -367,28 +367,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BC87099B946A144669F18EF0 /* [CP] Embed Pods Frameworks */ = {
+		E8800BAF0D14B9A4FF114088 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gradientor/Pods-Gradientor-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Gradientor/Pods-Gradientor-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Google-Mobile-Ads-SDK/GoogleMobileAdsResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUserMessagingPlatform/UserMessagingPlatformResources.bundle",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMobileAdsResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UserMessagingPlatformResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gradientor/Pods-Gradientor-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gradientor/Pods-Gradientor-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
