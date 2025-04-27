@@ -9,9 +9,9 @@
 import UIKit
 
 class AboutViewController: UITableViewController {
-  let reuseIdentifier = "reuseIdentifier"
+  private let reuseIdentifier = "reuseIdentifier"
 
-  let dependencies = [
+  private let dependencies = [
     [
       "AdFooter",
       "https://gitlab.com/tnantoka/AdFooter",
@@ -30,7 +30,7 @@ class AboutViewController: UITableViewController {
     ],
   ]
 
-  var closeItem: UIBarButtonItem {
+  private var closeItem: UIBarButtonItem {
     return UIBarButtonItem(
       title: NSLocalizedString("Close", comment: ""),
       style: .plain,
@@ -46,6 +46,8 @@ class AboutViewController: UITableViewController {
 
     title = NSLocalizedString("About", comment: "")
 
+    tableView.backgroundColor = MaterialDesign.backgroundColor
+    tableView.separatorStyle = .none
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
   }
 
@@ -99,7 +101,7 @@ extension AboutViewController /*: UITableViewDataSource, UITableViewDelegate*/ {
 
     switch indexPath.section {
     case 0:
-      cell.textLabel?.text = "Gradientor"
+      cell.textLabel?.text = NSLocalizedString("Gradientor", comment: "")
       cell.detailTextLabel?.text = "http://gradientor.tnantoka.com/"
       break
     case 1:

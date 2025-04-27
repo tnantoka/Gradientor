@@ -11,21 +11,26 @@ import GameplayKit
 import UIKit
 
 class HomeViewController: UIViewController {
+  private let reuseIdentifier = "reuseIdentifier"
 
   internal var gradient = Gradient()
 
   lazy internal var infoItem: UIBarButtonItem = {
     self.barButtonItem(systemName: "info", target: self, action: #selector(infoDidTap))
   }()
-  lazy internal var editItem: UIBarButtonItem = {
-    self.barButtonItem(systemName: "pencil", target: self, action: #selector(editDidTap))
+  lazy internal var addItem: UIBarButtonItem = {
+    UIBarButtonItem(
+      barButtonSystemItem: .add,
+      target: self,
+      action: #selector(addDidTap)
+    )
   }()
 
-  lazy internal var clearItem: UIBarButtonItem = {
+  lazy internal var deleteItem: UIBarButtonItem = {
     UIBarButtonItem(
       barButtonSystemItem: .trash,
       target: self,
-      action: #selector(clearDidTap)
+      action: #selector(deleteDidTap)
     )
   }()
   lazy internal var refreshItem: UIBarButtonItem = {
@@ -44,18 +49,94 @@ class HomeViewController: UIViewController {
   }()
   private let flexibleItem = UIBarButtonItem(
     barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+  lazy private var directionControl: UISegmentedControl = {
+    let config = UIImage.SymbolConfiguration(pointSize: 18.0, weight: .regular)
+
+    let segmentedControl = UISegmentedControl(
+      items: [
+        UIImage(systemName: "minus", withConfiguration: config),
+        UIImage(systemName: "minus", withConfiguration: config)?.rotated(degree: 90.0),
+        UIImage(systemName: "circle", withConfiguration: config),
+        UIImage(systemName: "line.diagonal", withConfiguration: config),
+        UIImage(systemName: "line.diagonal", withConfiguration: config)?.rotated(degree: 90.0),
+      ].compactMap { $0 })
+
+    segmentedControl.selectedSegmentIndex = AppState.shared.direction.rawValue
+    segmentedControl.addTarget(self, action: #selector(segmentDidChange), for: .valueChanged)
+
+    return segmentedControl
+  }()
+  lazy internal var directionItem: UIBarButtonItem = {
+    UIBarButtonItem(customView: self.directionControl)
+  }()
+  lazy private var gradientView: UIView = {
+    let gradientView = UIView()
+
+    gradientView.backgroundColor = MaterialDesign.backgroundColor
+
+    return gradientView
+  }()
+
+  lazy private var tableView: UITableView = {
+    let tableView = UITableView()
+
+    tableView.separatorStyle = .none
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.isEditing = true
+    tableView.allowsMultipleSelectionDuringEditing = true
+    tableView.backgroundColor = MaterialDesign.backgroundColor
+
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+
+    return tableView
+  }()
+
+  lazy private var borderView: UIView = {
+    let borderView = UIView()
+
+    borderView.backgroundColor = MaterialDesign.backgroundColor
+
+    return borderView
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = NSLocalizedString("Gradientor", comment: "")
     view.backgroundColor = MaterialDesign.backgroundColor
 
     navigationItem.leftBarButtonItem = infoItem
-    navigationItem.rightBarButtonItem = editItem
+    navigationItem.rightBarButtonItems = [addItem, deleteItem]
     toolbarItems = [
-      flexibleItem, clearItem, flexibleItem, refreshItem, flexibleItem, exportItem, flexibleItem,
+      refreshItem, flexibleItem, directionItem, flexibleItem, exportItem,
     ]
+
+    view.addSubview(gradientView)
+    gradientView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      gradientView.topAnchor.constraint(equalTo: view.topAnchor),
+      gradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      gradientView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+      gradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ])
+
+    view.addSubview(borderView)
+    borderView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      borderView.topAnchor.constraint(equalTo: view.topAnchor),
+      borderView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      borderView.widthAnchor.constraint(equalToConstant: 1.0),
+      borderView.leadingAnchor.constraint(equalTo: gradientView.trailingAnchor),
+    ])
+
+    view.addSubview(tableView)
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      tableView.topAnchor.constraint(equalTo: view.topAnchor),
+      tableView.leadingAnchor.constraint(equalTo: borderView.trailingAnchor),
+      tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ])
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +148,10 @@ class HomeViewController: UIViewController {
     #if DEBUG
       //            setIconColors(); let fixme = ""
     #endif
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
 
     updateUI()
   }
@@ -81,8 +166,10 @@ class HomeViewController: UIViewController {
     ]
   }
 
-  private func updateGradient(colors: [UIColor]) {
-    view.layer.sublayers?.forEach { sublayer in
+  private func updateGradient() {
+    let colors = AppState.shared.colors
+
+    gradientView.layer.sublayers?.forEach { sublayer in
       if sublayer.isKind(of: GradientLayer.self) {
         sublayer.removeFromSuperlayer()
       }
@@ -90,20 +177,24 @@ class HomeViewController: UIViewController {
 
     gradient.direction = AppState.shared.direction
     gradient.colors = colors
-    gradient.frame = view.bounds
+    gradient.frame = gradientView.bounds
 
-    view.layer.addSublayer(gradient.layer)
+    gradientView.layer.addSublayer(gradient.layer)
   }
 
-  private func updateUI() {
-    let colors = AppState.shared.colors
-    updateGradient(colors: colors)
-    clearItem.isEnabled = colors.count > 1
-    exportItem.isEnabled = colors.count > 1
+  @objc private func updateUI() {
+    tableView.reloadData()
+
+    updateGradient()
+    updateButtonState()
+
+    title = String(
+      format: NSLocalizedString("%d colors", comment: ""), AppState.shared.colors.count)
   }
 
-  private func clear() {
-    AppState.shared.colors = []
+  private func updateButtonState() {
+    deleteItem.isEnabled = tableView.indexPathsForSelectedRows?.count ?? 0 > 0
+    exportItem.isEnabled = AppState.shared.colors.count > 0
   }
 
   private func refresh() {
@@ -152,9 +243,19 @@ class HomeViewController: UIViewController {
 
   // MARK - Actions
 
-  @objc private func editDidTap() {
-    let editViewController = EditViewController()
-    navigationController?.pushViewController(editViewController, animated: true)
+  @objc private func addDidTap() {
+    let addViewController = AddViewController()
+
+    addViewController.didDone = { [weak self] in
+      self?.updateUI()
+      self?.dismiss(animated: true)
+    }
+
+    let addNavigationController = UINavigationController(
+      rootViewController: addViewController)
+    addNavigationController.navigationBar.isTranslucent = false
+
+    present(addNavigationController, animated: true, completion: nil)
   }
 
   @objc private func infoDidTap() {
@@ -166,14 +267,11 @@ class HomeViewController: UIViewController {
     present(aboutNavigationController, animated: true, completion: nil)
   }
 
-  @objc private func clearDidTap() {
-    confirm(
-      title: NSLocalizedString("Delete All Colors", comment: ""),
-      actionTitle: NSLocalizedString("Delete", comment: "")
-    ) { [weak self] in
-      self?.clear()
-      self?.updateUI()
-    }
+  @objc private func deleteDidTap() {
+    guard let indexPaths = tableView.indexPathsForSelectedRows else { return }
+
+    indexPaths.map { $0.row }.sorted(by: >).forEach { AppState.shared.colors.remove(at: $0) }
+    updateUI()
   }
 
   @objc private func refreshDidTap() {
@@ -200,5 +298,72 @@ class HomeViewController: UIViewController {
     exportNavigationController.navigationBar.isTranslucent = false
 
     present(exportNavigationController, animated: true, completion: nil)
+  }
+
+  @objc private func segmentDidChange(_ sender: UISegmentedControl) {
+    let direction = Gradient.Direction(rawValue: sender.selectedSegmentIndex) ?? .vertical
+    AppState.shared.direction = direction
+    updateGradient()
+  }
+}
+
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    let cellHeight = 44.0
+    let tableHeight = tableView.bounds.height
+    let minimumCellCount = Int(ceil(tableHeight / cellHeight))
+
+    return max(minimumCellCount, AppState.shared.colors.count)
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+    -> UITableViewCell
+  {
+    let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+
+    if indexPath.row > AppState.shared.colors.count - 1 {
+      cell.textLabel?.text = ""
+      cell.backgroundColor = indexPath.row % 2 == 0 ? .clear : MaterialDesign.colorGroups[18][0]
+      cell.selectionStyle = .none
+      cell.selectedBackgroundView = nil
+      return cell
+    }
+
+    let color = AppState.shared.colors[indexPath.row]
+    cell.textLabel?.text = color.hexValue()
+    cell.textLabel?.textColor = color.contrastColor()
+
+    cell.backgroundColor = color
+    cell.selectionStyle = .default
+
+    let selectedBackgroundView = UIView()
+    selectedBackgroundView.backgroundColor = color
+    cell.selectedBackgroundView = selectedBackgroundView
+
+    return cell
+  }
+
+  func tableView(
+    _ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath,
+    to destinationIndexPath: IndexPath
+  ) {
+    AppState.shared.moveColor(from: sourceIndexPath.row, to: destinationIndexPath.row)
+    updateGradient()
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    updateButtonState()
+
+    if indexPath.row > AppState.shared.colors.count - 1 {
+      addDidTap()
+    }
+  }
+
+  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    updateButtonState()
+  }
+
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return indexPath.row < AppState.shared.colors.count
   }
 }

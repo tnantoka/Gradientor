@@ -10,7 +10,7 @@ import GameplayKit
 import UIKit
 
 class EditViewController: UITableViewController {
-  let reuseIdentifier = "reuseIdentifier"
+  private let reuseIdentifier = "reuseIdentifier"
 
   lazy internal var addItem: UIBarButtonItem = {
     UIBarButtonItem(
@@ -84,7 +84,18 @@ class EditViewController: UITableViewController {
 
   @objc private func addDidTap() {
     let addViewController = AddViewController()
-    navigationController?.pushViewController(addViewController, animated: true)
+
+    addViewController.didDone = { [weak self] in
+      self?.tableView.reloadData()
+      self?.dismiss(animated: true)
+
+    }
+
+    let addNavigationController = UINavigationController(
+      rootViewController: addViewController)
+    addNavigationController.navigationBar.isTranslucent = false
+
+    present(addNavigationController, animated: true, completion: nil)
   }
 
   @objc private func segmentDidChange(_ sender: UISegmentedControl) {
