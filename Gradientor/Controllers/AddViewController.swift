@@ -9,8 +9,17 @@
 import UIKit
 
 class AddViewController: UIViewController {
-  let reuseIdentifier = "reuseIdentifier"
+  private let reuseIdentifier = "reuseIdentifier"
 
+  var didDone: () -> Void = {}
+
+  lazy internal var doneItem: UIBarButtonItem = {
+    UIBarButtonItem(
+      barButtonSystemItem: .done,
+      target: self,
+      action: #selector(doneDidTap)
+    )
+  }()
   lazy internal var randomItem: UIBarButtonItem = {
     barButtonItem(systemName: "shuffle", target: self, action: #selector(throttledRandomDidTap))
   }()
@@ -63,6 +72,7 @@ class AddViewController: UIViewController {
     title = MaterialDesign.names[0]
     view.backgroundColor = MaterialDesign.backgroundColor
 
+    navigationItem.leftBarButtonItem = doneItem
     toolbarItems = [flexibleItem, randomItem, flexibleItem, rgbItem, flexibleItem]
 
     view.addSubview(collectionView)
@@ -128,7 +138,7 @@ class AddViewController: UIViewController {
     view.addSubview(backdropView)
 
     UIView.animate(
-      withDuration: 0.3, delay: 1.0, options: [],
+      withDuration: 0.3, delay: 0.3, options: [],
       animations: {
         backdropView.alpha = 0
       },
@@ -138,6 +148,10 @@ class AddViewController: UIViewController {
   }
 
   // MARK - Actions
+
+  @objc private func doneDidTap() {
+    didDone()
+  }
 
   @objc private func throttledRandomDidTap() {
     let now = Date()
@@ -245,9 +259,7 @@ extension AddViewController: UITableViewDataSource, UITableViewDelegate {
     cell.textLabel?.textColor = color.contrastColor()
     cell.selectionStyle = .none
 
-    let backgroundView = UIView()
-    backgroundView.backgroundColor = color
-    cell.backgroundView = backgroundView
+    cell.backgroundColor = color
 
     return cell
   }

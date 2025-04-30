@@ -55,32 +55,33 @@ class HomeViewControllerTests: XCTestCase {
 
     func testUpdateGradient() {
         AppState.shared.direction = .vertical
-        homeViewController.viewWillAppear(false)
+        homeViewController.viewDidLayoutSubviews()
         XCTAssertEqual(homeViewController.gradient.direction, .vertical)
 
         AppState.shared.direction = .radial
-        homeViewController.viewWillAppear(false)
+        homeViewController.viewDidLayoutSubviews()
         XCTAssertEqual(homeViewController.gradient.direction, .radial)
 
         AppState.shared.direction = .diagonalLR
-        homeViewController.viewWillAppear(false)
+        homeViewController.viewDidLayoutSubviews()
         XCTAssertEqual(homeViewController.gradient.direction, .diagonalLR)
 
         AppState.shared.direction = .diagonalRL
-        homeViewController.viewWillAppear(false)
+        homeViewController.viewDidLayoutSubviews()
         XCTAssertEqual(homeViewController.gradient.direction, .diagonalRL)
     }
 
     // MARK: - Actions
 
-    func testEditDidTap() {
-        let editItem = homeViewController.editItem
-        UIApplication.shared.sendAction(editItem.action!, to: editItem.target, from: nil, for: nil)
+    func testAddDidTap() {
+        let addItem = homeViewController.addItem
+        UIApplication.shared.sendAction(addItem.action!, to: addItem.target, from: nil, for: nil)
 
         let expectation = self.expectation(description: "")
 
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            XCTAssertTrue(self.homeViewController.navigationController?.topViewController is EditViewController)
+            XCTAssertTrue((self.presentedViewController as? UINavigationController)?.topViewController is AddViewController)
             expectation.fulfill()
         }
 
@@ -92,14 +93,6 @@ class HomeViewControllerTests: XCTestCase {
         UIApplication.shared.sendAction(infoItem.action!, to: infoItem.target, from: nil, for: nil)
 
         XCTAssertTrue((presentedViewController as? UINavigationController)?.topViewController is AboutViewController)
-    }
-
-    func testClearDidTap() {
-        let clearItem = homeViewController.clearItem
-        UIApplication.shared.sendAction(clearItem.action!, to: clearItem.target, from: nil, for: nil)
-
-        XCTAssertTrue(presentedViewController is UIAlertController)
-        XCTAssertEqual(presentedViewController?.title, "Delete All Colors")
     }
 
     func testRefreshDidTap() {
