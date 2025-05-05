@@ -343,6 +343,21 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     return cell
   }
 
+  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    return indexPath.row < AppState.shared.colors.count
+  }
+
+  func tableView(
+    _ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath,
+    toProposedIndexPath proposedDestinationIndexPath: IndexPath
+  ) -> IndexPath {
+    if proposedDestinationIndexPath.row > AppState.shared.colors.count - 1 {
+      return IndexPath(row: AppState.shared.colors.count - 1, section: sourceIndexPath.section)
+    }
+
+    return proposedDestinationIndexPath
+  }
+
   func tableView(
     _ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath,
     to destinationIndexPath: IndexPath
