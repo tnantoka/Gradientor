@@ -367,9 +367,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    updateButtonState()
-
-    if indexPath.row > AppState.shared.colors.count - 1 {
+    if indexPath.row < AppState.shared.colors.count {
+      updateButtonState()
+    } else {
+      tableView.deselectRow(at: indexPath, animated: false)
       addDidTap()
     }
   }
