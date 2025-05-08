@@ -12,6 +12,7 @@ class AddViewController: UIViewController {
   private let reuseIdentifier = "reuseIdentifier"
 
   var didDone: () -> Void = {}
+  var didAdd: () -> Void = {}
 
   lazy internal var doneItem: UIBarButtonItem = {
     UIBarButtonItem(
@@ -39,7 +40,7 @@ class AddViewController: UIViewController {
   lazy private var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
 
-    let length = UIScreen.main.bounds.width / 10.0
+    let length = view.bounds.width / 10.0
     layout.itemSize = CGSize(width: length, height: length)
     layout.minimumLineSpacing = 0.0
     layout.minimumInteritemSpacing = 0.0
@@ -60,6 +61,7 @@ class AddViewController: UIViewController {
     tableView.separatorStyle = .none
     tableView.dataSource = self
     tableView.delegate = self
+    tableView.backgroundColor = MaterialDesign.backgroundColor
 
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
 
@@ -74,6 +76,10 @@ class AddViewController: UIViewController {
 
     navigationItem.leftBarButtonItem = doneItem
     toolbarItems = [flexibleItem, randomItem, flexibleItem, rgbItem, flexibleItem]
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
 
     view.addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +87,7 @@ class AddViewController: UIViewController {
       collectionView.topAnchor.constraint(equalTo: view.topAnchor),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      collectionView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 5.0),
+      collectionView.heightAnchor.constraint(equalToConstant: view.bounds.width / 5.0),
     ])
 
     view.addSubview(tableView)
@@ -147,6 +153,12 @@ class AddViewController: UIViewController {
       })
   }
 
+  private func addColor(_ color: UIColor) {
+    AppState.shared.colors.append(color)
+    showSuccess(subtitle: color.hexValue())
+    didAdd()
+  }
+
   // MARK - Actions
 
   @objc private func doneDidTap() {
@@ -163,9 +175,7 @@ class AddViewController: UIViewController {
   }
 
   @objc private func randomDidTap() {
-    let color = AppState.randomColor
-    AppState.shared.colors.append(color)
-    showSuccess(subtitle: color.hexValue())
+    addColor(AppState.randomColor)
   }
 
   @objc private func rgbDidTap() {
@@ -193,9 +203,7 @@ class AddViewController: UIViewController {
       ) { [weak self] _ in
         guard let rgb = alertController.textFields?.first?.text else { return }
         let code = rgb.trimmingCharacters(in: .whitespacesAndNewlines)
-        let color = UIColor(hexString: code)
-        AppState.shared.colors.append(color)
-        self?.showSuccess(subtitle: color.hexValue())
+        self?.addColor(UIColor(hexString: code))
       }
     )
 
@@ -268,9 +276,7 @@ extension AddViewController: UITableViewDataSource, UITableViewDelegate {
     guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
     let color = MaterialDesign.colorGroups[selectedGroup][indexPath.row]
-
-    AppState.shared.colors.append(color)
-    showSuccess(subtitle: color.hexValue())
+    addColor(color)
 
     let overlayView = UIView(frame: cell.contentView.bounds)
     overlayView.backgroundColor = color.contrastColor()

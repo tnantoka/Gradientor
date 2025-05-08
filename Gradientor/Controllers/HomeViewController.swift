@@ -247,8 +247,10 @@ class HomeViewController: UIViewController {
     let addViewController = AddViewController()
 
     addViewController.didDone = { [weak self] in
-      self?.updateUI()
       self?.dismiss(animated: true)
+    }
+    addViewController.didAdd = { [weak self] in
+      self?.updateUI()
     }
 
     let addNavigationController = UINavigationController(
