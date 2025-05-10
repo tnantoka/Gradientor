@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		616F4DDA06F71496262C31F0 /* libPods-GradientorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD641F45EB723AA3DE82BEAD /* libPods-GradientorTests.a */; };
 		9B083DA82DB3DB2E00D109D8 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B083DA72DB3DB2900D109D8 /* AboutViewController.swift */; };
+		9B083DB02DC88C7B00D109D8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9B083DAF2DC88C7B00D109D8 /* PrivacyInfo.xcprivacy */; };
 		9B2F50182971506D003E3FFD /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F50172971506D003E3FFD /* Keys.swift */; };
 		9B316D561EBB57D600338C48 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */; };
 		9BA06F9F1EBB5E18001D3C23 /* AddViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA06F9E1EBB5E18001D3C23 /* AddViewControllerTests.swift */; };
@@ -50,6 +51,7 @@
 		2E52D2CCAC8729B3B8F68974 /* Pods-GradientorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.release.xcconfig"; sourceTree = "<group>"; };
 		4451127B46BCEE557A6AB5C3 /* Pods-GradientorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GradientorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GradientorTests/Pods-GradientorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B083DA72DB3DB2900D109D8 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		9B083DAF2DC88C7B00D109D8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9B2F50172971506D003E3FFD /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		9B316D551EBB57D600338C48 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		9BA06F9E1EBB5E18001D3C23 /* AddViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewControllerTests.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				9BECCBD51EAFEB0E003E4EC5 /* Acknowledgements.plist */,
 				9BB79A191EB4D7F50079808A /* Localizable.strings */,
 				9BD38680297821CC009D3218 /* LaunchScreen.storyboard */,
+				9B083DAF2DC88C7B00D109D8 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Gradientor;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B083DB02DC88C7B00D109D8 /* PrivacyInfo.xcprivacy in Resources */,
 				9BECCBD11EAF90A9003E4EC5 /* InfoPlist.strings in Resources */,
 				9BB79A171EB4D7F50079808A /* Localizable.strings in Resources */,
 				9BECCBA01EA4FD24003E4EC5 /* Assets.xcassets in Resources */,
@@ -550,16 +554,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = H4Z42X3L6X;
 				INFOPLIST_FILE = Gradientor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tnantoka.Gradientor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -569,16 +574,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = H4Z42X3L6X;
 				INFOPLIST_FILE = Gradientor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tnantoka.Gradientor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

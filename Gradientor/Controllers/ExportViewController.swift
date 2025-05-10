@@ -192,6 +192,11 @@ class ExportViewController: FormViewController {
     }
     let activityViewController = UIActivityViewController(
       activityItems: items, applicationActivities: nil)
+
+    if let popoverController = activityViewController.popoverPresentationController {
+      popoverController.barButtonItem = saveItem
+    }
+
     present(activityViewController, animated: true, completion: nil)
 
     AppState.shared.exportCount += 1

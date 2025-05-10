@@ -247,8 +247,10 @@ class HomeViewController: UIViewController {
     let addViewController = AddViewController()
 
     addViewController.didDone = { [weak self] in
-      self?.updateUI()
       self?.dismiss(animated: true)
+    }
+    addViewController.didAdd = { [weak self] in
+      self?.updateUI()
     }
 
     let addNavigationController = UINavigationController(
@@ -343,6 +345,21 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     return cell
   }
 
+  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    return indexPath.row < AppState.shared.colors.count
+  }
+
+  func tableView(
+    _ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath,
+    toProposedIndexPath proposedDestinationIndexPath: IndexPath
+  ) -> IndexPath {
+    if proposedDestinationIndexPath.row > AppState.shared.colors.count - 1 {
+      return IndexPath(row: AppState.shared.colors.count - 1, section: sourceIndexPath.section)
+    }
+
+    return proposedDestinationIndexPath
+  }
+
   func tableView(
     _ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath,
     to destinationIndexPath: IndexPath
@@ -352,9 +369,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    updateButtonState()
-
-    if indexPath.row > AppState.shared.colors.count - 1 {
+    if indexPath.row < AppState.shared.colors.count {
+      updateButtonState()
+    } else {
+      tableView.deselectRow(at: indexPath, animated: false)
       addDidTap()
     }
   }
