@@ -14,7 +14,7 @@ class AboutViewController: UITableViewController {
   private let dependencies = [
     [
       "AdFooter",
-      "https://gitlab.com/tnantoka/AdFooter",
+      "https://gitlab.com/tnantoka/adfooter",
     ],
     [
       "Chameleon",
@@ -48,7 +48,7 @@ class AboutViewController: UITableViewController {
 
     tableView.backgroundColor = MaterialDesign.backgroundColor
     tableView.separatorStyle = .none
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+    tableView.register(SubtitleCell.self, forCellReuseIdentifier: reuseIdentifier)
   }
 
   @objc func closeItemDidTap(sender: Any?) {
@@ -86,7 +86,7 @@ extension AboutViewController /*: UITableViewDataSource, UITableViewDelegate*/ {
   {
     switch section {
     case 1:
-      return "© 2025 tnantoka"
+      return "© 2017 tnantoka"
     default:
       return nil
     }

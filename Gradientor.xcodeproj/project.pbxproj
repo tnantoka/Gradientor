@@ -25,7 +25,6 @@
 		9BECCBC21EAB9E49003E4EC5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBC11EAB9E49003E4EC5 /* AppState.swift */; };
 		9BECCBCE1EADB07E003E4EC5 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBCD1EADB07E003E4EC5 /* Gradient.swift */; };
 		9BECCBD11EAF90A9003E4EC5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BECCBD31EAF90A9003E4EC5 /* InfoPlist.strings */; };
-		9BECCBD61EAFEB0E003E4EC5 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BECCBD51EAFEB0E003E4EC5 /* Acknowledgements.plist */; };
 		9BECCBDA1EB0C031003E4EC5 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBD91EB0C031003E4EC5 /* AddViewController.swift */; };
 		9BECCBDC1EB0D2E8003E4EC5 /* MaterialDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBDB1EB0D2E8003E4EC5 /* MaterialDesign.swift */; };
 		9BECCBDF1EB1A4CD003E4EC5 /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BECCBDE1EB1A4CD003E4EC5 /* ExportViewController.swift */; };
@@ -33,6 +32,7 @@
 		9BED864A2DAE94A200C9B789 /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED86492DAE94A200C9B789 /* UIColor+hexString.swift */; };
 		9BED864C2DAE9B0600C9B789 /* UIColor+hexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED864B2DAE9AFE00C9B789 /* UIColor+hexValue.swift */; };
 		9BED864E2DAE9F1700C9B789 /* UIColor+contrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED864D2DAE9F0E00C9B789 /* UIColor+contrastColor.swift */; };
+		9BF2ACBC2DDA202900EC9A0C /* SubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF2ACBB2DDA202500EC9A0C /* SubtitleCell.swift */; };
 		BEE9903A99898B9FEAA07E44 /* libPods-Gradientor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B516317852039CC9C88738 /* libPods-Gradientor.a */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +73,6 @@
 		9BECCBCD1EADB07E003E4EC5 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		9BECCBD21EAF90A9003E4EC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9BECCBD41EAF90B4003E4EC5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9BECCBD51EAFEB0E003E4EC5 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		9BECCBD91EB0C031003E4EC5 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		9BECCBDB1EB0D2E8003E4EC5 /* MaterialDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialDesign.swift; sourceTree = "<group>"; };
 		9BECCBDE1EB1A4CD003E4EC5 /* ExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		9BED86492DAE94A200C9B789 /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
 		9BED864B2DAE9AFE00C9B789 /* UIColor+hexValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexValue.swift"; sourceTree = "<group>"; };
 		9BED864D2DAE9F0E00C9B789 /* UIColor+contrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+contrastColor.swift"; sourceTree = "<group>"; };
+		9BF2ACBB2DDA202500EC9A0C /* SubtitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleCell.swift; sourceTree = "<group>"; };
 		F0B516317852039CC9C88738 /* libPods-Gradientor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Gradientor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD864E0FC53E7718F3AE726 /* Pods-Gradientor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gradientor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gradientor/Pods-Gradientor.debug.xcconfig"; sourceTree = "<group>"; };
 		FD641F45EB723AA3DE82BEAD /* libPods-GradientorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GradientorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +159,7 @@
 		9BECCB971EA4FD24003E4EC5 /* Gradientor */ = {
 			isa = PBXGroup;
 			children = (
+				9BF2ACBA2DDA201700EC9A0C /* Views */,
 				9BECCBC01EAB9E24003E4EC5 /* State */,
 				9BECCBC91EABA622003E4EC5 /* Models */,
 				9BECCBB81EA4FFAC003E4EC5 /* Controllers */,
@@ -166,7 +167,6 @@
 				9BECCB9F1EA4FD24003E4EC5 /* Assets.xcassets */,
 				9BECCBA41EA4FD24003E4EC5 /* Info.plist */,
 				9BECCBD31EAF90A9003E4EC5 /* InfoPlist.strings */,
-				9BECCBD51EAFEB0E003E4EC5 /* Acknowledgements.plist */,
 				9BB79A191EB4D7F50079808A /* Localizable.strings */,
 				9BD38680297821CC009D3218 /* LaunchScreen.storyboard */,
 				9B083DAF2DC88C7B00D109D8 /* PrivacyInfo.xcprivacy */,
@@ -217,6 +217,14 @@
 				9BED864D2DAE9F0E00C9B789 /* UIColor+contrastColor.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		9BF2ACBA2DDA201700EC9A0C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9BF2ACBB2DDA202500EC9A0C /* SubtitleCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,7 +323,6 @@
 				9BB79A171EB4D7F50079808A /* Localizable.strings in Resources */,
 				9BECCBA01EA4FD24003E4EC5 /* Assets.xcassets in Resources */,
 				9BD38681297821CC009D3218 /* LaunchScreen.storyboard in Resources */,
-				9BECCBD61EAFEB0E003E4EC5 /* Acknowledgements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +408,7 @@
 				9BECCBDC1EB0D2E8003E4EC5 /* MaterialDesign.swift in Sources */,
 				9B083DA82DB3DB2E00D109D8 /* AboutViewController.swift in Sources */,
 				9BECCB991EA4FD24003E4EC5 /* AppDelegate.swift in Sources */,
+				9BF2ACBC2DDA202900EC9A0C /* SubtitleCell.swift in Sources */,
 				9BECCBBA1EA4FFF7003E4EC5 /* HomeViewController.swift in Sources */,
 				9BED864E2DAE9F1700C9B789 /* UIColor+contrastColor.swift in Sources */,
 				9BB79A141EB374610079808A /* UIViewController+barButtonItem.swift in Sources */,
@@ -554,12 +562,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = H4Z42X3L6X;
 				INFOPLIST_FILE = Gradientor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tnantoka.Gradientor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -574,12 +582,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = H4Z42X3L6X;
 				INFOPLIST_FILE = Gradientor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tnantoka.Gradientor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
