@@ -103,8 +103,7 @@ class AddViewController: UIViewController {
   // MARK - Utilities
 
   fileprivate func showSuccess(subtitle: String?) {
-    let config = UIImage.SymbolConfiguration(pointSize: 64.0, weight: .regular)
-    let image = UIImage(systemName: "checkmark", withConfiguration: config)?.withTintColor(
+    let image = UIImage(systemName: "checkmark")?.withTintColor(
       UIColor(white: 0.0, alpha: 0.87), renderingMode: .alwaysOriginal)
 
     let hudSize = CGSize(width: 180.0, height: 180.0)

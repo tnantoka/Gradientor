@@ -14,8 +14,7 @@ extension UIViewController {
     target: Any,
     action: Selector
   ) -> UIBarButtonItem {
-    let config = UIImage.SymbolConfiguration(pointSize: 18.0, weight: .regular)
-    let image = UIImage(systemName: systemName, withConfiguration: config)
+    let image = UIImage(systemName: systemName)
     return UIBarButtonItem(image: image, style: .plain, target: target, action: action)
   }
 }

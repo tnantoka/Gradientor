@@ -50,15 +50,13 @@ class HomeViewController: UIViewController {
   private let flexibleItem = UIBarButtonItem(
     barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
   lazy private var directionControl: UISegmentedControl = {
-    let config = UIImage.SymbolConfiguration(pointSize: 18.0, weight: .regular)
-
     let segmentedControl = UISegmentedControl(
       items: [
-        UIImage(systemName: "minus", withConfiguration: config),
-        UIImage(systemName: "minus", withConfiguration: config)?.rotated(degree: 90.0),
-        UIImage(systemName: "circle", withConfiguration: config),
-        UIImage(systemName: "line.diagonal", withConfiguration: config),
-        UIImage(systemName: "line.diagonal", withConfiguration: config)?.rotated(degree: 90.0),
+        UIImage(systemName: "minus"),
+        UIImage(systemName: "minus")?.rotated(degree: 90.0),
+        UIImage(systemName: "circle"),
+        UIImage(systemName: "line.diagonal"),
+        UIImage(systemName: "line.diagonal")?.rotated(degree: 90.0),
       ].compactMap { $0 })
 
     segmentedControl.selectedSegmentIndex = AppState.shared.direction.rawValue
